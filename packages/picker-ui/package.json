@@ -1,0 +1,60 @@
+{
+  "name": "@polytheme/picker",
+  "version": "0.1.0",
+  "description": "Hamburger + category accordion theme picker. One Shadow DOM web component, thin React/Vue/Svelte wrappers.",
+  "type": "module",
+  "sideEffects": ["./dist/index.js", "./dist/index.cjs", "./dist/picker.global.js"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./element": {
+      "types": "./dist/vanilla.d.ts",
+      "import": "./dist/vanilla.js",
+      "require": "./dist/vanilla.cjs"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.js",
+      "require": "./dist/vue/index.cjs"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/index.d.ts",
+      "import": "./dist/svelte/index.js",
+      "require": "./dist/svelte/index.cjs"
+    },
+    "./picker.global.js": "./dist/picker.global.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "@polytheme/core": "^0.1.0",
+    "react": ">=17",
+    "vue": ">=3.3"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "vue": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1",
+    "vue": "^3.5.12"
+  },
+  "keywords": ["theme-switcher", "web-component", "shadow-dom", "react", "vue", "svelte"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

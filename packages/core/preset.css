@@ -1,0 +1,181 @@
+/*
+ * @polytheme/core/preset.css — optional.
+ *
+ * The engine only writes custom properties. This sheet is the bridge from those
+ * properties to actual element styles, so a plain HTML page is themed without
+ * you writing any CSS. It is pack-agnostic: it reads `--pt-*` and nothing else.
+ *
+ * Skip it entirely if you already have a design system — then just point your
+ * own rules at the same variables.
+ */
+
+:root {
+  --pt-space: var(--pt-shape-space, 1rem);
+  --pt-transition: var(--pt-motion-duration, 180ms) var(--pt-motion-ease, ease);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+ * Any class here that sets `display` outranks the UA's `[hidden] { display:
+ * none }`, so `hidden` silently stops working on themed elements. Restate it
+ * with enough weight to win.
+ */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--pt-color-bg, #fff);
+  color: var(--pt-color-text, #111);
+  font-family: var(--pt-type-body, system-ui, sans-serif);
+  font-size: calc(1rem * var(--pt-type-scale, 1));
+  line-height: var(--pt-type-line-height, 1.6);
+  transition: background-color var(--pt-transition), color var(--pt-transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--pt-type-display, inherit);
+  font-weight: var(--pt-type-hero-weight, 700);
+  letter-spacing: var(--pt-type-letter-spacing, normal);
+  text-transform: var(--pt-type-heading-transform, none);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: calc(2.75rem * var(--pt-type-scale, 1)); }
+h2 { font-size: calc(2rem * var(--pt-type-scale, 1)); }
+h3 { font-size: calc(1.5rem * var(--pt-type-scale, 1)); }
+h4 { font-size: calc(1.2rem * var(--pt-type-scale, 1)); }
+
+p, ul, ol { margin: 0 0 1em; }
+
+small, .pt-dim { color: var(--pt-color-text-dim, #666); }
+
+code, pre, kbd, samp {
+  font-family: var(--pt-type-mono, ui-monospace, monospace);
+}
+
+pre {
+  background: var(--pt-color-bg-alt);
+  border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  border-radius: var(--pt-shape-radius-large, 0);
+  padding: var(--pt-space);
+  overflow-x: auto;
+}
+
+a {
+  color: var(--pt-color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: opacity var(--pt-transition);
+}
+a:hover { opacity: 0.8; }
+
+hr {
+  border: 0;
+  border-top: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  margin: calc(var(--pt-space) * 2) 0;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--pt-color-accent);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------- components */
+
+.pt-card,
+:where(article, aside, .card)[data-pt-card] {
+  background: var(--pt-color-card-bg);
+  border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  border-radius: var(--pt-shape-radius-large, 0);
+  box-shadow: var(--pt-shape-shadow, none);
+  padding: calc(var(--pt-space) * 1.25);
+  transition: background-color var(--pt-transition), border-color var(--pt-transition),
+    box-shadow var(--pt-transition), transform var(--pt-transition);
+}
+
+.pt-btn,
+button:where(:not([data-pt-unstyled])) {
+  font-family: var(--pt-type-display, inherit);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: var(--pt-type-letter-spacing, normal);
+  text-transform: var(--pt-type-heading-transform, none);
+  background: var(--pt-color-accent);
+  color: var(--pt-color-accent-text);
+  border: var(--pt-shape-border-width, 1px) solid var(--pt-color-accent);
+  border-radius: var(--pt-shape-radius, 0);
+  box-shadow: var(--pt-shape-shadow, none);
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  transition: transform var(--pt-transition), filter var(--pt-transition),
+    box-shadow var(--pt-transition);
+}
+
+.pt-btn:hover,
+button:where(:not([data-pt-unstyled])):hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.pt-btn:active,
+button:where(:not([data-pt-unstyled])):active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+.pt-btn--ghost {
+  background: transparent;
+  color: var(--pt-color-accent);
+  border-color: var(--pt-color-border);
+  box-shadow: none;
+}
+
+input, select, textarea {
+  font: inherit;
+  color: var(--pt-color-text);
+  background: var(--pt-color-bg-alt);
+  border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  border-radius: var(--pt-shape-radius, 0);
+  padding: 0.55em 0.75em;
+  width: 100%;
+}
+
+table { border-collapse: collapse; width: 100%; }
+th, td {
+  text-align: left;
+  padding: 0.6em 0.75em;
+  border-bottom: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+}
+th { font-family: var(--pt-type-display, inherit); }
+tbody tr:nth-child(even) { background: var(--pt-color-bg-alt); }
+
+.pt-badge {
+  display: inline-block;
+  font-family: var(--pt-type-mono, monospace);
+  font-size: 0.75rem;
+  background: var(--pt-color-bg-alt);
+  color: var(--pt-color-text-dim);
+  border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  border-radius: var(--pt-shape-radius, 0);
+  padding: 0.15em 0.6em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

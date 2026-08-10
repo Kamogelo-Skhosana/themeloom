@@ -1,0 +1,192 @@
+/*
+ * @polytheme/themes-classic — flourishes
+ *
+ * Companion stylesheet for the pack's decorative hooks. The engine writes
+ * `data-flourish="<name>"` on <body>; everything below hangs off that.
+ *
+ * Entirely optional. Skip this file and the themes still work — you just lose
+ * the grid horizon, the scanlines and the grain.
+ *
+ * Every flourish is pointer-events: none and sits behind content.
+ */
+
+/*
+ * `isolation` keeps the negative-z-index decoration inside this element's
+ * stacking context, so it paints above the background and below the content
+ * without any rule having to touch the children.
+ *
+ * That last part matters: an earlier version raised every child to
+ * `position: relative` instead, which silently overrode `:host { position:
+ * fixed }` on <polytheme-picker> and dropped the picker into normal flow. Outer
+ * page rules beat `:host` rules, so a decorative stylesheet must never reach
+ * for a descendant selector this broad.
+ */
+[data-flourish] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-flourish]::before,
+[data-flourish]::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-flourish]::before,
+  [data-flourish]::after {
+    animation: none !important;
+  }
+}
+
+/* ---------------------------------------------------------- grid-horizon */
+/* retro-80s: a perspective grid receding to a glowing horizon line. */
+[data-flourish='grid-horizon']::before {
+  background:
+    linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(255, 46, 154, 0.14) 56%, transparent 57%),
+    repeating-linear-gradient(to right, rgba(33, 212, 253, 0.16) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(to bottom, rgba(33, 212, 253, 0.16) 0 1px, transparent 1px 64px);
+  mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
+  opacity: 0.6;
+}
+[data-flourish='grid-horizon']::after {
+  background: radial-gradient(ellipse 80% 45% at 50% 58%, rgba(255, 46, 154, 0.28), transparent 70%);
+}
+
+/* -------------------------------------------------------- starfield-tile */
+/* retro-90s: the obligatory tiled star background, drawn instead of a GIF. */
+[data-flourish='starfield-tile']::before {
+  background-image:
+    radial-gradient(1px 1px at 12px 18px, rgba(255, 255, 255, 0.75) 50%, transparent 51%),
+    radial-gradient(1px 1px at 58px 44px, rgba(255, 255, 255, 0.55) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90px 12px, rgba(255, 255, 255, 0.65) 50%, transparent 51%);
+  background-size: 120px 120px;
+  opacity: 0.35;
+}
+
+/* ----------------------------------------------------------- chrome-sheen */
+/* retro-y2k: a slow diagonal highlight sweeping across the page. */
+[data-flourish='chrome-sheen']::before {
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(186, 210, 255, 0.35) 52%,
+    rgba(255, 255, 255, 0) 68%
+  );
+  background-size: 300% 300%;
+  animation: pt-sheen 14s linear infinite;
+  opacity: 0.5;
+}
+@keyframes pt-sheen {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+/* ------------------------------------------------------------- grid-rules */
+/* basic-mono: a faint typographic grid, Swiss-poster style. */
+[data-flourish='grid-rules']::before {
+  background:
+    repeating-linear-gradient(to right, rgba(17, 17, 17, 0.06) 0 1px, transparent 1px 25%),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.06) 0 1px, transparent 1px);
+}
+
+/* -------------------------------------------------------------- scanlines */
+/* future-cyberpunk: CRT lines plus a very slight vertical roll. */
+[data-flourish='scanlines']::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 240, 255, 0.045) 0 1px,
+    transparent 1px 3px
+  );
+  animation: pt-roll 8s linear infinite;
+}
+[data-flourish='scanlines']::after {
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+@keyframes pt-roll {
+  from { background-position-y: 0; }
+  to { background-position-y: 3px; }
+}
+
+/* ----------------------------------------------------------------- aurora */
+/* future-holo: two soft colour fields drifting behind frosted panels. */
+[data-flourish='aurora']::before {
+  background:
+    radial-gradient(45% 35% at 20% 20%, rgba(109, 94, 252, 0.35), transparent 70%),
+    radial-gradient(40% 40% at 80% 30%, rgba(34, 211, 238, 0.30), transparent 70%),
+    radial-gradient(50% 40% at 50% 90%, rgba(240, 171, 252, 0.28), transparent 70%);
+  filter: blur(20px);
+  animation: pt-drift 22s ease-in-out infinite alternate;
+}
+@keyframes pt-drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1.02); }
+  to { transform: translate3d(2%, 2%, 0) scale(1.08); }
+}
+
+/* Frosted cards only make sense when something is behind them to frost. */
+[data-flourish='aurora'] [class*='card'],
+[data-flourish='aurora'] .pt-card {
+  backdrop-filter: blur(var(--pt-glass-blur, 14px)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--pt-glass-blur, 14px)) saturate(1.4);
+}
+
+/* ------------------------------------------------------------- pixel-grid */
+/* arcade-8bit: a chunky lattice, aligned to an 8px pixel budget. */
+[data-flourish='pixel-grid']::before {
+  background:
+    repeating-linear-gradient(to right, rgba(242, 244, 255, 0.05) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(to bottom, rgba(242, 244, 255, 0.05) 0 1px, transparent 1px 8px);
+  image-rendering: pixelated;
+}
+
+/* ------------------------------------------------------------ vector-glow */
+/* arcade-vector: phosphor bloom pooling in the centre of the tube. */
+[data-flourish='vector-glow']::before {
+  background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.10), transparent 60%);
+}
+[data-flourish='vector-glow']::after {
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 4px);
+  opacity: 0.5;
+}
+
+/* ----------------------------------------------------------------- canopy */
+/* nature-forest: dappled light through leaves, top-left. */
+[data-flourish='canopy']::before {
+  background:
+    radial-gradient(30% 25% at 12% 0%, rgba(127, 176, 105, 0.22), transparent 70%),
+    radial-gradient(25% 20% at 78% 6%, rgba(217, 168, 108, 0.16), transparent 70%);
+}
+[data-flourish='canopy']::after {
+  background: linear-gradient(to bottom, transparent 60%, rgba(4, 12, 7, 0.5) 100%);
+}
+
+/* ------------------------------------------------------------------ grain */
+/* nature-desert: paper tooth. An SVG turbulence tile, no image request. */
+[data-flourish='grain']::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+/* ------------------------------------------------------------- rule-lines */
+/* elegant-editorial: margin rules, like a printed page. */
+[data-flourish='rule-lines']::before {
+  background:
+    linear-gradient(to right, transparent calc(50% - 34rem), rgba(138, 28, 28, 0.18) calc(50% - 34rem), rgba(138, 28, 28, 0.18) calc(50% - 34rem + 1px), transparent calc(50% - 34rem + 1px)),
+    linear-gradient(to right, transparent calc(50% + 34rem), rgba(138, 28, 28, 0.18) calc(50% + 34rem), rgba(138, 28, 28, 0.18) calc(50% + 34rem + 1px), transparent calc(50% + 34rem + 1px));
+}
+
+/* --------------------------------------------------------------- vignette */
+/* elegant-noir: light falls off toward the frame edge. */
+[data-flourish='vignette']::before {
+  background: radial-gradient(ellipse 75% 65% at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+}
+[data-flourish='vignette']::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}

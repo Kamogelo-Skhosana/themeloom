@@ -1,0 +1,33 @@
+{
+  "name": "@polytheme/core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic theme engine. A theme is a full design contract: color, type, shape, motion, flourish.",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./global": {
+      "types": "./dist/global.d.ts",
+      "import": "./dist/global.js",
+      "require": "./dist/global.cjs"
+    },
+    "./polytheme.global.js": "./dist/polytheme.global.js",
+    "./preset.css": "./preset.css",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "preset.css"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "keywords": ["theme", "theming", "design-tokens", "css-variables", "dark-mode", "web-components"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

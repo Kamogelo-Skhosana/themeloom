@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>polytheme — plain HTML, no build step</title>
+
+<!-- 1. Token → element styles. Optional: bring your own CSS instead. -->
+<link rel="stylesheet" href="/packages/core/preset.css" />
+<!-- 2. Decorative hooks for themes that declare a `flourish`. Also optional. -->
+<link rel="stylesheet" href="/packages/themes-pack-classic/styles/flourishes.css" />
+
+<!-- 3. Apply the stored theme before first paint, so the page never flashes. -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('demo-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  /* Everything below reads from the tokens the engine writes. Nothing here
+     mentions a colour, a font or a radius by name. */
+  .wrap { max-width: 64rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 4rem) 1.25rem 6rem; }
+
+  header { padding-block: clamp(2rem, 8vh, 5rem) 2rem; }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--pt-type-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pt-color-accent);
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: clamp(2.25rem, 7vw, 4.25rem); margin-bottom: 0.35em; }
+  .lede { font-size: 1.15rem; color: var(--pt-color-text-dim); max-width: 40ch; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--pt-shape-space);
+    margin-top: 3rem;
+  }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .chip {
+    width: 2.5rem; height: 2.5rem;
+    border-radius: var(--pt-shape-radius);
+    border: var(--pt-shape-border-width) solid var(--pt-color-border);
+  }
+
+  .specimen { margin-top: 3rem; }
+  .specimen dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--pt-type-mono);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  .specimen dt { color: var(--pt-color-text-dim); }
+  .specimen dd { margin: 0; overflow-wrap: anywhere; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: var(--pt-shape-border-width) solid var(--pt-color-border);
+    color: var(--pt-color-text-dim);
+    font-size: 0.85rem;
+  }
+
+  .motion-demo {
+    width: 2.5rem; height: 2.5rem;
+    background: var(--pt-color-accent);
+    border-radius: var(--pt-shape-radius);
+    animation: slide calc(var(--pt-motion-duration) * 8) var(--pt-motion-ease) infinite alternate;
+  }
+  @keyframes slide { to { transform: translateX(min(14rem, 40vw)); } }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow" id="category">basic</span>
+      <h1 id="theme-name">Corporate Clean</h1>
+      <p class="lede" id="theme-description">
+        One page. Thirteen themes. The markup below never changes — only the tokens do.
+      </p>
+      <div class="actions">
+        <button id="next">Next theme →</button>
+        <button class="pt-btn--ghost" id="random">Surprise me</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <article class="pt-card">
+        <h3>Colour</h3>
+        <p>Eight required roles, plus optional status colours. Contrast is checked in CI.</p>
+        <div class="swatches" id="swatches"></div>
+      </article>
+
+      <article class="pt-card">
+        <h3>Type</h3>
+        <p>Display and body stacks, hero weight, tracking. Fonts load on first use of a theme — never up front.</p>
+        <p><span class="pt-badge" id="font-count">0 fonts</span></p>
+      </article>
+
+      <article class="pt-card">
+        <h3>Shape &amp; motion</h3>
+        <p>Radius, shadow and border width, plus the duration and easing every transition reads from.</p>
+        <div class="motion-demo" aria-hidden="true"></div>
+      </article>
+    </div>
+
+    <section class="specimen">
+      <h2>The active contract</h2>
+      <dl id="tokens"></dl>
+    </section>
+
+    <section class="specimen">
+      <h2>Components</h2>
+      <p>
+        A <a href="#">link</a>, some <code>inline code</code>, and a table — all
+        picking up the same tokens.
+      </p>
+      <table>
+        <thead><tr><th>Theme</th><th>Category</th><th>Flourish</th></tr></thead>
+        <tbody id="theme-table"></tbody>
+      </table>
+      <p style="margin-top: 1.5rem;"><input type="text" placeholder="An input, themed too" /></p>
+    </section>
+
+    <footer>
+      Built with polytheme. No build step, no framework, no CSS framework.
+    </footer>
+  </div>
+
+  <!-- 4. The engine, the pack and the picker — three script tags. -->
+  <script src="/packages/core/dist/polytheme.global.js"></script>
+  <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
+  <script src="/packages/picker-ui/dist/picker.global.js"></script>
+
+  <script>
+    const engine = Polytheme.init({
+      themes: PolythemeClassic.classicThemes,
+      categories: PolythemeClassic.classicCategories,
+      storageKey: 'demo-theme',
+      default: 'basic-corporate',
+    });
+
+    // The picker finds `window.__polytheme` on its own — no wiring needed.
+    const picker = document.createElement('polytheme-picker');
+    picker.setAttribute('position', 'top-right');
+    document.body.appendChild(picker);
+
+    const $ = (id) => document.getElementById(id);
+
+    engine.subscribe((theme) => {
+      if (!theme) return;
+      $('theme-name').textContent = theme.name;
+      $('theme-description').textContent = theme.description;
+      $('category').textContent = theme.category;
+      $('font-count').textContent = `${(theme.fonts || []).length} font${(theme.fonts || []).length === 1 ? '' : 's'}`;
+
+      $('swatches').replaceChildren(
+        ...['bg', 'bgAlt', 'cardBg', 'text', 'textDim', 'accent', 'border'].map((role) => {
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.style.background = theme.color[role];
+          chip.title = role;
+          return chip;
+        }),
+      );
+
+      const rows = [
+        ['color.accent', theme.color.accent],
+        ['type.display', theme.type.display],
+        ['type.body', theme.type.body],
+        ['type.heroWeight', theme.type.heroWeight],
+        ['type.letterSpacing', theme.type.letterSpacing],
+        ['shape.radius', theme.shape.radius],
+        ['shape.shadow', theme.shape.shadow],
+        ['motion.duration', (theme.motion || {}).duration || '180ms (default)'],
+        ['motion.ease', (theme.motion || {}).ease || 'default'],
+        ['flourish', theme.flourish || '—'],
+      ];
+      $('tokens').replaceChildren(
+        ...rows.flatMap(([key, value]) => {
+          const dt = document.createElement('dt');
+          dt.textContent = key;
+          const dd = document.createElement('dd');
+          dd.textContent = String(value);
+          return [dt, dd];
+        }),
+      );
+    });
+
+    $('theme-table').replaceChildren(
+      ...engine.list().map((theme) => {
+        const tr = document.createElement('tr');
+        for (const value of [theme.name, theme.category, theme.flourish || '—']) {
+          const td = document.createElement('td');
+          td.textContent = value;
+          tr.appendChild(td);
+        }
+        tr.style.cursor = 'pointer';
+        tr.addEventListener('click', () => engine.set(theme.id));
+        return tr;
+      }),
+    );
+
+    $('next').addEventListener('click', () => engine.next());
+    $('random').addEventListener('click', () => engine.random());
+  </script>
+</body>
+</html>

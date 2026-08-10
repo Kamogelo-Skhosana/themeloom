@@ -1,0 +1,22 @@
+{
+  "name": "polytheme-example-nextjs",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@polytheme/core": "^0.1.0",
+    "@polytheme/picker": "^0.1.0",
+    "@polytheme/themes-classic": "^0.1.0",
+    "next": "^15.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  }
+}

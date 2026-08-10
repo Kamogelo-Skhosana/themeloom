@@ -1,0 +1,22 @@
+{
+  "name": "polytheme",
+  "version": "0.1.0",
+  "description": "Scaffold polytheme into an existing project: npx polytheme init",
+  "type": "module",
+  "bin": {
+    "polytheme": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/scaffold.d.ts",
+      "import": "./dist/scaffold.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": ["polytheme", "cli", "scaffold", "theme"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "polytheme-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Polytheme — a full design contract per theme: color, type, shape, motion, flourish.",
+  "workspaces": [
+    "packages/core",
+    "packages/themes-pack-classic",
+    "packages/picker-ui",
+    "packages/cli"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "clean": "node scripts/clean.mjs",
+    "typecheck": "node scripts/typecheck.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "docs": "node scripts/serve.mjs . 4321 /docs/",
+    "example:vanilla": "node scripts/serve.mjs . 4322 /examples/vanilla-html/",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.9.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

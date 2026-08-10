@@ -1,0 +1,30 @@
+{
+  "name": "@polytheme/themes-classic",
+  "version": "0.1.0",
+  "description": "Thirteen first-party polytheme themes across retro, basic, futuristic, arcade, nature and elegant.",
+  "type": "module",
+  "sideEffects": ["./styles/*.css"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./flourishes.css": "./styles/flourishes.css",
+    "./themes-classic.global.js": "./dist/themes-classic.global.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "styles"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "@polytheme/core": "^0.1.0"
+  },
+  "keywords": ["polytheme", "themes", "design-tokens", "retro", "cyberpunk"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

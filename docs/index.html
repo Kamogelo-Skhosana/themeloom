@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>polytheme — theme gallery &amp; playground</title>
+<meta name="description" content="Every theme is a full design contract: colour, type, shape, motion and an optional flourish." />
+
+<link rel="stylesheet" href="/packages/core/preset.css" />
+<link rel="stylesheet" href="/packages/themes-pack-classic/styles/flourishes.css" />
+
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('polytheme-docs');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 6rem; }
+
+  .hero { padding-block: clamp(3rem, 12vh, 7rem) 2rem; }
+  .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 0.25em; }
+  .hero p { font-size: 1.2rem; color: var(--pt-color-text-dim); max-width: 46ch; }
+  .kicker {
+    font-family: var(--pt-type-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pt-color-accent);
+  }
+
+  section { margin-top: clamp(3rem, 8vh, 5rem); }
+  section > h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+  .section-note { color: var(--pt-color-text-dim); max-width: 52ch; margin-top: -0.25em; }
+
+  /* ---------------------------------------------------------- the gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /*
+   * Each card previews a theme using that theme's own tokens, read from a
+   * scoped custom-property block written by JS. A live iframe per theme would
+   * be more faithful and far heavier; this stays honest because the preview
+   * reads the same variables the real page does.
+   */
+  .preview {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: var(--c-radius);
+    box-shadow: var(--c-shadow);
+    transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .preview:hover { transform: translateY(-3px); }
+  .preview[aria-current="true"] { outline: 2px solid var(--pt-color-accent); outline-offset: 3px; }
+
+  .preview-canvas { padding: 1.25rem 1.25rem 1rem; }
+  .preview-title {
+    font-family: var(--c-display);
+    font-weight: var(--c-hero-weight);
+    letter-spacing: var(--c-tracking);
+    text-transform: var(--c-transform);
+    font-size: 1.35rem;
+    line-height: 1.1;
+    margin: 0 0 0.4rem;
+  }
+  .preview-body { font-family: var(--c-body); font-size: 0.85rem; color: var(--c-dim); margin: 0 0 1rem; }
+  .preview-chip {
+    display: inline-block;
+    font-family: var(--c-display);
+    font-size: 0.7rem;
+    letter-spacing: var(--c-tracking);
+    text-transform: var(--c-transform);
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    border-radius: var(--c-radius-sm);
+    padding: 0.35em 0.9em;
+  }
+  .preview-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--c-bg-alt);
+    border-top: 1px solid var(--c-border);
+    font-family: ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: var(--c-dim);
+  }
+
+  /* ------------------------------------------------------- the playground */
+  .playground { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 2rem; }
+  @media (min-width: 60rem) { .playground { grid-template-columns: 20rem minmax(0, 1fr); } }
+
+  .controls { display: grid; gap: 0.9rem; align-content: start; }
+  .control { display: grid; gap: 0.3rem; }
+  .control label { font-size: 0.78rem; color: var(--pt-color-text-dim); font-family: var(--pt-type-mono); }
+  .control input[type="color"] { height: 2.5rem; padding: 0.15rem; }
+  .control-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+
+  pre { font-size: 0.78rem; max-height: 26rem; }
+  .copy-row { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.75rem; }
+
+  .stat-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+  footer {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--pt-color-border);
+    color: var(--pt-color-text-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker">polytheme</p>
+      <h1>A theme is a contract, not a palette.</h1>
+      <p>
+        Colour, type, shape, motion and an optional flourish — declared once as
+        typed tokens, applied by flipping one attribute. No Tailwind, no build
+        step, no framework.
+      </p>
+      <div class="stat-row">
+        <span class="pt-badge" id="stat-themes">— themes</span>
+        <span class="pt-badge" id="stat-categories">— categories</span>
+        <span class="pt-badge">core 5.3&nbsp;kB gzipped</span>
+      </div>
+    </header>
+
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <p class="section-note">
+        Every card is drawn with its own theme's tokens. Click one to apply it to
+        this whole page.
+      </p>
+      <div class="gallery" id="gallery-grid"></div>
+    </section>
+
+    <section id="playground">
+      <h2>Playground</h2>
+      <p class="section-note">
+        Fork the active theme, adjust it, and copy out a ready-to-paste
+        <code>defineTheme()</code> call.
+      </p>
+
+      <div class="playground">
+        <div class="controls">
+          <div class="control">
+            <label for="pg-name">name</label>
+            <input id="pg-name" type="text" />
+          </div>
+          <div class="control-row">
+            <div class="control">
+              <label for="pg-bg">color.bg</label>
+              <input id="pg-bg" type="color" />
+            </div>
+            <div class="control">
+              <label for="pg-text">color.text</label>
+              <input id="pg-text" type="color" />
+            </div>
+          </div>
+          <div class="control-row">
+            <div class="control">
+              <label for="pg-accent">color.accent</label>
+              <input id="pg-accent" type="color" />
+            </div>
+            <div class="control">
+              <label for="pg-card">color.cardBg</label>
+              <input id="pg-card" type="color" />
+            </div>
+          </div>
+          <div class="control">
+            <label for="pg-radius">shape.radius — <span id="pg-radius-out">8px</span></label>
+            <input id="pg-radius" type="range" min="0" max="32" step="1" />
+          </div>
+          <div class="control">
+            <label for="pg-duration">motion.duration — <span id="pg-duration-out">180ms</span></label>
+            <input id="pg-duration" type="range" min="0" max="600" step="20" />
+          </div>
+          <div class="control">
+            <label for="pg-display">type.display</label>
+            <input id="pg-display" type="text" />
+          </div>
+          <p id="pg-contrast" class="pt-badge">contrast —</p>
+          <button id="pg-apply">Apply to this page</button>
+          <button class="pt-btn--ghost" id="pg-reset">Reset</button>
+        </div>
+
+        <div>
+          <pre><code id="pg-code"></code></pre>
+          <div class="copy-row">
+            <button class="pt-btn--ghost" id="pg-copy">Copy theme source</button>
+            <span class="pt-badge" id="pg-copied" hidden>copied</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2>Install</h2>
+      <pre><code># the engine, a pack, and the picker
+npm install @polytheme/core @polytheme/themes-classic @polytheme/picker
+
+# or scaffold it
+npx polytheme init</code></pre>
+      <pre><code>import { ThemeEngine } from '@polytheme/core';
+import { classicThemes, classicCategories } from '@polytheme/themes-classic';
+import '@polytheme/picker';
+import '@polytheme/core/preset.css';
+import '@polytheme/themes-classic/flourishes.css';
+
+const engine = new ThemeEngine({
+  themes: classicThemes,
+  categories: classicCategories,
+  persist: 'localStorage',
+  storageKey: 'site-theme',
+  default: 'basic-corporate',
+});
+
+engine.set('arcade-8bit');
+engine.on('change', (event) => console.log(event.theme.id));</code></pre>
+    </section>
+
+    <footer>
+      polytheme · MIT · the picker in the corner is
+      <code>&lt;polytheme-picker&gt;</code>, running on this page.
+    </footer>
+  </div>
+
+  <script src="/packages/core/dist/polytheme.global.js"></script>
+  <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
+  <script src="/packages/picker-ui/dist/picker.global.js"></script>
+
+  <script>
+    const { classicThemes, classicCategories } = PolythemeClassic;
+
+    const engine = Polytheme.init({
+      themes: classicThemes,
+      categories: classicCategories,
+      storageKey: 'polytheme-docs',
+      default: 'basic-corporate',
+    });
+
+    document.body.appendChild(document.createElement('polytheme-picker'));
+
+    const $ = (id) => document.getElementById(id);
+
+    $('stat-themes').textContent = `${engine.list().length} themes`;
+    $('stat-categories').textContent = `${engine.categories().length} categories`;
+
+    // ------------------------------------------------------------- gallery
+
+    const cards = new Map();
+
+    for (const category of engine.categories()) {
+      for (const theme of category.themes) {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'preview';
+        card.dataset.themeId = theme.id;
+        card.setAttribute('aria-label', `Apply ${theme.name}`);
+
+        // Scope the theme's own tokens to this card only.
+        const motion = theme.motion || {};
+        Object.entries({
+          '--c-bg': theme.color.bg,
+          '--c-bg-alt': theme.color.bgAlt,
+          '--c-text': theme.color.text,
+          '--c-dim': theme.color.textDim,
+          '--c-accent': theme.color.accent,
+          '--c-accent-text': theme.color.accentText,
+          '--c-border': theme.color.border,
+          '--c-radius': theme.shape.radiusLarge || `min(${theme.shape.radius}, 1.5rem)`,
+          '--c-radius-sm': theme.shape.radius,
+          '--c-shadow': theme.shape.shadow,
+          '--c-display': theme.type.display,
+          '--c-body': theme.type.body,
+          '--c-hero-weight': theme.type.heroWeight,
+          '--c-tracking': theme.type.letterSpacing,
+          '--c-transform': theme.type.headingTransform || 'none',
+          '--c-duration': motion.duration || '180ms',
+        }).forEach(([key, value]) => card.style.setProperty(key, value));
+
+        const canvas = document.createElement('div');
+        canvas.className = 'preview-canvas';
+        const title = document.createElement('p');
+        title.className = 'preview-title';
+        title.textContent = theme.name;
+        const body = document.createElement('p');
+        body.className = 'preview-body';
+        body.textContent = theme.description;
+        const chip = document.createElement('span');
+        chip.className = 'preview-chip';
+        chip.textContent = 'Button';
+        canvas.append(title, body, chip);
+
+        const meta = document.createElement('div');
+        meta.className = 'preview-meta';
+        const id = document.createElement('span');
+        id.textContent = theme.id;
+        const flourish = document.createElement('span');
+        flourish.textContent = theme.flourish || '—';
+        meta.append(id, flourish);
+
+        card.append(canvas, meta);
+        card.addEventListener('click', () => engine.set(theme.id));
+        cards.set(theme.id, card);
+        $('gallery-grid').appendChild(card);
+      }
+    }
+
+    // ---------------------------------------------------------- playground
+
+    let draft = null;
+
+    function loadDraft(theme) {
+      draft = {
+        name: theme.name,
+        bg: theme.color.bg,
+        text: theme.color.text,
+        accent: theme.color.accent,
+        cardBg: theme.color.cardBg,
+        radius: parseInt(theme.shape.radius, 10) || 0,
+        duration: parseInt((theme.motion || {}).duration, 10) || 180,
+        display: theme.type.display,
+        source: theme,
+      };
+      $('pg-name').value = draft.name;
+      $('pg-bg').value = toHex(draft.bg);
+      $('pg-text').value = toHex(draft.text);
+      $('pg-accent').value = toHex(draft.accent);
+      $('pg-card').value = toHex(draft.cardBg);
+      $('pg-radius').value = draft.radius;
+      $('pg-duration').value = draft.duration;
+      $('pg-display').value = draft.display;
+      renderDraft();
+    }
+
+    /* <input type="color"> only speaks #rrggbb, so gradients and rgba() get a
+       neutral stand-in rather than silently corrupting the token. */
+    function toHex(value) {
+      return /^#[0-9a-f]{6}$/i.test(value) ? value : '#808080';
+    }
+
+    function readControls() {
+      draft.name = $('pg-name').value;
+      draft.bg = $('pg-bg').value;
+      draft.text = $('pg-text').value;
+      draft.accent = $('pg-accent').value;
+      draft.cardBg = $('pg-card').value;
+      draft.radius = Number($('pg-radius').value);
+      draft.duration = Number($('pg-duration').value);
+      draft.display = $('pg-display').value;
+    }
+
+    function draftToTheme() {
+      const base = draft.source;
+      return {
+        ...base,
+        id: 'custom',
+        name: draft.name || 'Custom',
+        description: `Forked from ${base.name}.`,
+        swatch: draft.accent,
+        color: { ...base.color, bg: draft.bg, text: draft.text, accent: draft.accent, cardBg: draft.cardBg },
+        type: { ...base.type, display: draft.display },
+        shape: { ...base.shape, radius: `${draft.radius}px` },
+        motion: { ...(base.motion || {}), duration: `${draft.duration}ms`, ease: (base.motion || {}).ease || 'ease' },
+      };
+    }
+
+    function renderDraft() {
+      $('pg-radius-out').textContent = `${draft.radius}px`;
+      $('pg-duration-out').textContent = `${draft.duration}ms`;
+
+      const ratio = Polytheme.contrastRatio(draft.text, draft.bg);
+      const label = ratio === null ? '—' : `${ratio.toFixed(2)}:1`;
+      const verdict = ratio === null ? '' : ratio >= 4.5 ? ' AA ✓' : ratio >= 3 ? ' large text only' : ' fails AA';
+      $('pg-contrast').textContent = `contrast ${label}${verdict}`;
+
+      $('pg-code').textContent = toSource(draftToTheme());
+    }
+
+    function toSource(theme) {
+      const q = (value) => (typeof value === 'string' ? `'${value.replace(/'/g, "\\'")}'` : String(value));
+      const block = (obj, indent) =>
+        Object.entries(obj)
+          .filter(([, v]) => v !== undefined)
+          .map(([k, v]) => `${indent}${k}: ${q(v)},`)
+          .join('\n');
+
+      return `import { defineTheme } from '@polytheme/core';
+
+export const ${camel(theme.name)} = defineTheme({
+  id: '${slug(theme.name)}',
+  category: '${theme.category}',
+  name: '${theme.name}',
+  description: '${theme.description}',
+  swatch: '${theme.swatch}',
+
+  color: {
+${block(theme.color, '    ')}
+  },
+  type: {
+${block(theme.type, '    ')}
+  },
+  shape: {
+${block(theme.shape, '    ')}
+  },
+  motion: {
+${block(theme.motion, '    ')}
+  },${theme.flourish ? `\n  flourish: '${theme.flourish}',` : ''}
+});`;
+    }
+
+    const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'custom';
+    const camel = (s) => slug(s).replace(/-(.)/g, (_, c) => c.toUpperCase());
+
+    for (const id of ['pg-name', 'pg-bg', 'pg-text', 'pg-accent', 'pg-card', 'pg-radius', 'pg-duration', 'pg-display']) {
+      $(id).addEventListener('input', () => {
+        readControls();
+        renderDraft();
+      });
+    }
+
+    $('pg-apply').addEventListener('click', () => {
+      const theme = draftToTheme();
+      engine.register(theme);
+      engine.set(theme.id);
+    });
+
+    $('pg-reset').addEventListener('click', () => loadDraft(engine.current));
+
+    $('pg-copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText($('pg-code').textContent);
+        $('pg-copied').hidden = false;
+        setTimeout(() => ($('pg-copied').hidden = true), 1500);
+      } catch {
+        /* clipboard blocked — the source is on screen to select by hand */
+      }
+    });
+
+    // ----------------------------------------------------------- reactions
+
+    engine.subscribe((theme) => {
+      if (!theme) return;
+      for (const [id, card] of cards) card.setAttribute('aria-current', String(id === theme.id));
+      if (!draft || draft.source.id !== theme.id) {
+        if (theme.id !== 'custom') loadDraft(theme);
+      }
+    });
+  </script>
+</body>
+</html>
