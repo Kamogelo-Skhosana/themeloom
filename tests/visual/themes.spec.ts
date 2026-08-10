@@ -1,33 +1,90 @@
 import { test, expect, type Page } from '@playwright/test';
+import { classicThemeIds } from '@polytheme/themes-classic';
 
 const DEMO = '/examples/vanilla-html/';
 
-/** Theme ids, read from the running page rather than duplicated here. */
-async function themeIds(page: Page): Promise<string[]> {
-  return page.evaluate(() => (window as any).__polytheme.list().map((t: { id: string }) => t.id));
+async function openDemo(page: Page): Promise<void> {
+  await page.goto(DEMO);
+  // The engine mounts from a deferred module script, so nothing may be on
+  // `window` yet when the navigation resolves.
+  await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
 }
 
+/** Applies a theme. Enough for anything that asserts on attributes or tokens. */
 async function applyTheme(page: Page, id: string): Promise<void> {
   await page.evaluate((themeId) => (window as any).__polytheme.set(themeId), id);
-  // Wait for the theme's fonts before shooting, or the screenshot catches the
-  // fallback stack and every run disagrees with the last.
+  await page.waitForTimeout(50);
+}
+
+/**
+ * Applies a theme and waits until its own web fonts are actually usable.
+ *
+ * Only for tests that then take a screenshot. Everything else asserts on
+ * attributes and computed properties, where gating on a Google Fonts download
+ * would add network flakiness and buy nothing — that is exactly how the
+ * corner-pinning test started failing on a slow fetch.
+ *
+ * `document.fonts.ready` is not enough on its own, in both directions: it can
+ * resolve *before* the stylesheet the engine just injected has registered its
+ * @font-face rules, and it resolves whether or not the fetch succeeded. Either
+ * way the screenshot catches the fallback stack, and a baseline of the wrong
+ * typeface is worse than no baseline at all.
+ *
+ * Polling the face set covers both: it cannot pass early, and if the fonts
+ * never arrive the test fails here naming the theme rather than silently
+ * recording the wrong picture.
+ *
+ * Note this inspects `document.fonts` directly rather than calling
+ * `fonts.check()`. `check('16px "Rajdhani"')` asks about weight *400* — and a
+ * theme that only ever renders its display face at `heroWeight: 700` never
+ * fetches the 400 face, so the check stays false forever on a font that is
+ * perfectly well loaded.
+ */
+async function applyThemeAndLoadFonts(page: Page, id: string): Promise<void> {
+  await page.evaluate((themeId) => (window as any).__polytheme.set(themeId), id);
+  await page.waitForFunction(
+    (themeId) => {
+      const theme = (window as any).__polytheme.get(themeId);
+      const families: string[] = (theme.fonts ?? []).map((f: { family: string }) => f.family);
+      return families.every((family) => {
+        const faces = [...document.fonts].filter((face) => face.family === family);
+        // At least one weight arrived, and nothing is still in flight that
+        // could repaint the page after the screenshot.
+        return faces.some((f) => f.status === 'loaded') && !faces.some((f) => f.status === 'loading');
+      });
+    },
+    id,
+    { timeout: 20_000 },
+  );
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(150);
 }
 
 test.describe('theme rendering', () => {
-  test('every theme renders distinctly', async ({ page }) => {
-    await page.goto(DEMO);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
-
-    for (const id of await themeIds(page)) {
-      await applyTheme(page, id);
+  /*
+   * One test per theme, not one loop over all of them.
+   *
+   * The loop shared a single 30s budget across thirteen screenshots. That
+   * passed locally and timed out on CI — but the real damage was to baseline
+   * generation: a timeout partway through meant every theme after it never got
+   * a baseline written, so `--update-snapshots` produced a partial set and the
+   * next run failed on the gaps. Per-theme tests each get their own budget,
+   * run in parallel, name the offending theme in the failure, and cannot
+   * truncate each other.
+   *
+   * The ids come from the pack itself, so adding a theme without a baseline is
+   * a failing test rather than a silent gap in coverage.
+   */
+  for (const id of classicThemeIds) {
+    test(`${id} renders distinctly`, async ({ page }) => {
+      await openDemo(page);
+      await applyThemeAndLoadFonts(page, id);
       await expect(page).toHaveScreenshot(`theme-${id}.png`, { fullPage: false });
-    }
-  });
+    });
+  }
 
   test('the attribute and the tokens agree', async ({ page }) => {
-    await page.goto(DEMO);
+    await openDemo(page);
     await applyTheme(page, 'arcade-8bit');
 
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'arcade-8bit');
@@ -41,8 +98,7 @@ test.describe('theme rendering', () => {
   });
 
   test('fonts load lazily, only for themes actually used', async ({ page }) => {
-    await page.goto(DEMO);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
+    await openDemo(page);
 
     const initial = await page.locator('link[data-polytheme="font"]').count();
     await applyTheme(page, 'arcade-8bit');
@@ -55,7 +111,7 @@ test.describe('theme rendering', () => {
   });
 
   test('the choice survives a reload', async ({ page }) => {
-    await page.goto(DEMO);
+    await openDemo(page);
     await applyTheme(page, 'elegant-noir');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'elegant-noir');
@@ -66,8 +122,7 @@ test.describe('picker', () => {
   const picker = (page: Page) => page.locator('polytheme-picker');
 
   test('opens, lists categories, and applies a theme', async ({ page }) => {
-    await page.goto(DEMO);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
+    await openDemo(page);
 
     await picker(page).locator('.trigger').click();
     await expect(picker(page).locator('.panel')).toBeVisible();
@@ -83,8 +138,7 @@ test.describe('picker', () => {
   });
 
   test('stays pinned to the corner, even under a flourish stylesheet', async ({ page }) => {
-    await page.goto(DEMO);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
+    await openDemo(page);
 
     // A theme with a flourish is the case that broke this: the pack's
     // decorative CSS must not be able to restyle the host element.
@@ -101,7 +155,7 @@ test.describe('picker', () => {
   });
 
   test('search narrows the list across categories', async ({ page }) => {
-    await page.goto(DEMO);
+    await openDemo(page);
     await picker(page).locator('.trigger').click();
     await picker(page).locator('.search').fill('arcade');
 
@@ -109,7 +163,7 @@ test.describe('picker', () => {
   });
 
   test('Escape closes and returns focus to the trigger', async ({ page }) => {
-    await page.goto(DEMO);
+    await openDemo(page);
     await picker(page).locator('.trigger').click();
     await expect(picker(page).locator('.panel')).toBeVisible();
 
@@ -117,15 +171,18 @@ test.describe('picker', () => {
     await expect(picker(page).locator('.panel')).toBeHidden();
   });
 
-  test('stays legible on every theme', async ({ page }) => {
-    await page.goto(DEMO);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
-
-    for (const id of ['basic-corporate', 'arcade-8bit', 'retro-90s', 'elegant-noir']) {
-      await applyTheme(page, id);
+  /*
+   * A spread across the extremes the picker has to survive: a light default, a
+   * pixel font with zero radius, a bevelled grey system theme, and a dark
+   * serif one. Split per theme for the same reason as the theme screenshots
+   * above.
+   */
+  for (const id of ['basic-corporate', 'arcade-8bit', 'retro-90s', 'elegant-noir']) {
+    test(`stays legible on ${id}`, async ({ page }) => {
+      await openDemo(page);
+      await applyThemeAndLoadFonts(page, id);
       await picker(page).locator('.trigger').click();
       await expect(picker(page).locator('.panel')).toHaveScreenshot(`picker-${id}.png`);
-      await page.keyboard.press('Escape');
-    }
-  });
+    });
+  }
 });

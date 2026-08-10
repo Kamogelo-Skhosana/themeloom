@@ -184,6 +184,54 @@ Themes are tested two ways. Unit tests assert the contract and the WCAG contrast
 ratios of every theme in the pack. Playwright screenshots assert what they
 actually look like — a broken theme is a visual bug, not a logic bug.
 
+### Visual baselines
+
+Chromium rasterises text differently per platform, so a baseline is only valid
+on the OS that produced it — the platform is in the filename
+(`theme-retro-80s-chromium-linux.png`). Two sets are committed: **Linux**,
+because that is what CI gates on, and **Windows**, so `npm run test:visual`
+gives a real answer on a maintainer's own machine.
+
+Regenerate both together — refreshing one is how the other goes stale:
+
+```
+Actions → "Update visual baselines" → Run workflow
+```
+
+It runs on a Linux and a Windows runner in turn and commits each set.
+
+Only the Linux set can't be produced natively on a Windows or macOS machine. To
+make it locally anyway, run the image CI uses and copy the results back out:
+
+```bash
+docker run --rm --ipc=host \
+  -v "$PWD:/src:ro" \
+  -v "$PWD/tests/visual/themes.spec.ts-snapshots:/out" \
+  mcr.microsoft.com/playwright:v1.62.1-noble bash -c '
+    mkdir -p /app && tar -C /src -cf - --exclude=node_modules . | tar -C /app -xf -
+    cd /app && npm ci && npm run build
+    npx playwright test --update-snapshots=all --workers=1
+    cp /app/tests/visual/themes.spec.ts-snapshots/*-linux.png /out/'
+```
+
+The repo is copied in rather than worked on through the bind mount, and
+`--workers=1` keeps it serial: Docker Desktop's mount IO and CPU limits turned a
+40-second suite into two minutes and made parallel Chromium instances time out.
+Neither affects the pixels — the baselines this produces are identical to CI's.
+
+Three deliberate choices here, each of which cost a red CI run to learn:
+
+- **`updateSnapshots: 'none'` under CI.** The default writes the actual
+  screenshot and *then* fails, so a missing baseline arrives looking like a wall
+  of visual regressions. CI now says plainly that the snapshot isn't there.
+- **One test per theme, not one loop.** A loop shares a single timeout across
+  every screenshot; when it runs out partway, the remaining themes never get a
+  baseline written — so `--update-snapshots` silently produces a partial set.
+- **Fonts are waited on by polling `document.fonts.check()`.**
+  `document.fonts.ready` both resolves too early (before the just-injected
+  stylesheet registers its `@font-face` rules) and resolves on failure, either
+  of which bakes the fallback typeface into a baseline.
+
 ## Roadmap
 
 - [x] `@polytheme/core` + the classic pack + the vanilla picker

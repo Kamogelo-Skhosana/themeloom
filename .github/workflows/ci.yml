@@ -33,8 +33,12 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
 
-      # Baselines are committed per platform. A theme that renders differently
-      # is a real failure here, not flake — that is the point of this job.
+      # Baselines are per-platform and this job is the Linux one, so it needs
+      # `*-chromium-linux.png` committed. Generate them with the "Update visual
+      # baselines" workflow — never by hand from a Windows or macOS machine.
+      #
+      # A theme that renders differently is a real failure here, not flake.
+      # That is the point of this job.
       - run: npm run test:visual
 
       - uses: actions/upload-artifact@v4

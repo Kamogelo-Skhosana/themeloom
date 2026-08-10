@@ -1,0 +1,82 @@
+name: Update visual baselines
+
+# Chromium rasterises text differently per platform, so a baseline is only valid
+# on the OS that produced it. Baselines carry the platform in the filename
+# (`theme-retro-80s-chromium-linux.png`), and the repo commits two sets: Linux
+# because that is what CI gates on, Windows so maintainers can run
+# `npm run test:visual` locally and get a real answer.
+#
+# Both are regenerated here, together. Refreshing only one is how a set goes
+# stale and starts failing on differences nobody made.
+#
+#   Actions → Update visual baselines → Run workflow
+#
+# Run it whenever a theme, preset.css or the picker's markup changes and the
+# `visual` CI job fails on differences you meant to make.
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to update baselines on
+        required: true
+        default: main
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    strategy:
+      # Sequential, not parallel: each job commits to the same branch, and the
+      # second needs the first's commit in its history to push cleanly.
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Install Chromium
+        run: npx playwright install ${{ runner.os == 'Linux' && '--with-deps' || '' }} chromium
+
+      # `--update-snapshots=all` rewrites every baseline rather than only the
+      # ones that fail the diff threshold. A change too small to trip the
+      # threshold would otherwise leave a stale baseline behind and the suite
+      # would quietly stop testing it.
+      #
+      # The flag overrides `updateSnapshots: 'none'` from the config, which is
+      # what makes a *missing* baseline a hard error on the normal CI run.
+      - name: Regenerate
+        run: npx playwright test --update-snapshots=all
+
+      - name: Verify the new baselines pass a clean run
+        run: npm run test:visual
+
+      - name: Commit
+        shell: bash
+        run: |
+          if git diff --quiet -- tests/visual; then
+            echo "Baselines for ${{ runner.os }} already up to date."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/visual
+          git commit -m "chore: regenerate ${{ runner.os }} visual baselines"
+          # The other matrix leg may have pushed since checkout.
+          git pull --rebase origin "${{ inputs.branch }}"
+          git push origin "HEAD:${{ inputs.branch }}"

@@ -11,7 +11,25 @@ export default defineConfig({
   forbidOnly: !!process.env['CI'],
   retries: process.env['CI'] ? 2 : 0,
   reporter: process.env['CI'] ? 'github' : 'list',
-  timeout: 30_000,
+
+  // Each theme test loads the page and waits for that theme's web fonts to
+  // arrive from Google Fonts. On a warm runner that is a couple of seconds; on
+  // a cold container behind a VM network it has been seen to take over 30.
+  // The budget is per test, so a generous ceiling costs nothing when things are
+  // fast and prevents a network hiccup from reading as a visual regression.
+  timeout: 60_000,
+
+  /*
+   * On CI a missing baseline is a setup failure, not something to paper over.
+   * The default ('missing') writes the actual screenshot and then fails, which
+   * reads as thirteen mysterious diffs; 'none' says plainly that the snapshot
+   * isn't there.
+   *
+   * Baselines are per-platform — Chromium rasterises text differently on Linux
+   * and Windows — so they must be generated on the platform CI runs. See
+   * .github/workflows/update-snapshots.yml.
+   */
+  updateSnapshots: process.env['CI'] ? 'none' : 'missing',
 
   use: {
     baseURL: 'http://localhost:4399',
