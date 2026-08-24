@@ -1,4 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { classicThemeIds } from '@polytheme/themes-classic';
+import { seasonalThemeIds } from '@polytheme/themes-seasonal';
+
+// Derived, not hardcoded: adding a pack to the gallery should not need this
+// number edited, but dropping one silently should still fail.
+const GALLERY_SIZE = classicThemeIds.length + seasonalThemeIds.length;
 
 const DOCS = '/docs/';
 
@@ -10,7 +16,7 @@ test.describe('docs site', () => {
 
   test('the gallery has a card per theme, each in its own tokens', async ({ page }) => {
     const cards = page.locator('.preview');
-    await expect(cards).toHaveCount(13);
+    await expect(cards).toHaveCount(GALLERY_SIZE);
 
     // Each card is styled by the theme it previews, not by the active page theme.
     const backgrounds = await cards.evaluateAll((nodes) =>

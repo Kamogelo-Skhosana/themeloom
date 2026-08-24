@@ -7,7 +7,7 @@
 Colour, type, shape, motion and an optional flourish — declared once as typed
 tokens, applied by flipping one attribute.
 
-`@polytheme/core` · `@polytheme/themes-classic` · `@polytheme/picker` · `npx polytheme init`
+`@polytheme/core` · `@polytheme/themes-classic` · `@polytheme/themes-seasonal` · `@polytheme/picker` · `npx polytheme init`
 
 </div>
 
@@ -128,6 +128,7 @@ the contract where you write it, not where you use it.
 | --- | --- |
 | `@polytheme/core` | The engine. Zero dependencies, 5.3 kB gzipped, ESM + CJS + IIFE. |
 | `@polytheme/themes-classic` | 13 themes across retro, basic, futuristic, arcade, nature, elegant. |
+| `@polytheme/themes-seasonal` | 6 themes for times of year — spring, summer, autumn, Halloween, winter, New Year. |
 | `@polytheme/picker` | `<polytheme-picker>` plus React, Vue and Svelte wrappers. |
 | `polytheme` (CLI) | `npx polytheme init` — scaffolds a theme config and prints the snippet. |
 
@@ -138,7 +139,7 @@ the same shape as Lucide or Heroicons.
 
 One Shadow DOM web component, with thin per-framework wrappers rather than three
 implementations of the same logic. The shadow root matters here: the picker sits
-on top of thirteen very different themes and has to stay legible on all of them,
+on top of nineteen very different themes and has to stay legible on all of them,
 which it can't do if a theme's `button {}` rule reaches inside.
 
 ```jsx
@@ -172,8 +173,8 @@ import { inlineBootScript } from '@polytheme/core';
 
 ```bash
 npm install
-npm run build          # all four packages
-npm test               # 149 unit tests, including contrast checks per theme
+npm run build          # all five packages
+npm test               # 208 unit tests, including contrast checks per theme
 npm run typecheck
 npm run docs           # gallery + playground at localhost:4321/docs/
 npm run example:vanilla
@@ -238,7 +239,7 @@ Three deliberate choices here, each of which cost a red CI run to learn:
 - [x] Gallery and playground site
 - [x] React / Vue / Svelte wrappers
 - [x] `npx polytheme init`
-- [ ] `@polytheme/themes-seasonal` — halloween, holiday, summer
+- [x] `@polytheme/themes-seasonal` — spring, summer, autumn, halloween, winter, new year
 - [ ] `@polytheme/themes-brand` — starter kit for building your own pack
 
 ## Licence

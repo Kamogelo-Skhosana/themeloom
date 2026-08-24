@@ -6,6 +6,7 @@
   "workspaces": [
     "packages/core",
     "packages/themes-pack-classic",
+    "packages/themes-pack-seasonal",
     "packages/picker-ui",
     "packages/cli"
   ],

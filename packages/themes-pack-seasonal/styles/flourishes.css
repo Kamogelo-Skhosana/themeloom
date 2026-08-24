@@ -1,0 +1,151 @@
+/*
+ * @polytheme/themes-seasonal — flourishes
+ *
+ * Companion stylesheet for this pack's decorative hooks. The engine writes
+ * `data-flourish="<name>"` on <body>; everything below hangs off that.
+ *
+ * Optional — the themes work without it. Same painting rules as the classic
+ * pack: `isolation` keeps the decoration inside this element's stacking
+ * context at `z-index: -1`, so it sits above the background and below the
+ * content without any rule reaching for the children. A decorative stylesheet
+ * that restyles descendants can silently break components that rely on
+ * `:host` positioning.
+ */
+
+[data-flourish] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-flourish]::before,
+[data-flourish]::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-flourish]::before,
+  [data-flourish]::after {
+    animation: none !important;
+  }
+}
+
+/* --------------------------------------------------------------- cobwebs */
+/* seasonal-halloween: webs in the top corners, fog pooling at the bottom. */
+[data-flourish='cobwebs']::before {
+  background-image:
+    repeating-conic-gradient(from 0deg at 0% 0%, rgba(247, 236, 217, 0.10) 0deg 1deg, transparent 1deg 15deg),
+    repeating-conic-gradient(from 180deg at 100% 0%, rgba(247, 236, 217, 0.10) 0deg 1deg, transparent 1deg 15deg);
+  background-size: 260px 260px, 260px 260px;
+  background-position: top left, top right;
+  background-repeat: no-repeat;
+}
+[data-flourish='cobwebs']::after {
+  background:
+    radial-gradient(70% 40% at 50% 108%, rgba(139, 70, 196, 0.30), transparent 70%),
+    radial-gradient(40% 30% at 15% 100%, rgba(255, 117, 24, 0.14), transparent 70%);
+}
+
+/* -------------------------------------------------------------- snowfall */
+/* seasonal-winter: three layers of flakes at different depths and speeds. */
+[data-flourish='snowfall']::before {
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.9) 50%, transparent 51%),
+    radial-gradient(2px 2px at 120px 80px, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 70px 140px, rgba(255, 255, 255, 0.8) 50%, transparent 51%);
+  background-size: 200px 200px, 260px 260px, 160px 160px;
+  animation: pt-snow 18s linear infinite;
+  opacity: 0.9;
+}
+[data-flourish='snowfall']::after {
+  background: linear-gradient(to bottom, rgba(195, 213, 226, 0.35), transparent 45%);
+}
+@keyframes pt-snow {
+  from { background-position: 0 -200px, 0 -260px, 0 -160px; }
+  to   { background-position: 40px 200px, -30px 260px, 20px 160px; }
+}
+
+/* -------------------------------------------------------------- sun-rays */
+/* seasonal-summer: a hot corner and slow rotating rays. */
+[data-flourish='sun-rays']::before {
+  background: repeating-conic-gradient(
+    from 0deg at 88% 6%,
+    rgba(232, 89, 12, 0.10) 0deg 3deg,
+    transparent 3deg 12deg
+  );
+  animation: pt-rays 90s linear infinite;
+}
+[data-flourish='sun-rays']::after {
+  background:
+    radial-gradient(30% 25% at 88% 6%, rgba(255, 196, 90, 0.45), transparent 70%),
+    linear-gradient(to bottom, transparent 70%, rgba(10, 162, 192, 0.10) 100%);
+}
+@keyframes pt-rays {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------------------------------------------------------------- petals */
+/* seasonal-spring: blossom drifting down and sideways. */
+[data-flourish='petals']::before {
+  background-image:
+    radial-gradient(4px 3px at 30px 40px, rgba(194, 24, 91, 0.22) 50%, transparent 51%),
+    radial-gradient(3px 2px at 150px 110px, rgba(194, 24, 91, 0.16) 50%, transparent 51%),
+    radial-gradient(3px 3px at 90px 180px, rgba(76, 154, 42, 0.16) 50%, transparent 51%);
+  background-size: 220px 240px, 300px 320px, 260px 280px;
+  animation: pt-petals 26s linear infinite;
+}
+@keyframes pt-petals {
+  from { background-position: 0 -240px, 0 -320px, 0 -280px; }
+  to   { background-position: 90px 240px, -70px 320px, 50px 280px; }
+}
+
+/* ---------------------------------------------------------------- embers */
+/* seasonal-autumn: sparks rising from the bottom edge. */
+[data-flourish='embers']::before {
+  background-image:
+    radial-gradient(2px 2px at 40px 20px, rgba(226, 98, 27, 0.55) 50%, transparent 51%),
+    radial-gradient(1px 1px at 140px 60px, rgba(201, 162, 39, 0.45) 50%, transparent 51%),
+    radial-gradient(2px 2px at 90px 120px, rgba(226, 98, 27, 0.35) 50%, transparent 51%);
+  background-size: 200px 200px, 240px 240px, 180px 180px;
+  animation: pt-embers 22s linear infinite;
+  mask-image: linear-gradient(to top, #000 0%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 75%);
+}
+[data-flourish='embers']::after {
+  background: radial-gradient(60% 35% at 50% 105%, rgba(226, 98, 27, 0.22), transparent 70%);
+}
+@keyframes pt-embers {
+  from { background-position: 0 200px, 0 240px, 0 180px; }
+  to   { background-position: 30px -200px, -40px -240px, 20px -180px; }
+}
+
+/* ------------------------------------------------------------- fireworks */
+/* seasonal-newyear: two bursts on a long, offset cycle. */
+[data-flourish='fireworks']::before {
+  background: repeating-conic-gradient(
+    from 0deg at 24% 26%,
+    rgba(245, 197, 24, 0.30) 0deg 2deg,
+    transparent 2deg 10deg
+  );
+  mask-image: radial-gradient(22% 22% at 24% 26%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(22% 22% at 24% 26%, #000 0%, transparent 70%);
+  animation: pt-burst 7s ease-out infinite;
+}
+[data-flourish='fireworks']::after {
+  background: repeating-conic-gradient(
+    from 12deg at 76% 18%,
+    rgba(123, 92, 255, 0.30) 0deg 2deg,
+    transparent 2deg 10deg
+  );
+  mask-image: radial-gradient(18% 18% at 76% 18%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(18% 18% at 76% 18%, #000 0%, transparent 70%);
+  animation: pt-burst 7s ease-out 3.5s infinite;
+}
+@keyframes pt-burst {
+  0%        { opacity: 0; transform: scale(0.35); }
+  12%       { opacity: 1; }
+  55%, 100% { opacity: 0; transform: scale(1.25); }
+}

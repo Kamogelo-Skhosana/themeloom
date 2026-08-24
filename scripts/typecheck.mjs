@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 // tsup generates declarations with its own program, so project references would
 // only be a second, divergent source of truth.
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const packages = ['core', 'themes-pack-classic', 'picker-ui', 'cli'];
+const packages = ['core', 'themes-pack-classic', 'themes-pack-seasonal', 'picker-ui', 'cli'];
 const tsc = join(root, 'node_modules', '.bin', process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
 
 let failed = false;

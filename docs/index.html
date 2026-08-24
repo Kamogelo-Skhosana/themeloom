@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="/packages/core/preset.css" />
 <link rel="stylesheet" href="/packages/themes-pack-classic/styles/flourishes.css" />
+<link rel="stylesheet" href="/packages/themes-pack-seasonal/styles/flourishes.css" />
 
 <script>
   (function () {
@@ -246,14 +247,21 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
 
   <script src="/packages/core/dist/polytheme.global.js"></script>
   <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
+  <script src="/packages/themes-pack-seasonal/dist/themes-seasonal.global.js"></script>
   <script src="/packages/picker-ui/dist/picker.global.js"></script>
 
   <script>
-    const { classicThemes, classicCategories } = PolythemeClassic;
+    // Two packs side by side. Nothing below this line knows there is more than
+    // one — which is exactly what the shared contract buys.
+    const allThemes = [...PolythemeClassic.classicThemes, ...PolythemeSeasonal.seasonalThemes];
+    const allCategories = {
+      ...PolythemeClassic.classicCategories,
+      ...PolythemeSeasonal.seasonalCategories,
+    };
 
     const engine = Polytheme.init({
-      themes: classicThemes,
-      categories: classicCategories,
+      themes: allThemes,
+      categories: allCategories,
       storageKey: 'polytheme-docs',
       default: 'basic-corporate',
     });

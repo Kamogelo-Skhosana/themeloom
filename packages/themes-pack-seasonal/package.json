@@ -1,0 +1,30 @@
+{
+  "name": "@polytheme/themes-seasonal",
+  "version": "0.1.0",
+  "description": "Six polytheme themes for times of year — spring, summer, autumn, Halloween, winter and New Year.",
+  "type": "module",
+  "sideEffects": ["./styles/*.css"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./flourishes.css": "./styles/flourishes.css",
+    "./themes-seasonal.global.js": "./dist/themes-seasonal.global.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "styles"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "@polytheme/core": "^0.1.0"
+  },
+  "keywords": ["polytheme", "themes", "seasonal", "halloween", "winter", "design-tokens"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

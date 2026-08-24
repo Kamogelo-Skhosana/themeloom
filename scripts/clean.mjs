@@ -6,6 +6,7 @@ const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const targets = [
   'packages/core/dist',
   'packages/themes-pack-classic/dist',
+  'packages/themes-pack-seasonal/dist',
   'packages/picker-ui/dist',
   'packages/cli/dist',
 ];
