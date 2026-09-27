@@ -1,5 +1,5 @@
-import { classicThemes, classicCategories } from '@polytheme/themes-classic';
-import { defineTheme } from '@polytheme/core';
+import { classicThemes, classicCategories } from '@themeloom/themes-classic';
+import { defineTheme } from '@themeloom/core';
 
 /** Your own theme, alongside the pack. */
 export const houseTheme = defineTheme({

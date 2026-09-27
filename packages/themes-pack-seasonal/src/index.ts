@@ -1,4 +1,4 @@
-import { definePack, type CategoryMeta, type ThemeTokens } from '@polytheme/core';
+import { definePack, type CategoryMeta, type ThemeTokens } from '@themeloom/core';
 
 import { seasonalSpring } from './seasonal-spring.js';
 import { seasonalSummer } from './seasonal-summer.js';
@@ -20,7 +20,7 @@ export {
  * The seasonal pack, in calendar order.
  *
  * Same contract as every other pack — the engine and the picker can't tell
- * this one apart from `@polytheme/themes-classic`, which is the point.
+ * this one apart from `@themeloom/themes-classic`, which is the point.
  */
 export const seasonalThemes = definePack([
   seasonalSpring,

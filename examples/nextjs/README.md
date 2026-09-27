@@ -1,4 +1,4 @@
-# polytheme · Next.js (App Router)
+# themeloom · Next.js (App Router)
 
 ```bash
 npm install
@@ -21,5 +21,5 @@ is an identity function; its only job is to typecheck the contract at author
 time.
 
 > The workspace packages are referenced by version here. To run against the
-> local build instead, add `"@polytheme/core": "file:../../packages/core"` (and
+> local build instead, add `"@themeloom/core": "file:../../packages/core"` (and
 > the same for the other two) to `dependencies`.

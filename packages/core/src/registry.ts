@@ -24,7 +24,7 @@ const titleCase = (id: string) =>
 export class ThemeValidationError extends Error {
   readonly issues: string[];
   constructor(id: string, issues: string[]) {
-    super(`[polytheme] invalid theme "${id}":\n  - ${issues.join('\n  - ')}`);
+    super(`[themeloom] invalid theme "${id}":\n  - ${issues.join('\n  - ')}`);
     this.name = 'ThemeValidationError';
     this.issues = issues;
   }

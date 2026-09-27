@@ -1,7 +1,7 @@
 {
-  "name": "@polytheme/themes-seasonal",
+  "name": "@themeloom/themes-seasonal",
   "version": "0.1.0",
-  "description": "Six polytheme themes for times of year — spring, summer, autumn, Halloween, winter and New Year.",
+  "description": "Six themeloom themes for times of year — spring, summer, autumn, Halloween, winter and New Year.",
   "type": "module",
   "sideEffects": ["./styles/*.css"],
   "main": "./dist/index.cjs",
@@ -22,9 +22,9 @@
     "build": "tsup"
   },
   "peerDependencies": {
-    "@polytheme/core": "^0.1.0"
+    "@themeloom/core": "^0.1.0"
   },
-  "keywords": ["polytheme", "themes", "seasonal", "halloween", "winter", "design-tokens"],
+  "keywords": ["themeloom", "themes", "seasonal", "halloween", "winter", "design-tokens"],
   "license": "MIT",
   "publishConfig": { "access": "public" }
 }

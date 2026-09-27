@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { ThemeProvider, ThemePicker } from '@polytheme/picker/react';
+import { ThemeProvider, ThemePicker } from '@themeloom/picker/react';
 import { themes, categories, STORAGE_KEY, DEFAULT_THEME } from '../theme.config';
 
 /**

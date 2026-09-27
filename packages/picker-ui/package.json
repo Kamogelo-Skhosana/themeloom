@@ -1,5 +1,5 @@
 {
-  "name": "@polytheme/picker",
+  "name": "@themeloom/picker",
   "version": "0.1.0",
   "description": "Hamburger + category accordion theme picker. One Shadow DOM web component, thin React/Vue/Svelte wrappers.",
   "type": "module",
@@ -41,7 +41,7 @@
     "build": "tsup"
   },
   "peerDependencies": {
-    "@polytheme/core": "^0.1.0",
+    "@themeloom/core": "^0.1.0",
     "react": ">=17",
     "vue": ">=3.3"
   },

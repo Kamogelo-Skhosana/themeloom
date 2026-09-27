@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>polytheme — theme gallery &amp; playground</title>
+<title>themeloom — theme gallery &amp; playground</title>
 <meta name="description" content="Every theme is a full design contract: colour, type, shape, motion and an optional flourish." />
 
 <link rel="stylesheet" href="/packages/core/preset.css" />
@@ -13,7 +13,7 @@
 <script>
   (function () {
     try {
-      var t = localStorage.getItem('polytheme-docs');
+      var t = localStorage.getItem('themeloom-docs');
       if (t) document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}
   })();
@@ -131,7 +131,7 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <p class="kicker">polytheme</p>
+      <p class="kicker">themeloom</p>
       <h1>A theme is a contract, not a palette.</h1>
       <p>
         Colour, type, shape, motion and an optional flourish — declared once as
@@ -217,15 +217,15 @@
     <section id="install">
       <h2>Install</h2>
       <pre><code># the engine, a pack, and the picker
-npm install @polytheme/core @polytheme/themes-classic @polytheme/picker
+npm install @themeloom/core @themeloom/themes-classic @themeloom/picker
 
 # or scaffold it
-npx polytheme init</code></pre>
-      <pre><code>import { ThemeEngine } from '@polytheme/core';
-import { classicThemes, classicCategories } from '@polytheme/themes-classic';
-import '@polytheme/picker';
-import '@polytheme/core/preset.css';
-import '@polytheme/themes-classic/flourishes.css';
+npx themeloom init</code></pre>
+      <pre><code>import { ThemeEngine } from '@themeloom/core';
+import { classicThemes, classicCategories } from '@themeloom/themes-classic';
+import '@themeloom/picker';
+import '@themeloom/core/preset.css';
+import '@themeloom/themes-classic/flourishes.css';
 
 const engine = new ThemeEngine({
   themes: classicThemes,
@@ -240,12 +240,12 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
     </section>
 
     <footer>
-      polytheme · MIT · the picker in the corner is
-      <code>&lt;polytheme-picker&gt;</code>, running on this page.
+      themeloom · MIT · the picker in the corner is
+      <code>&lt;themeloom-picker&gt;</code>, running on this page.
     </footer>
   </div>
 
-  <script src="/packages/core/dist/polytheme.global.js"></script>
+  <script src="/packages/core/dist/themeloom.global.js"></script>
   <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
   <script src="/packages/themes-pack-seasonal/dist/themes-seasonal.global.js"></script>
   <script src="/packages/picker-ui/dist/picker.global.js"></script>
@@ -253,20 +253,20 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
   <script>
     // Two packs side by side. Nothing below this line knows there is more than
     // one — which is exactly what the shared contract buys.
-    const allThemes = [...PolythemeClassic.classicThemes, ...PolythemeSeasonal.seasonalThemes];
+    const allThemes = [...ThemeloomClassic.classicThemes, ...ThemeloomSeasonal.seasonalThemes];
     const allCategories = {
-      ...PolythemeClassic.classicCategories,
-      ...PolythemeSeasonal.seasonalCategories,
+      ...ThemeloomClassic.classicCategories,
+      ...ThemeloomSeasonal.seasonalCategories,
     };
 
-    const engine = Polytheme.init({
+    const engine = Themeloom.init({
       themes: allThemes,
       categories: allCategories,
-      storageKey: 'polytheme-docs',
+      storageKey: 'themeloom-docs',
       default: 'basic-corporate',
     });
 
-    document.body.appendChild(document.createElement('polytheme-picker'));
+    document.body.appendChild(document.createElement('themeloom-picker'));
 
     const $ = (id) => document.getElementById(id);
 
@@ -397,7 +397,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
       $('pg-radius-out').textContent = `${draft.radius}px`;
       $('pg-duration-out').textContent = `${draft.duration}ms`;
 
-      const ratio = Polytheme.contrastRatio(draft.text, draft.bg);
+      const ratio = Themeloom.contrastRatio(draft.text, draft.bg);
       const label = ratio === null ? '—' : `${ratio.toFixed(2)}:1`;
       const verdict = ratio === null ? '' : ratio >= 4.5 ? ' AA ✓' : ratio >= 3 ? ' large text only' : ' fails AA';
       $('pg-contrast').textContent = `contrast ${label}${verdict}`;
@@ -413,7 +413,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
           .map(([k, v]) => `${indent}${k}: ${q(v)},`)
           .join('\n');
 
-      return `import { defineTheme } from '@polytheme/core';
+      return `import { defineTheme } from '@themeloom/core';
 
 export const ${camel(theme.name)} = defineTheme({
   id: '${slug(theme.name)}',

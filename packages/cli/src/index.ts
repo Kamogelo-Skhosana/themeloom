@@ -35,10 +35,10 @@ function parseArgs(args: string[]) {
 
 function help(): void {
   console.log(`
-${c.bold}polytheme${c.reset} — scaffold theming into an existing project
+${c.bold}themeloom${c.reset} — scaffold theming into an existing project
 
 ${c.bold}Usage${c.reset}
-  npx polytheme init [options]
+  npx themeloom init [options]
 
 ${c.bold}Options${c.reset}
   --packs <list>    Theme packs to install (default: classic)
@@ -59,7 +59,7 @@ async function main(): Promise<void> {
     return;
   }
   if (command !== 'init') {
-    console.error(`Unknown command "${command}". Try: npx polytheme init`);
+    console.error(`Unknown command "${command}". Try: npx themeloom init`);
     exit(1);
   }
 
@@ -73,7 +73,7 @@ async function main(): Promise<void> {
     .map((s) => s.trim())
     .filter(Boolean);
 
-  console.log(`\n${c.bold}polytheme${c.reset} ${c.dim}init${c.reset}`);
+  console.log(`\n${c.bold}themeloom${c.reset} ${c.dim}init${c.reset}`);
   console.log(`${c.dim}Detected project:${c.reset} ${detected === 'unknown' ? 'no package.json — assuming plain HTML' : detected}\n`);
 
   if (!skipPrompts && !flags.has('kind')) {
@@ -115,6 +115,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((error: unknown) => {
-  console.error(`\n[polytheme] ${(error as Error).message}\n`);
+  console.error(`\n[themeloom] ${(error as Error).message}\n`);
   exit(1);
 });

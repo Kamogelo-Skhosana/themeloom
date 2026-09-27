@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { classicThemeIds } from '@polytheme/themes-classic';
+import { classicThemeIds } from '@themeloom/themes-classic';
 
 const DEMO = '/examples/vanilla-html/';
 
@@ -7,12 +7,12 @@ async function openDemo(page: Page): Promise<void> {
   await page.goto(DEMO);
   // The engine mounts from a deferred module script, so nothing may be on
   // `window` yet when the navigation resolves.
-  await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
+  await page.waitForFunction(() => Boolean((window as any).__themeloom?.current));
 }
 
 /** Applies a theme. Enough for anything that asserts on attributes or tokens. */
 async function applyTheme(page: Page, id: string): Promise<void> {
-  await page.evaluate((themeId) => (window as any).__polytheme.set(themeId), id);
+  await page.evaluate((themeId) => (window as any).__themeloom.set(themeId), id);
   await page.waitForTimeout(50);
 }
 
@@ -41,10 +41,10 @@ async function applyTheme(page: Page, id: string): Promise<void> {
  * perfectly well loaded.
  */
 async function applyThemeAndLoadFonts(page: Page, id: string): Promise<void> {
-  await page.evaluate((themeId) => (window as any).__polytheme.set(themeId), id);
+  await page.evaluate((themeId) => (window as any).__themeloom.set(themeId), id);
   await page.waitForFunction(
     (themeId) => {
-      const theme = (window as any).__polytheme.get(themeId);
+      const theme = (window as any).__themeloom.get(themeId);
       const families: string[] = (theme.fonts ?? []).map((f: { family: string }) => f.family);
       return families.every((family) => {
         const faces = [...document.fonts].filter((face) => face.family === family);
@@ -100,11 +100,11 @@ test.describe('theme rendering', () => {
   test('fonts load lazily, only for themes actually used', async ({ page }) => {
     await openDemo(page);
 
-    const initial = await page.locator('link[data-polytheme="font"]').count();
+    const initial = await page.locator('link[data-themeloom="font"]').count();
     await applyTheme(page, 'arcade-8bit');
-    const afterOne = await page.locator('link[data-polytheme="font"]').count();
+    const afterOne = await page.locator('link[data-themeloom="font"]').count();
     await applyTheme(page, 'arcade-8bit');
-    const afterRepeat = await page.locator('link[data-polytheme="font"]').count();
+    const afterRepeat = await page.locator('link[data-themeloom="font"]').count();
 
     expect(afterOne).toBeGreaterThan(initial);
     expect(afterRepeat).toBe(afterOne);
@@ -119,7 +119,7 @@ test.describe('theme rendering', () => {
 });
 
 test.describe('picker', () => {
-  const picker = (page: Page) => page.locator('polytheme-picker');
+  const picker = (page: Page) => page.locator('themeloom-picker');
 
   test('opens, lists categories, and applies a theme', async ({ page }) => {
     await openDemo(page);

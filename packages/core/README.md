@@ -1,9 +1,9 @@
-# @polytheme/core
+# @themeloom/core
 
 The engine. Zero dependencies, no framework, no CSS framework.
 
 ```bash
-npm install @polytheme/core
+npm install @themeloom/core
 ```
 
 ## What it does
@@ -13,7 +13,7 @@ also appends one CSS rule of custom properties and any `<link>` tags that
 theme's fonts need. Everything after that is one attribute write.
 
 ```ts
-import { ThemeEngine } from '@polytheme/core';
+import { ThemeEngine } from '@themeloom/core';
 
 const engine = new ThemeEngine({
   themes,                    // ThemeTokens[]
@@ -32,7 +32,7 @@ const off = engine.subscribe((theme) => {});   // fires immediately, then on cha
 Also dispatches a DOM event, for consumers that never see the engine object:
 
 ```js
-document.addEventListener('polytheme:change', (e) => console.log(e.detail.theme.id));
+document.addEventListener('themeloom:change', (e) => console.log(e.detail.theme.id));
 ```
 
 ## Options
@@ -41,7 +41,7 @@ document.addEventListener('polytheme:change', (e) => console.log(e.detail.theme.
 | --- | --- | --- |
 | `themes` | `[]` | Registered up front; more via `register()`. |
 | `persist` | `'localStorage'` | `false` disables it. Falls back silently when storage is blocked. |
-| `storageKey` | `'polytheme'` | |
+| `storageKey` | `'themeloom'` | |
 | `default` | first registered | Used when nothing is stored. |
 | `target` | `document.documentElement` | Element that gets `data-theme`. |
 | `flourishTarget` | `document.body` | Element that gets `data-flourish`. |
@@ -75,7 +75,7 @@ declare `shape.radiusLarge` to override the clamp.
 ## SSR
 
 ```ts
-import { inlineBootScript, renderThemeStylesheet } from '@polytheme/core';
+import { inlineBootScript, renderThemeStylesheet } from '@themeloom/core';
 
 // In <head>, synchronously, before anything paints:
 inlineBootScript({ storageKey: 'site-theme', default: 'basic-corporate' });

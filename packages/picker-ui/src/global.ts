@@ -1,2 +1,2 @@
-/** `<script src>` entry — registers `<polytheme-picker>` on load. */
+/** `<script src>` entry — registers `<themeloom-picker>` on load. */
 export * from './index.js';

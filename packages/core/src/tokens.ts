@@ -148,7 +148,7 @@ export function defineTheme<T extends ThemeTokens>(theme: T): T {
 export function definePack<T extends readonly ThemeTokens[]>(themes: T): T {
   const seen = new Set<string>();
   for (const t of themes) {
-    if (seen.has(t.id)) throw new Error(`[polytheme] duplicate theme id in pack: "${t.id}"`);
+    if (seen.has(t.id)) throw new Error(`[themeloom] duplicate theme id in pack: "${t.id}"`);
     seen.add(t.id);
   }
   return themes;

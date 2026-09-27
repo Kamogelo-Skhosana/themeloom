@@ -72,7 +72,7 @@ describe('ThemeEngine', () => {
   test('dispatches a DOM event as well, for non-JS consumers', () => {
     const engine = new ThemeEngine({ themes: [themeA, themeB] });
     let detail = null;
-    dom.document.addEventListener('polytheme:change', (event) => (detail = event.detail));
+    dom.document.addEventListener('themeloom:change', (event) => (detail = event.detail));
     engine.set('beta');
     assert.equal(detail.theme.id, 'beta');
   });

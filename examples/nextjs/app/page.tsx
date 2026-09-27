@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from '@polytheme/picker/react';
+import { useTheme } from '@themeloom/picker/react';
 
 export default function Home() {
   const { theme, themes, setTheme, randomTheme } = useTheme();

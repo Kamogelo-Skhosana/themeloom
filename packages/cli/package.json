@@ -1,10 +1,10 @@
 {
-  "name": "polytheme",
+  "name": "themeloom",
   "version": "0.1.0",
-  "description": "Scaffold polytheme into an existing project: npx polytheme init",
+  "description": "Scaffold themeloom into an existing project: npx themeloom init",
   "type": "module",
   "bin": {
-    "polytheme": "./dist/index.js"
+    "themeloom": "./dist/index.js"
   },
   "exports": {
     ".": {
@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsup"
   },
-  "keywords": ["polytheme", "cli", "scaffold", "theme"],
+  "keywords": ["themeloom", "cli", "scaffold", "theme"],
   "license": "MIT",
   "publishConfig": { "access": "public" }
 }

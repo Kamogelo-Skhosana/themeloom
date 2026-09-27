@@ -1,27 +1,27 @@
-import type { CategoryInfo, ThemeEngine, ThemeTokens } from '@polytheme/core';
+import type { CategoryInfo, ThemeEngine, ThemeTokens } from '@themeloom/core';
 import { pickerStyles } from './styles.js';
 
-const TAG = 'polytheme-picker';
+const TAG = 'themeloom-picker';
 
 type EngineLike = ThemeEngine;
 
 declare global {
   interface Window {
-    __polytheme?: ThemeEngine;
+    __themeloom?: ThemeEngine;
   }
 }
 
 /**
- * `<polytheme-picker>` — the hamburger + category accordion.
+ * `<themeloom-picker>` — the hamburger + category accordion.
  *
  * Finds its engine in this order:
  *   1. the `.engine` property, if you set one
- *   2. `window.__polytheme` (what `Polytheme.init()` creates)
+ *   2. `window.__themeloom` (what `Themeloom.init()` creates)
  *   3. an engine it builds itself from `.themes` / the `themes` attribute
  *
  * The whole thing lives in a shadow root — see styles.ts for why that matters.
  */
-export class PolythemePicker extends HTMLElement {
+export class ThemeloomPicker extends HTMLElement {
   static observedAttributes = ['open', 'position', 'label', 'categories', 'variant', 'themes', 'hide-search'];
 
   #root: ShadowRoot;
@@ -116,18 +116,18 @@ export class PolythemePicker extends HTMLElement {
       this.#renderList();
       return;
     }
-    if (window.__polytheme) {
-      this.#bindEngine(window.__polytheme);
+    if (window.__themeloom) {
+      this.#bindEngine(window.__themeloom);
       return;
     }
 
     const themes = this.#ownThemes ?? (await this.#loadThemesAttribute());
     if (!themes?.length) {
       // No themes yet. A framework wrapper may set `.engine` a tick later, and
-      // `Polytheme.init()` may not have run — retry once on the next frame.
+      // `Themeloom.init()` may not have run — retry once on the next frame.
       this.#renderList();
       requestAnimationFrame(() => {
-        if (!this.#engine && window.__polytheme) this.#bindEngine(window.__polytheme);
+        if (!this.#engine && window.__themeloom) this.#bindEngine(window.__themeloom);
       });
       return;
     }
@@ -142,13 +142,13 @@ export class PolythemePicker extends HTMLElement {
       storageKey: this.getAttribute('storage-key') ?? undefined,
       default: this.getAttribute('default') ?? undefined,
     });
-    window.__polytheme ??= engine;
+    window.__themeloom ??= engine;
     this.#bindEngine(engine);
   }
 
   /**
    * `themes="…"` resolves as: a global variable name (`MyThemes`,
-   * `PolythemeClassic.classicThemes`) or a URL to a JSON array. Bare package
+   * `ThemeloomClassic.classicThemes`) or a URL to a JSON array. Bare package
    * specifiers can't be resolved in the browser — set `.themes` instead.
    */
   async #loadThemesAttribute(): Promise<ThemeTokens[] | null> {
@@ -171,13 +171,13 @@ export class PolythemePicker extends HTMLElement {
         const data = await response.json();
         if (Array.isArray(data)) return data as ThemeTokens[];
       } catch (error) {
-        console.warn(`[polytheme-picker] could not load themes from "${spec}":`, error);
+        console.warn(`[themeloom-picker] could not load themes from "${spec}":`, error);
       }
       return null;
     }
 
     console.warn(
-      `[polytheme-picker] themes="${spec}" is not a global or a URL. ` +
+      `[themeloom-picker] themes="${spec}" is not a global or a URL. ` +
         'Bare package names cannot be resolved in the browser — set the `.themes` property instead.',
     );
     return null;
@@ -519,22 +519,22 @@ function el(tag: string, className?: string): HTMLElement {
  * the global; otherwise the bundler resolves the dynamic import.
  */
 async function loadEngineConstructor(): Promise<(new (options: object) => ThemeEngine) | null> {
-  const fromGlobal = (window as unknown as { Polytheme?: { ThemeEngine?: unknown } }).Polytheme?.ThemeEngine;
+  const fromGlobal = (window as unknown as { Themeloom?: { ThemeEngine?: unknown } }).Themeloom?.ThemeEngine;
   if (typeof fromGlobal === 'function') return fromGlobal as new (options: object) => ThemeEngine;
   try {
-    const mod = await import('@polytheme/core');
+    const mod = await import('@themeloom/core');
     return mod.ThemeEngine as unknown as new (options: object) => ThemeEngine;
   } catch {
-    console.warn('[polytheme-picker] no engine found. Load @polytheme/core, or set the `.engine` property.');
+    console.warn('[themeloom-picker] no engine found. Load @themeloom/core, or set the `.engine` property.');
     return null;
   }
 }
 
-/** Registers `<polytheme-picker>`. Safe to call more than once. */
+/** Registers `<themeloom-picker>`. Safe to call more than once. */
 export function definePicker(tagName = TAG): void {
   if (typeof customElements === 'undefined') return;
   if (customElements.get(tagName)) return;
-  customElements.define(tagName, PolythemePicker);
+  customElements.define(tagName, ThemeloomPicker);
 }
 
 export { TAG as PICKER_TAG };

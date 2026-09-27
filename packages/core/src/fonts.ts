@@ -31,14 +31,14 @@ export function ensureFonts(fonts: readonly ThemeFont[] | undefined, doc: Docume
       pre.rel = 'preconnect';
       pre.href = origin;
       pre.crossOrigin = '';
-      pre.setAttribute('data-polytheme', 'preconnect');
+      pre.setAttribute('data-themeloom', 'preconnect');
       head.appendChild(pre);
     }
 
     const link = doc.createElement('link');
     link.rel = 'stylesheet';
     link.href = font.url;
-    link.setAttribute('data-polytheme', 'font');
+    link.setAttribute('data-themeloom', 'font');
     link.setAttribute('data-font-family', font.family);
     head.appendChild(link);
     LOADED.add(font.url);

@@ -1,7 +1,7 @@
 {
-  "name": "@polytheme/themes-classic",
+  "name": "@themeloom/themes-classic",
   "version": "0.1.0",
-  "description": "Thirteen first-party polytheme themes across retro, basic, futuristic, arcade, nature and elegant.",
+  "description": "Thirteen first-party themeloom themes across retro, basic, futuristic, arcade, nature and elegant.",
   "type": "module",
   "sideEffects": ["./styles/*.css"],
   "main": "./dist/index.cjs",
@@ -22,9 +22,9 @@
     "build": "tsup"
   },
   "peerDependencies": {
-    "@polytheme/core": "^0.1.0"
+    "@themeloom/core": "^0.1.0"
   },
-  "keywords": ["polytheme", "themes", "design-tokens", "retro", "cyberpunk"],
+  "keywords": ["themeloom", "themes", "design-tokens", "retro", "cyberpunk"],
   "license": "MIT",
   "publishConfig": { "access": "public" }
 }

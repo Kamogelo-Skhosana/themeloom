@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react';
-import { inlineBootScript } from '@polytheme/core';
+import { inlineBootScript } from '@themeloom/core';
 import { Providers } from './providers';
 import { DEFAULT_THEME, STORAGE_KEY } from '../theme.config';
 
-import '@polytheme/core/preset.css';
-import '@polytheme/themes-classic/flourishes.css';
+import '@themeloom/core/preset.css';
+import '@themeloom/themes-classic/flourishes.css';
 
 export const metadata = {
-  title: 'polytheme · Next.js',
+  title: 'themeloom · Next.js',
   description: 'Themes as design contracts, applied before first paint.',
 };
 

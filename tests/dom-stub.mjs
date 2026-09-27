@@ -198,7 +198,7 @@ export function installDom({ reducedMotion = false } = {}) {
     },
     /** All CSS text the engine has injected so far. */
     injectedCss() {
-      return document.head.querySelector('style#polytheme-vars')?.textContent ?? '';
+      return document.head.querySelector('style#themeloom-vars')?.textContent ?? '';
     },
     fontLinks() {
       return document.head.childNodes.filter((n) => n.tagName === 'LINK' && n.rel === 'stylesheet');

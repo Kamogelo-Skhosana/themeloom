@@ -1,4 +1,4 @@
-import { defineTheme } from '@polytheme/core';
+import { defineTheme } from '@themeloom/core';
 
 export const arcadeVector = defineTheme({
   id: 'arcade-vector',

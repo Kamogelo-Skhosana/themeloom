@@ -1,13 +1,13 @@
 <div align="center">
 
-# polytheme
+# themeloom
 
 **A theme is a design contract, not a palette.**
 
 Colour, type, shape, motion and an optional flourish — declared once as typed
 tokens, applied by flipping one attribute.
 
-`@polytheme/core` · `@polytheme/themes-classic` · `@polytheme/themes-seasonal` · `@polytheme/picker` · `npx polytheme init`
+`@themeloom/core` · `@themeloom/themes-classic` · `@themeloom/themes-seasonal` · `@themeloom/picker` · `npx themeloom init`
 
 </div>
 
@@ -19,7 +19,7 @@ Most theming libraries swap colours. Swapping colours gets you the same site in
 a different hue — it never gets you a site that feels like it came from a
 different decade.
 
-A polytheme theme declares the whole design language:
+A themeloom theme declares the whole design language:
 
 | Group | What it fixes |
 | --- | --- |
@@ -39,19 +39,19 @@ required. The core is dependency-free and works from a `<script>` tag.
 ## Install
 
 ```bash
-npm install @polytheme/core @polytheme/themes-classic @polytheme/picker
+npm install @themeloom/core @themeloom/themes-classic @themeloom/picker
 # or
-npx polytheme init
+npx themeloom init
 ```
 
 ## Use it
 
 ```ts
-import { ThemeEngine } from '@polytheme/core';
-import { classicThemes, classicCategories } from '@polytheme/themes-classic';
-import '@polytheme/picker';                          // registers <polytheme-picker>
-import '@polytheme/core/preset.css';                 // optional: token → element styles
-import '@polytheme/themes-classic/flourishes.css';   // optional: decorative hooks
+import { ThemeEngine } from '@themeloom/core';
+import { classicThemes, classicCategories } from '@themeloom/themes-classic';
+import '@themeloom/picker';                          // registers <themeloom-picker>
+import '@themeloom/core/preset.css';                 // optional: token → element styles
+import '@themeloom/themes-classic/flourishes.css';   // optional: decorative hooks
 
 const engine = new ThemeEngine({
   themes: classicThemes,
@@ -66,7 +66,7 @@ engine.on('change', ({ theme }) => console.log(theme.id));
 ```
 
 ```html
-<polytheme-picker position="top-right"></polytheme-picker>
+<themeloom-picker position="top-right"></themeloom-picker>
 ```
 
 Then write your CSS against the custom properties the engine writes:
@@ -84,23 +84,23 @@ Then write your CSS against the custom properties the engine writes:
 ### No build step at all
 
 ```html
-<link rel="stylesheet" href="…/@polytheme/core/preset.css" />
-<script src="…/@polytheme/core/polytheme.global.js"></script>
-<script src="…/@polytheme/themes-classic/themes-classic.global.js"></script>
-<script src="…/@polytheme/picker/picker.global.js"></script>
+<link rel="stylesheet" href="…/@themeloom/core/preset.css" />
+<script src="…/@themeloom/core/themeloom.global.js"></script>
+<script src="…/@themeloom/themes-classic/themes-classic.global.js"></script>
+<script src="…/@themeloom/picker/picker.global.js"></script>
 <script>
-  Polytheme.init({ themes: PolythemeClassic.classicThemes });
+  Themeloom.init({ themes: ThemeloomClassic.classicThemes });
 </script>
-<polytheme-picker></polytheme-picker>
+<themeloom-picker></themeloom-picker>
 ```
 
-`Polytheme.init()` parks the engine on `window.__polytheme`, and the picker
+`Themeloom.init()` parks the engine on `window.__themeloom`, and the picker
 finds it there — no wiring.
 
 ## Writing a theme
 
 ```ts
-import { defineTheme } from '@polytheme/core';
+import { defineTheme } from '@themeloom/core';
 
 export const houseTheme = defineTheme({
   id: 'house',              // kebab-case; becomes the data-theme value
@@ -126,11 +126,11 @@ the contract where you write it, not where you use it.
 
 | Package | What it is |
 | --- | --- |
-| `@polytheme/core` | The engine. Zero dependencies, 5.3 kB gzipped, ESM + CJS + IIFE. |
-| `@polytheme/themes-classic` | 13 themes across retro, basic, futuristic, arcade, nature, elegant. |
-| `@polytheme/themes-seasonal` | 6 themes for times of year — spring, summer, autumn, Halloween, winter, New Year. |
-| `@polytheme/picker` | `<polytheme-picker>` plus React, Vue and Svelte wrappers. |
-| `polytheme` (CLI) | `npx polytheme init` — scaffolds a theme config and prints the snippet. |
+| `@themeloom/core` | The engine. Zero dependencies, 5.3 kB gzipped, ESM + CJS + IIFE. |
+| `@themeloom/themes-classic` | 13 themes across retro, basic, futuristic, arcade, nature, elegant. |
+| `@themeloom/themes-seasonal` | 6 themes for times of year — spring, summer, autumn, Halloween, winter, New Year. |
+| `@themeloom/picker` | `<themeloom-picker>` plus React, Vue and Svelte wrappers. |
+| `themeloom` (CLI) | `npx themeloom init` — scaffolds a theme config and prints the snippet. |
 
 Packs ship separately so the core stays small and anyone can publish their own —
 the same shape as Lucide or Heroicons.
@@ -144,15 +144,15 @@ which it can't do if a theme's `button {}` rule reaches inside.
 
 ```jsx
 // React
-import { ThemeProvider, ThemePicker, useTheme } from '@polytheme/picker/react';
+import { ThemeProvider, ThemePicker, useTheme } from '@themeloom/picker/react';
 ```
 ```vue
 <!-- Vue -->
-import { ThemePicker, providePolytheme, useTheme } from '@polytheme/picker/vue';
+import { ThemePicker, provideThemeloom, useTheme } from '@themeloom/picker/vue';
 ```
 ```svelte
 <!-- Svelte: a store and an action, so no Svelte compiler is needed to publish -->
-import { picker, themeStore } from '@polytheme/picker/svelte';
+import { picker, themeStore } from '@themeloom/picker/svelte';
 ```
 
 Attributes: `position`, `categories`, `variant`, `label`, `open`, `hide-search`,
@@ -164,7 +164,7 @@ Events: `picker-select`, `picker-open`, `picker-close`.
 The stored theme has to be on `<html>` before the browser paints:
 
 ```tsx
-import { inlineBootScript } from '@polytheme/core';
+import { inlineBootScript } from '@themeloom/core';
 
 <script dangerouslySetInnerHTML={{ __html: inlineBootScript({ storageKey: 'site-theme' }) }} />
 ```
@@ -235,12 +235,12 @@ Three deliberate choices here, each of which cost a red CI run to learn:
 
 ## Roadmap
 
-- [x] `@polytheme/core` + the classic pack + the vanilla picker
+- [x] `@themeloom/core` + the classic pack + the vanilla picker
 - [x] Gallery and playground site
 - [x] React / Vue / Svelte wrappers
-- [x] `npx polytheme init`
-- [x] `@polytheme/themes-seasonal` — spring, summer, autumn, halloween, winter, new year
-- [ ] `@polytheme/themes-brand` — starter kit for building your own pack
+- [x] `npx themeloom init`
+- [x] `@themeloom/themes-seasonal` — spring, summer, autumn, halloween, winter, new year
+- [ ] `@themeloom/themes-brand` — starter kit for building your own pack
 
 ## Licence
 

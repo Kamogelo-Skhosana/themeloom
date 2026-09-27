@@ -1,5 +1,5 @@
 {
-  "name": "@polytheme/core",
+  "name": "@themeloom/core",
   "version": "0.1.0",
   "description": "Framework-agnostic theme engine. A theme is a full design contract: color, type, shape, motion, flourish.",
   "type": "module",
@@ -18,7 +18,7 @@
       "import": "./dist/global.js",
       "require": "./dist/global.cjs"
     },
-    "./polytheme.global.js": "./dist/polytheme.global.js",
+    "./themeloom.global.js": "./dist/themeloom.global.js",
     "./preset.css": "./preset.css",
     "./package.json": "./package.json"
   },

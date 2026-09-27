@@ -1,4 +1,4 @@
-import { definePack, type CategoryMeta, type ThemeTokens } from '@polytheme/core';
+import { definePack, type CategoryMeta, type ThemeTokens } from '@themeloom/core';
 
 import { retro80s } from './retro-80s.js';
 import { retro90s } from './retro-90s.js';

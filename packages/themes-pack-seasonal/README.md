@@ -1,14 +1,14 @@
-# @polytheme/themes-seasonal
+# @themeloom/themes-seasonal
 
-Six themes for times of year, for [polytheme](https://github.com/Kamogelo-Skhosana/polytheme).
+Six themes for times of year, for [themeloom](https://github.com/Kamogelo-Skhosana/themeloom).
 
 ```bash
-npm install @polytheme/core @polytheme/themes-seasonal
+npm install @themeloom/core @themeloom/themes-seasonal
 ```
 
 ```ts
-import { seasonalThemes, seasonalCategories } from '@polytheme/themes-seasonal';
-import '@polytheme/themes-seasonal/flourishes.css';   // optional
+import { seasonalThemes, seasonalCategories } from '@themeloom/themes-seasonal';
+import '@themeloom/themes-seasonal/flourishes.css';   // optional
 ```
 
 ## The themes
@@ -28,8 +28,8 @@ contract, and WCAG AA contrast on body text, dimmed text and accent text.
 ## Dressing a site by the calendar
 
 ```ts
-import { ThemeEngine } from '@polytheme/core';
-import { seasonalThemes, themeForDate } from '@polytheme/themes-seasonal';
+import { ThemeEngine } from '@themeloom/core';
+import { seasonalThemes, themeForDate } from '@themeloom/themes-seasonal';
 
 new ThemeEngine({
   themes: seasonalThemes,
@@ -47,7 +47,7 @@ the helper — pick the theme yourself; the pack doesn't care.
 
 ## Composing with other packs
 
-Ids and the `seasonal` category don't collide with `@polytheme/themes-classic`,
+Ids and the `seasonal` category don't collide with `@themeloom/themes-classic`,
 and the category orders don't tie, so the picker's ordering stays deterministic
 when both are registered:
 

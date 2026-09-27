@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ThemePicker, providePolytheme, useTheme } from '@polytheme/picker/vue';
-import { classicThemes, classicCategories } from '@polytheme/themes-classic';
+import { ThemePicker, provideThemeloom, useTheme } from '@themeloom/picker/vue';
+import { classicThemes, classicCategories } from '@themeloom/themes-classic';
 
-providePolytheme({
+provideThemeloom({
   themes: classicThemes,
   categories: classicCategories,
   persist: 'localStorage',

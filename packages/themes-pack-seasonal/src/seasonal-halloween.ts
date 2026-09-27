@@ -1,4 +1,4 @@
-import { defineTheme } from '@polytheme/core';
+import { defineTheme } from '@themeloom/core';
 
 export const seasonalHalloween = defineTheme({
   id: 'seasonal-halloween',

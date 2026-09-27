@@ -10,7 +10,7 @@ export interface ThemeEngineOptions {
   themes?: readonly ThemeTokens[];
   /** Where the choice is remembered. `false` disables persistence entirely. */
   persist?: PersistMode;
-  /** Storage key. Default `polytheme`. */
+  /** Storage key. Default `themeloom`. */
   storageKey?: string;
   /** Theme applied when nothing is stored. Defaults to the first registered theme. */
   default?: string;
@@ -53,7 +53,7 @@ type EventMap = {
 
 type Listener<K extends keyof EventMap> = (payload: EventMap[K]) => void;
 
-const STYLE_ID = 'polytheme-vars';
+const STYLE_ID = 'themeloom-vars';
 
 /**
  * Applies a theme by flipping one attribute.
@@ -86,7 +86,7 @@ export class ThemeEngine {
     }
     this.#options = {
       persist: options.persist ?? 'localStorage',
-      storageKey: options.storageKey ?? 'polytheme',
+      storageKey: options.storageKey ?? 'themeloom',
       attribute: options.attribute ?? 'data-theme',
       prefix: options.prefix ?? 'pt',
       injectVars: options.injectVars ?? true,
@@ -246,7 +246,7 @@ export class ThemeEngine {
     if (event === 'error' && !listeners?.size) {
       // Without this, an unhandled engine error is a silent failure.
       const { error, context } = payload as EventMap['error'];
-      console.warn(`[polytheme] ${context}: ${error.message}`);
+      console.warn(`[themeloom] ${context}: ${error.message}`);
       return;
     }
     for (const listener of listeners ?? []) {
@@ -288,7 +288,7 @@ export class ThemeEngine {
 
     const detail: ThemeChangeEvent = { theme, previous, reason };
     this.#emit('change', detail);
-    document.dispatchEvent(new CustomEvent<ThemeChangeEvent>('polytheme:change', { detail, bubbles: true }));
+    document.dispatchEvent(new CustomEvent<ThemeChangeEvent>('themeloom:change', { detail, bubbles: true }));
     return theme;
   }
 
@@ -391,7 +391,7 @@ export function inlineBootScript(options: {
   default?: string;
   attribute?: string;
 } = {}): string {
-  const key = JSON.stringify(options.storageKey ?? 'polytheme');
+  const key = JSON.stringify(options.storageKey ?? 'themeloom');
   const fallback = JSON.stringify(options.default ?? '');
   const attr = JSON.stringify(options.attribute ?? 'data-theme');
   return `(function(){try{var t=localStorage.getItem(${key})||${fallback};if(t)document.documentElement.setAttribute(${attr},t)}catch(e){}})()`;

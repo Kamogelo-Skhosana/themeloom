@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>polytheme — plain HTML, no build step</title>
+<title>themeloom — plain HTML, no build step</title>
 
 <!-- 1. Token → element styles. Optional: bring your own CSS instead. -->
 <link rel="stylesheet" href="/packages/core/preset.css" />
@@ -137,25 +137,25 @@
     </section>
 
     <footer>
-      Built with polytheme. No build step, no framework, no CSS framework.
+      Built with themeloom. No build step, no framework, no CSS framework.
     </footer>
   </div>
 
   <!-- 4. The engine, the pack and the picker — three script tags. -->
-  <script src="/packages/core/dist/polytheme.global.js"></script>
+  <script src="/packages/core/dist/themeloom.global.js"></script>
   <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
   <script src="/packages/picker-ui/dist/picker.global.js"></script>
 
   <script>
-    const engine = Polytheme.init({
-      themes: PolythemeClassic.classicThemes,
-      categories: PolythemeClassic.classicCategories,
+    const engine = Themeloom.init({
+      themes: ThemeloomClassic.classicThemes,
+      categories: ThemeloomClassic.classicCategories,
       storageKey: 'demo-theme',
       default: 'basic-corporate',
     });
 
-    // The picker finds `window.__polytheme` on its own — no wiring needed.
-    const picker = document.createElement('polytheme-picker');
+    // The picker finds `window.__themeloom` on its own — no wiring needed.
+    const picker = document.createElement('themeloom-picker');
     picker.setAttribute('position', 'top-right');
     document.body.appendChild(picker);
 

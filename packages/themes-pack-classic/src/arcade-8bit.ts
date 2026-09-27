@@ -1,4 +1,4 @@
-import { defineTheme } from '@polytheme/core';
+import { defineTheme } from '@themeloom/core';
 
 export const arcade8bit = defineTheme({
   id: 'arcade-8bit',

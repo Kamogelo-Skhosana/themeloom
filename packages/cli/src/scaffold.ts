@@ -35,8 +35,8 @@ export async function detectProject(cwd: string): Promise<ProjectKind> {
   }
 }
 
-const CONFIG_TS = (packs: string[]) => `import { ThemeEngine, defineTheme } from '@polytheme/core';
-${packs.includes('classic') ? "import { classicThemes, classicCategories } from '@polytheme/themes-classic';\n" : ''}
+const CONFIG_TS = (packs: string[]) => `import { ThemeEngine, defineTheme } from '@themeloom/core';
+${packs.includes('classic') ? "import { classicThemes, classicCategories } from '@themeloom/themes-classic';\n" : ''}
 /**
  * Your own theme. Every field is part of the contract — colour, type, shape and
  * motion together are what make a theme feel like a different product rather
@@ -86,22 +86,22 @@ export const engine = new ThemeEngine({
 
 const SNIPPETS: Record<ProjectKind, (configImport: string) => string> = {
   vanilla: () => `<!-- in <head> -->
-<link rel="stylesheet" href="node_modules/@polytheme/core/preset.css" />
-<link rel="stylesheet" href="node_modules/@polytheme/themes-classic/flourishes.css" />
+<link rel="stylesheet" href="node_modules/@themeloom/core/preset.css" />
+<link rel="stylesheet" href="node_modules/@themeloom/themes-classic/flourishes.css" />
 
 <!-- before </body> -->
 <script type="module">
   import './theme.config.js';
-  import '@polytheme/picker';
+  import '@themeloom/picker';
 </script>
-<polytheme-picker position="top-right"></polytheme-picker>`,
+<themeloom-picker position="top-right"></themeloom-picker>`,
 
   react: (configImport) => `// app layout or root component
 'use client';
-import { ThemePicker } from '@polytheme/picker/react';
+import { ThemePicker } from '@themeloom/picker/react';
 import { themes } from '${configImport}';
-import '@polytheme/core/preset.css';
-import '@polytheme/themes-classic/flourishes.css';
+import '@themeloom/core/preset.css';
+import '@themeloom/themes-classic/flourishes.css';
 
 export default function Layout({ children }) {
   return (
@@ -113,10 +113,10 @@ export default function Layout({ children }) {
 }`,
 
   vue: (configImport) => `<script setup>
-import { ThemePicker } from '@polytheme/picker/vue';
+import { ThemePicker } from '@themeloom/picker/vue';
 import { themes } from '${configImport}';
-import '@polytheme/core/preset.css';
-import '@polytheme/themes-classic/flourishes.css';
+import '@themeloom/core/preset.css';
+import '@themeloom/themes-classic/flourishes.css';
 </script>
 
 <template>
@@ -124,25 +124,25 @@ import '@polytheme/themes-classic/flourishes.css';
 </template>`,
 
   svelte: (configImport) => `<script>
-  import { picker } from '@polytheme/picker/svelte';
+  import { picker } from '@themeloom/picker/svelte';
   import { themes } from '${configImport}';
-  import '@polytheme/core/preset.css';
+  import '@themeloom/core/preset.css';
 </script>
 
-<polytheme-picker use:picker={{ themes }} position="top-right" />`,
+<themeloom-picker use:picker={{ themes }} position="top-right" />`,
 
   unknown: () => `<script type="module">
-  import { ThemeEngine } from '@polytheme/core';
-  import { classicThemes } from '@polytheme/themes-classic';
-  import '@polytheme/picker';
+  import { ThemeEngine } from '@themeloom/core';
+  import { classicThemes } from '@themeloom/themes-classic';
+  import '@themeloom/picker';
 
-  window.__polytheme = new ThemeEngine({ themes: classicThemes });
+  window.__themeloom = new ThemeEngine({ themes: classicThemes });
 </script>
-<polytheme-picker></polytheme-picker>`,
+<themeloom-picker></themeloom-picker>`,
 };
 
 const PACK_PACKAGES: Record<string, string> = {
-  classic: '@polytheme/themes-classic',
+  classic: '@themeloom/themes-classic',
 };
 
 /** Writes the theme config and returns the install command + paste-in snippet. */
@@ -162,7 +162,7 @@ export async function scaffold(options: ScaffoldOptions): Promise<ScaffoldResult
     written.push(configPath);
   }
 
-  const install = ['@polytheme/core', '@polytheme/picker', ...packs.map((p) => PACK_PACKAGES[p]).filter(Boolean)] as string[];
+  const install = ['@themeloom/core', '@themeloom/picker', ...packs.map((p) => PACK_PACKAGES[p]).filter(Boolean)] as string[];
 
   const importSpecifier = './' + relative(cwd, absolute).replace(/\\/g, '/').replace(/\.tsx?$/, '');
   return {

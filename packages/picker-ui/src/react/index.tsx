@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import type { ThemeEngine, ThemeTokens } from '@polytheme/core';
-import { definePicker, type PolythemePicker } from '../vanilla.js';
+import type { ThemeEngine, ThemeTokens } from '@themeloom/core';
+import { definePicker, type ThemeloomPicker } from '../vanilla.js';
 
 export interface ThemePickerProps {
-  /** Engine to drive. Falls back to `window.__polytheme`. */
+  /** Engine to drive. Falls back to `window.__themeloom`. */
   engine?: ThemeEngine | null;
   /** Themes to use when no engine is passed — the element creates one. */
   themes?: readonly ThemeTokens[];
@@ -25,7 +25,7 @@ export interface ThemePickerProps {
 }
 
 /**
- * Thin wrapper over `<polytheme-picker>`.
+ * Thin wrapper over `<themeloom-picker>`.
  *
  * The picker is one web component rather than one implementation per framework,
  * so this file only has to do the two things React can't do to a custom element
@@ -46,7 +46,7 @@ export function ThemePicker({
   className,
   style,
 }: ThemePickerProps): JSX.Element {
-  const ref = useRef<PolythemePicker | null>(null);
+  const ref = useRef<ThemeloomPicker | null>(null);
 
   useEffect(() => {
     definePicker();
@@ -81,7 +81,7 @@ export function ThemePicker({
   }, [onSelect, onOpenChange]);
 
   return (
-    <polytheme-picker
+    <themeloom-picker
       ref={ref as never}
       class={className}
       style={style}
@@ -100,10 +100,10 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'polytheme-picker': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> &
+      'themeloom-picker': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> &
         Record<string, unknown>;
     }
   }
 }
 
-export { useTheme, ThemeProvider, usePolytheme } from './useTheme.js';
+export { useTheme, ThemeProvider, useThemeloom } from './useTheme.js';

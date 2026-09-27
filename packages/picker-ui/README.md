@@ -1,40 +1,40 @@
-# @polytheme/picker
+# @themeloom/picker
 
 The hamburger + category accordion theme picker. One Shadow DOM web component;
 the framework packages are thin wrappers over the same element.
 
 ```bash
-npm install @polytheme/core @polytheme/picker
+npm install @themeloom/core @themeloom/picker
 ```
 
 ## Vanilla
 
 ```js
-import '@polytheme/picker';   // registers <polytheme-picker>
+import '@themeloom/picker';   // registers <themeloom-picker>
 ```
 
 ```html
-<polytheme-picker position="top-right"></polytheme-picker>
+<themeloom-picker position="top-right"></themeloom-picker>
 ```
 
 It finds its engine in this order:
 
 1. the `.engine` property, if you set one
-2. `window.__polytheme` — what `Polytheme.init()` creates
+2. `window.__themeloom` — what `Themeloom.init()` creates
 3. an engine it builds itself from `.themes`
 
 ```js
-document.querySelector('polytheme-picker').themes = classicThemes;
+document.querySelector('themeloom-picker').themes = classicThemes;
 ```
 
 > `themes="…"` as an *attribute* accepts a global variable name
-> (`PolythemeClassic.classicThemes`) or a URL to a JSON array. Bare package
+> (`ThemeloomClassic.classicThemes`) or a URL to a JSON array. Bare package
 > specifiers can't be resolved in a browser — set the property instead.
 
 ## React
 
 ```jsx
-import { ThemeProvider, ThemePicker, useTheme } from '@polytheme/picker/react';
+import { ThemeProvider, ThemePicker, useTheme } from '@themeloom/picker/react';
 
 <ThemeProvider themes={themes} storageKey="site-theme" default="basic-corporate">
   <App />
@@ -48,15 +48,15 @@ const { theme, themes, setTheme, nextTheme, randomTheme } = useTheme();
 
 ```vue
 <script setup>
-import { ThemePicker, providePolytheme, useTheme } from '@polytheme/picker/vue';
-providePolytheme({ themes });
+import { ThemePicker, provideThemeloom, useTheme } from '@themeloom/picker/vue';
+provideThemeloom({ themes });
 const { theme, setTheme } = useTheme();
 </script>
 
 <template><ThemePicker position="top-right" @select="…" /></template>
 ```
 
-Add `isCustomElement: (tag) => tag.startsWith('polytheme-')` to your Vue compiler
+Add `isCustomElement: (tag) => tag.startsWith('themeloom-')` to your Vue compiler
 options, or Vue warns about an unknown component.
 
 ## Svelte
@@ -66,10 +66,10 @@ needs no Svelte compiler and works on 4 and 5 alike.
 
 ```svelte
 <script>
-  import { picker, themeStore } from '@polytheme/picker/svelte';
+  import { picker, themeStore } from '@themeloom/picker/svelte';
 </script>
 
-<polytheme-picker use:picker={{ themes }} position="top-right" />
+<themeloom-picker use:picker={{ themes }} position="top-right" />
 <p>{$themeStore?.name}</p>
 ```
 
@@ -84,7 +84,7 @@ needs no Svelte compiler and works on 4 and 5 alike.
 | `open` | present = open | absent |
 | `hide-search` | present = no search field | absent |
 | `keep-open` | stay open after a choice | absent |
-| `storage-key` | only when the element creates its own engine | `polytheme` |
+| `storage-key` | only when the element creates its own engine | `themeloom` |
 
 Events: `picker-select` (`detail.theme`), `picker-open`, `picker-close`.
 Properties: `.engine`, `.themes`, `.open`. Methods: `select(id)`, `toggle()`, `close()`.

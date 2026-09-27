@@ -1,5 +1,5 @@
 /*
- * @polytheme/themes-classic — flourishes
+ * @themeloom/themes-classic — flourishes
  *
  * Companion stylesheet for the pack's decorative hooks. The engine writes
  * `data-flourish="<name>"` on <body>; everything below hangs off that.
@@ -17,7 +17,7 @@
  *
  * That last part matters: an earlier version raised every child to
  * `position: relative` instead, which silently overrode `:host { position:
- * fixed }` on <polytheme-picker> and dropped the picker into normal flow. Outer
+ * fixed }` on <themeloom-picker> and dropped the picker into normal flow. Outer
  * page rules beat `:host` rules, so a decorative stylesheet must never reach
  * for a descendant selector this broad.
  */

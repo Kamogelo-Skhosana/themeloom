@@ -1,5 +1,5 @@
 import { createContext, createElement, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@polytheme/core';
+import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@themeloom/core';
 
 const EngineContext = createContext<ThemeEngine | null>(null);
 
@@ -21,7 +21,7 @@ export function ThemeProvider({ children, engine: provided, ...options }: ThemeP
 
   useEffect(() => {
     engine.mount();
-    if (typeof window !== 'undefined') window.__polytheme ??= engine;
+    if (typeof window !== 'undefined') window.__themeloom ??= engine;
     return () => {
       if (!provided) engine.destroy();
     };
@@ -30,10 +30,10 @@ export function ThemeProvider({ children, engine: provided, ...options }: ThemeP
   return createElement(EngineContext.Provider, { value: engine }, children);
 }
 
-/** The engine from the nearest `ThemeProvider`, or `window.__polytheme`. */
-export function usePolytheme(): ThemeEngine | null {
+/** The engine from the nearest `ThemeProvider`, or `window.__themeloom`. */
+export function useThemeloom(): ThemeEngine | null {
   const fromContext = useContext(EngineContext);
-  return fromContext ?? (typeof window !== 'undefined' ? window.__polytheme ?? null : null);
+  return fromContext ?? (typeof window !== 'undefined' ? window.__themeloom ?? null : null);
 }
 
 export interface UseThemeResult {
@@ -47,7 +47,7 @@ export interface UseThemeResult {
 
 /** Subscribes to theme changes and re-renders on each one. */
 export function useTheme(): UseThemeResult {
-  const engine = usePolytheme();
+  const engine = useThemeloom();
   const [theme, setThemeState] = useState<ThemeTokens | null>(() => engine?.current ?? null);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup';
 
-const external = ['@polytheme/core', 'react', 'react/jsx-runtime', 'vue'];
+const external = ['@themeloom/core', 'react', 'react/jsx-runtime', 'vue'];
 
 export default defineConfig([
   {
@@ -20,10 +20,10 @@ export default defineConfig([
   },
   {
     // Standalone build for plain HTML. Core stays external — the page loads it
-    // from polytheme.global.js and the element reads it off the global.
+    // from themeloom.global.js and the element reads it off the global.
     entry: { 'picker.global': 'src/global.ts' },
     format: ['iife'],
-    globalName: 'PolythemePicker',
+    globalName: 'ThemeloomPicker',
     outExtension: () => ({ js: '.js' }),
     target: 'es2019',
     minify: true,

@@ -1,5 +1,5 @@
-import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@polytheme/core';
-import { definePicker, type PolythemePicker } from '../vanilla.js';
+import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@themeloom/core';
+import { definePicker, type ThemeloomPicker } from '../vanilla.js';
 
 /**
  * Svelte binding.
@@ -8,11 +8,11 @@ import { definePicker, type PolythemePicker } from '../vanilla.js';
  * package needs no Svelte compiler at build time and works on 4 and 5 alike.
  *
  *   <script>
- *     import { picker, themeStore } from '@polytheme/picker/svelte';
- *     import { classicThemes } from '@polytheme/themes-classic';
+ *     import { picker, themeStore } from '@themeloom/picker/svelte';
+ *     import { classicThemes } from '@themeloom/themes-classic';
  *   </script>
  *
- *   <polytheme-picker use:picker={{ themes: classicThemes }} position="top-right" />
+ *   <themeloom-picker use:picker={{ themes: classicThemes }} position="top-right" />
  *   <p>Current: {$themeStore?.name}</p>
  */
 
@@ -28,7 +28,7 @@ export interface ThemeStore {
 /** A Svelte-compatible readable store over an engine. */
 export function createThemeStore(engine?: ThemeEngine): ThemeStore {
   const resolve = (): ThemeEngine | null =>
-    engine ?? (typeof window !== 'undefined' ? window.__polytheme ?? null : null);
+    engine ?? (typeof window !== 'undefined' ? window.__themeloom ?? null : null);
 
   return {
     subscribe(run) {
@@ -45,27 +45,27 @@ export function createThemeStore(engine?: ThemeEngine): ThemeStore {
   };
 }
 
-/** The ambient store — resolves against `window.__polytheme` on subscribe. */
+/** The ambient store — resolves against `window.__themeloom` on subscribe. */
 export const themeStore: ThemeStore = createThemeStore();
 
 export interface PickerActionOptions {
   themes?: readonly ThemeTokens[];
   engine?: ThemeEngine;
-  /** Engine options used only when neither `engine` nor `window.__polytheme` exists. */
+  /** Engine options used only when neither `engine` nor `window.__themeloom` exists. */
   engineOptions?: ThemeEngineOptions;
   onSelect?: (theme: ThemeTokens) => void;
 }
 
-/** `use:picker` — wires a `<polytheme-picker>` element to an engine. */
-export function picker(node: PolythemePicker, options: PickerActionOptions = {}) {
+/** `use:picker` — wires a `<themeloom-picker>` element to an engine. */
+export function picker(node: ThemeloomPicker, options: PickerActionOptions = {}) {
   definePicker();
   let owned: ThemeEngine | null = null;
 
   const attach = (opts: PickerActionOptions) => {
-    let engine = opts.engine ?? (typeof window !== 'undefined' ? window.__polytheme : undefined) ?? null;
+    let engine = opts.engine ?? (typeof window !== 'undefined' ? window.__themeloom : undefined) ?? null;
     if (!engine && opts.themes?.length) {
       owned = new ThemeEngine({ ...opts.engineOptions, themes: opts.themes });
-      if (typeof window !== 'undefined') window.__polytheme ??= owned;
+      if (typeof window !== 'undefined') window.__themeloom ??= owned;
       engine = owned;
     }
     if (opts.themes) node.themes = opts.themes as ThemeTokens[];
@@ -91,4 +91,4 @@ export function picker(node: PolythemePicker, options: PickerActionOptions = {})
   };
 }
 
-export { definePicker, PolythemePicker } from '../vanilla.js';
+export { definePicker, ThemeloomPicker } from '../vanilla.js';

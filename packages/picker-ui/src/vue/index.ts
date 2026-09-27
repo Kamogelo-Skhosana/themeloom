@@ -12,10 +12,10 @@ import {
   type PropType,
   type Ref,
 } from 'vue';
-import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@polytheme/core';
-import { definePicker, type PolythemePicker } from '../vanilla.js';
+import { ThemeEngine, type ThemeEngineOptions, type ThemeTokens } from '@themeloom/core';
+import { definePicker, type ThemeloomPicker } from '../vanilla.js';
 
-const ENGINE_KEY: InjectionKey<ThemeEngine> = Symbol('polytheme');
+const ENGINE_KEY: InjectionKey<ThemeEngine> = Symbol('themeloom');
 
 /**
  * Creates an engine and provides it to descendants.
@@ -23,16 +23,16 @@ const ENGINE_KEY: InjectionKey<ThemeEngine> = Symbol('polytheme');
  * Call in a root component's `setup()`. Vue passes non-string props to custom
  * elements natively, so the wrapper below is even thinner than React's.
  */
-export function providePolytheme(options: ThemeEngineOptions = {}): ThemeEngine {
+export function provideThemeloom(options: ThemeEngineOptions = {}): ThemeEngine {
   const engine = new ThemeEngine(options);
-  if (typeof window !== 'undefined') window.__polytheme ??= engine;
+  if (typeof window !== 'undefined') window.__themeloom ??= engine;
   provide(ENGINE_KEY, engine);
   onUnmounted(() => engine.destroy());
   return engine;
 }
 
-export function usePolytheme(): ThemeEngine | null {
-  return inject(ENGINE_KEY, null) ?? (typeof window !== 'undefined' ? window.__polytheme ?? null : null);
+export function useThemeloom(): ThemeEngine | null {
+  return inject(ENGINE_KEY, null) ?? (typeof window !== 'undefined' ? window.__themeloom ?? null : null);
 }
 
 export interface UseThemeResult {
@@ -45,7 +45,7 @@ export interface UseThemeResult {
 
 /** A reactive ref of the active theme. */
 export function useTheme(): UseThemeResult {
-  const engine = usePolytheme();
+  const engine = useThemeloom();
   const theme = shallowRef<ThemeTokens | null>(engine?.current ?? null);
 
   let stop: (() => void) | undefined;
@@ -78,8 +78,8 @@ export const ThemePicker = defineComponent({
   },
   emits: ['select', 'open', 'close'],
   setup(props, { emit }) {
-    const el = ref<PolythemePicker | null>(null);
-    const injected = usePolytheme();
+    const el = ref<ThemeloomPicker | null>(null);
+    const injected = useThemeloom();
 
     onMounted(() => {
       definePicker();
@@ -103,7 +103,7 @@ export const ThemePicker = defineComponent({
     );
 
     return () =>
-      h('polytheme-picker', {
+      h('themeloom-picker', {
         ref: el,
         position: props.position,
         variant: props.variant,

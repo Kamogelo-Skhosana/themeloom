@@ -16,14 +16,14 @@ const read = (path) => readFileSync(fileURLToPath(new URL(path, import.meta.url)
  */
 const PACKS = [
   {
-    name: '@polytheme/themes-classic',
+    name: '@themeloom/themes-classic',
     themes: classicThemes,
     categories: classicCategories,
     flourishCss: read('../packages/themes-pack-classic/styles/flourishes.css'),
     expectedCategories: ['arcade', 'basic', 'elegant', 'futuristic', 'nature', 'retro'],
   },
   {
-    name: '@polytheme/themes-seasonal',
+    name: '@themeloom/themes-seasonal',
     themes: seasonalThemes,
     categories: seasonalCategories,
     flourishCss: read('../packages/themes-pack-seasonal/styles/flourishes.css'),

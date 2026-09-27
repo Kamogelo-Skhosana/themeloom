@@ -1,14 +1,14 @@
-# @polytheme/themes-classic
+# @themeloom/themes-classic
 
-Thirteen first-party themes for [polytheme](https://github.com/polytheme/polytheme).
+Thirteen first-party themes for [themeloom](https://github.com/themeloom/themeloom).
 
 ```bash
-npm install @polytheme/core @polytheme/themes-classic
+npm install @themeloom/core @themeloom/themes-classic
 ```
 
 ```ts
-import { classicThemes, classicCategories } from '@polytheme/themes-classic';
-import '@polytheme/themes-classic/flourishes.css';   // optional
+import { classicThemes, classicCategories } from '@themeloom/themes-classic';
+import '@themeloom/themes-classic/flourishes.css';   // optional
 ```
 
 ## The themes
@@ -39,7 +39,7 @@ One module per theme, so importing a single theme doesn't pull in the other
 twelve:
 
 ```ts
-import { arcade8bit } from '@polytheme/themes-classic';
+import { arcade8bit } from '@themeloom/themes-classic';
 ```
 
 ## Flourishes

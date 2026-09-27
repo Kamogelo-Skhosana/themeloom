@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { classicThemeIds } from '@polytheme/themes-classic';
-import { seasonalThemeIds } from '@polytheme/themes-seasonal';
+import { classicThemeIds } from '@themeloom/themes-classic';
+import { seasonalThemeIds } from '@themeloom/themes-seasonal';
 
 // Derived, not hardcoded: adding a pack to the gallery should not need this
 // number edited, but dropping one silently should still fail.
@@ -11,7 +11,7 @@ const DOCS = '/docs/';
 test.describe('docs site', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(DOCS);
-    await page.waitForFunction(() => Boolean((window as any).__polytheme?.current));
+    await page.waitForFunction(() => Boolean((window as any).__themeloom?.current));
   });
 
   test('the gallery has a card per theme, each in its own tokens', async ({ page }) => {
@@ -62,7 +62,7 @@ test.describe('docs site', () => {
   });
 
   test('a pill radius does not turn large surfaces into lozenges', async ({ page }) => {
-    await page.evaluate(() => (window as any).__polytheme.set('retro-y2k'));
+    await page.evaluate(() => (window as any).__themeloom.set('retro-y2k'));
 
     const [button, block] = await page.evaluate(() => [
       getComputedStyle(document.querySelector('#pg-apply')!).borderRadius,

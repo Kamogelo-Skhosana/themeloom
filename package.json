@@ -1,8 +1,8 @@
 {
-  "name": "polytheme-monorepo",
+  "name": "themeloom-monorepo",
   "version": "0.1.0",
   "private": true,
-  "description": "Polytheme — a full design contract per theme: color, type, shape, motion, flourish.",
+  "description": "Themeloom — a full design contract per theme: color, type, shape, motion, flourish.",
   "workspaces": [
     "packages/core",
     "packages/themes-pack-classic",

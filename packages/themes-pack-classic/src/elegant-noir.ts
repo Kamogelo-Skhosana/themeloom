@@ -1,4 +1,4 @@
-import { defineTheme } from '@polytheme/core';
+import { defineTheme } from '@themeloom/core';
 
 export const elegantNoir = defineTheme({
   id: 'elegant-noir',

@@ -10,10 +10,10 @@ export default defineConfig([
     treeshake: true,
   },
   {
-    // Drop-in build for plain HTML: <script src="polytheme.global.js">
-    entry: { 'polytheme.global': 'src/global.ts' },
+    // Drop-in build for plain HTML: <script src="themeloom.global.js">
+    entry: { 'themeloom.global': 'src/global.ts' },
     format: ['iife'],
-    globalName: 'Polytheme',
+    globalName: 'Themeloom',
     outExtension: () => ({ js: '.js' }),
     target: 'es2019',
     minify: true,
