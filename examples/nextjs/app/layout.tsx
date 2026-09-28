@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-pt-construct="">
       <head>
         {/*
           The stored theme has to be on <html> before the browser paints, or the

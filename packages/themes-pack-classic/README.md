@@ -74,6 +74,13 @@ classes. Two themes change layout as well: `bento` turns any container holding
 cards into a four-column bento grid, and `swiss-editorial` removes the gaps
 between cards and divides them with rules.
 
+**Construction is opt-in.** The rules that reach plain elements apply only under
+an element carrying `data-pt-construct`, so put it on `<html>` (or on whatever
+element carries `data-flourish`). Without it the stylesheet only draws the
+backdrop and styles the preset classes, so importing it never restyles
+components you built yourself — an app that wants the tokens and the backdrop
+but keeps its own buttons just leaves the attribute off.
+
 All background art is `pointer-events: none`, sits behind content, and honours
 `prefers-reduced-motion`. Skip the stylesheet and the themes still work through
 their tokens; you just get the plain construction from `preset.css`.

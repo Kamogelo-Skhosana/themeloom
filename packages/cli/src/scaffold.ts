@@ -102,6 +102,7 @@ import { ThemePicker } from '@themeloom/picker/react';
 import { themes } from '${configImport}';
 import '@themeloom/core/preset.css';
 import '@themeloom/themes-classic/flourishes.css';
+// Add data-pt-construct to <html> to get each theme's construction, not just its backdrop.
 
 export default function Layout({ children }) {
   return (

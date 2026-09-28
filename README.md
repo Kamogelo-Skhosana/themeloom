@@ -52,7 +52,7 @@ import { ThemeEngine } from '@themeloom/core';
 import { classicThemes, classicCategories } from '@themeloom/themes-classic';
 import '@themeloom/picker';                          // registers <themeloom-picker>
 import '@themeloom/core/preset.css';                 // optional: token → element styles
-import '@themeloom/themes-classic/flourishes.css';   // optional: decorative hooks
+import '@themeloom/themes-classic/flourishes.css';   // optional: each theme's construction + backdrop
 
 const engine = new ThemeEngine({
   themes: classicThemes,
@@ -162,6 +162,18 @@ Attributes: `position`, `categories`, `variant`, `label`, `open`, `hide-search`,
 Events: `picker-select`, `picker-open`, `picker-close`.
 
 ## Avoiding the theme flash
+
+`flourishes.css` gives each theme its own construction — how headings, buttons,
+inputs, cards and tables are built — but only where you opt in, so importing it
+never restyles components you designed yourself. Put `data-pt-construct` on
+`<html>` to turn it on for the page:
+
+```html
+<html lang="en" data-pt-construct>
+```
+
+Without the attribute you still get the theme's backdrop and the rules for the
+preset classes (`.pt-card`, `.pt-btn`, `.pt-badge`, `.pt-nav`), and nothing else.
 
 The stored theme has to be on `<html>` before the browser paints:
 
