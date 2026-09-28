@@ -4,8 +4,8 @@ export const liquidGlass = defineTheme({
   id: 'liquid-glass',
   category: 'glass',
   name: 'Liquid Glass',
-  description: 'Clear, refractive panels with specular edges floating over vivid colour.',
-  swatch: 'linear-gradient(135deg, #7cc4ff 0%, #ffffff 45%, #ff9ecf 100%)',
+  description: 'Clear, refractive panels with specular edges and soft depth.',
+  swatch: '#0071e3',
   mode: 'light',
 
   color: {
@@ -38,8 +38,6 @@ export const liquidGlass = defineTheme({
   },
   surface: {
     backdrop: 'blur(24px) saturate(1.9) brightness(1.05)',
-    cardOverlay: 'linear-gradient(160deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.12) 36%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 0.22) 100%)',
-    button: 'linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.06) 55%, rgba(255, 255, 255, 0) 100%), #0071e3',
     inset: 'inset 0 1px 3px rgba(15, 35, 80, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.55)',
     pressed: 'inset 0 2px 6px rgba(0, 0, 0, 0.2)',
     shadowHover: '0 18px 44px -8px rgba(15, 35, 80, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(255, 255, 255, 0.4)',

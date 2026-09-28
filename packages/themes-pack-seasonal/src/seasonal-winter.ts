@@ -5,7 +5,7 @@ export const seasonalWinter = defineTheme({
   category: 'seasonal',
   name: 'First Snow',
   description: 'Cold daylight on fresh powder, pine green and one berry red.',
-  swatch: 'linear-gradient(135deg, #f2f7fb 0%, #1a5e63 65%, #b3121a 100%)',
+  swatch: '#1a5e63',
   mode: 'light',
 
   color: {

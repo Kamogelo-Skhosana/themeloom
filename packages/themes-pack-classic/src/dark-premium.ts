@@ -5,7 +5,7 @@ export const darkPremium = defineTheme({
   category: 'clean',
   name: 'Dark Premium',
   description: 'Near-black, warm gold and a serif that takes its time.',
-  swatch: 'linear-gradient(135deg, #0b0b0c 0%, #1c1a16 60%, #d6b36a 100%)',
+  swatch: '#d6b36a',
   mode: 'dark',
 
   color: {
@@ -38,8 +38,6 @@ export const darkPremium = defineTheme({
     space: '1.25rem',
   },
   surface: {
-    cardOverlay: 'linear-gradient(180deg, rgba(214, 179, 106, 0.07) 0%, rgba(214, 179, 106, 0) 45%)',
-    button: 'linear-gradient(180deg, #e6c883 0%, #c9a25a 100%)',
     inset: 'inset 0 1px 2px rgba(0, 0, 0, 0.6)',
     shadowHover: 'inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 30px 70px -24px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(214, 179, 106, 0.28)',
     hoverTransform: 'translateY(-2px)',

@@ -5,7 +5,7 @@ export const neoBrutalism = defineTheme({
   category: 'expressive',
   name: 'Neo-Brutalism',
   description: 'Thick black outlines, hard offset shadows and loud flat colour.',
-  swatch: 'linear-gradient(135deg, #ffd23f 0 50%, #ff6b6b 50% 100%)',
+  swatch: '#ffd23f',
   mode: 'light',
 
   color: {

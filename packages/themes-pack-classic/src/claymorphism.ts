@@ -5,7 +5,7 @@ export const claymorphism = defineTheme({
   category: 'tactile',
   name: 'Claymorphism',
   description: 'Puffy, pastel, squeezable shapes that look pressed out of modelling clay.',
-  swatch: 'linear-gradient(135deg, #ffb3cb 0%, #cdb8ff 50%, #9fe8d6 100%)',
+  swatch: '#ff8fb1',
   mode: 'light',
 
   color: {
@@ -37,7 +37,6 @@ export const claymorphism = defineTheme({
     space: '1.1rem',
   },
   surface: {
-    button: 'linear-gradient(180deg, #ffadc6 0%, #ff85aa 100%)',
     inset: 'inset 4px 6px 10px rgba(125, 90, 200, 0.14), inset -4px -4px 8px rgba(255, 255, 255, 0.9)',
     pressed: 'inset 0 6px 12px rgba(160, 40, 90, 0.3)',
     shadowHover: '0 22px 36px -12px rgba(98, 62, 170, 0.42), inset -6px -8px 14px rgba(125, 90, 200, 0.16), inset 6px 8px 14px rgba(255, 255, 255, 0.95)',

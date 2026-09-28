@@ -5,7 +5,7 @@ export const cyberpunk = defineTheme({
   category: 'expressive',
   name: 'Cyberpunk',
   description: 'Hazard yellow and cyan neon, cut corners and a city that never sleeps.',
-  swatch: 'linear-gradient(135deg, #fcee0a 0 45%, #0a0612 45% 55%, #00f0ff 55% 100%)',
+  swatch: '#fcee0a',
   mode: 'dark',
 
   color: {
@@ -39,7 +39,6 @@ export const cyberpunk = defineTheme({
     space: '1rem',
   },
   surface: {
-    cardOverlay: 'linear-gradient(135deg, rgba(0, 240, 255, 0.09) 0%, rgba(0, 240, 255, 0) 30%, rgba(255, 0, 60, 0) 70%, rgba(255, 0, 60, 0.09) 100%)',
     button: '#fcee0a',
     shadowHover: '0 0 0 1px rgba(252, 238, 10, 0.6), 0 0 30px -2px rgba(252, 238, 10, 0.45)',
     pressed: '0 0 0 1px #ff003c, 0 0 18px -2px rgba(255, 0, 60, 0.6)',

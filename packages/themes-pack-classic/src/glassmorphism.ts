@@ -4,8 +4,8 @@ export const glassmorphism = defineTheme({
   id: 'glassmorphism',
   category: 'glass',
   name: 'Glassmorphism',
-  description: 'Frosted panels over glowing orbs on a deep indigo night.',
-  swatch: 'linear-gradient(135deg, #2a1f6b 0%, #9d7bff 55%, #4fd1e8 100%)',
+  description: 'Frosted translucent panels on a deep indigo night.',
+  swatch: '#b69cff',
   mode: 'dark',
 
   color: {
@@ -38,8 +38,6 @@ export const glassmorphism = defineTheme({
   },
   surface: {
     backdrop: 'blur(16px) saturate(1.5)',
-    cardOverlay: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%)',
-    button: 'linear-gradient(135deg, #c7b3ff 0%, #9d7bff 100%)',
     inset: 'inset 0 1px 2px rgba(0, 0, 0, 0.3)',
     pressed: 'inset 0 2px 6px rgba(10, 5, 40, 0.45)',
     shadowHover: '0 14px 40px rgba(3, 2, 20, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18)',

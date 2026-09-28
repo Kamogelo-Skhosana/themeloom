@@ -4,8 +4,8 @@ export const retroY2k = defineTheme({
   id: 'retro-y2k',
   category: 'expressive',
   name: 'Retro / Y2K',
-  description: 'Iridescent chrome, bubblegum pink and sparkles from the new millennium.',
-  swatch: 'linear-gradient(135deg, #ff7cc0 0%, #e6dcff 45%, #19d3ff 100%)',
+  description: 'Bubblegum pink, lavender, pill shapes and sparkles from the new millennium.',
+  swatch: '#e0187f',
   mode: 'light',
 
   color: {
@@ -38,8 +38,6 @@ export const retroY2k = defineTheme({
   },
   surface: {
     backdrop: 'blur(8px) saturate(1.2)',
-    cardOverlay: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(220, 210, 255, 0.35) 35%, rgba(180, 240, 255, 0.35) 65%, rgba(255, 210, 240, 0.5) 100%)',
-    button: 'linear-gradient(180deg, #ff7cc0 0%, #e0187f 55%, #c20f6c 100%)',
     inset: 'inset 0 2px 4px rgba(90, 40, 170, 0.18)',
     pressed: 'inset 0 3px 8px rgba(100, 0, 50, 0.4)',
     shadowHover: '0 16px 30px -10px rgba(90, 40, 170, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 6px rgba(150, 120, 255, 0.22)',

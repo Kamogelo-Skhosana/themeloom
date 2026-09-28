@@ -5,7 +5,7 @@ export const spatial3d = defineTheme({
   category: 'tactile',
   name: '3D / Spatial',
   description: 'Floating glass windows with real depth, tilting toward you on hover.',
-  swatch: 'radial-gradient(circle at 30% 25%, #c7a6ff 0%, #3a4152 55%, #1c1f27 100%)',
+  swatch: '#8ecbff',
   mode: 'dark',
 
   color: {
@@ -38,8 +38,6 @@ export const spatial3d = defineTheme({
   },
   surface: {
     backdrop: 'blur(28px) saturate(1.4)',
-    cardOverlay: 'radial-gradient(120% 80% at 30% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 60%)',
-    button: 'linear-gradient(180deg, #b8e0ff 0%, #7fc1ff 100%)',
     inset: 'inset 0 2px 6px rgba(0, 0, 0, 0.45)',
     pressed: 'inset 0 2px 8px rgba(0, 20, 50, 0.45)',
     shadowHover: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 40px 70px -20px rgba(0, 0, 0, 0.75), 0 14px 24px -10px rgba(0, 0, 0, 0.55)',

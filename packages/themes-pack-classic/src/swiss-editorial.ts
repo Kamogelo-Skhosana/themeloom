@@ -5,7 +5,7 @@ export const swissEditorial = defineTheme({
   category: 'clean',
   name: 'Swiss / Editorial',
   description: 'A strict grid, heavy grotesk headlines, serif reading text and one red.',
-  swatch: 'linear-gradient(90deg, #e30613 0 22%, #f7f5f0 22% 100%)',
+  swatch: '#e30613',
   mode: 'light',
 
   color: {

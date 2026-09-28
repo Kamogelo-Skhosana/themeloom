@@ -5,7 +5,7 @@ export const neumorphism = defineTheme({
   category: 'tactile',
   name: 'Neumorphism',
   description: 'Soft UI extruded from a single material, lit from the top left.',
-  swatch: 'linear-gradient(145deg, #ffffff 0%, #e3e8ef 50%, #c3c9d3 100%)',
+  swatch: '#4f5dff',
   mode: 'light',
 
   color: {
@@ -37,7 +37,6 @@ export const neumorphism = defineTheme({
     space: '1.1rem',
   },
   surface: {
-    button: 'linear-gradient(145deg, #5f6cff 0%, #4452e6 100%)',
     inset: 'inset 4px 4px 8px #c3c9d3, inset -4px -4px 8px #ffffff',
     pressed: 'inset 4px 4px 8px rgba(20, 30, 110, 0.4), inset -3px -3px 6px rgba(255, 255, 255, 0.2)',
     shadowHover: '12px 12px 24px #bec4ce, -12px -12px 24px #ffffff',

@@ -43,11 +43,6 @@
   background-position: top left, top right;
   background-repeat: no-repeat;
 }
-[data-flourish='cobwebs']::after {
-  background:
-    radial-gradient(70% 40% at 50% 108%, rgba(139, 70, 196, 0.30), transparent 70%),
-    radial-gradient(40% 30% at 15% 100%, rgba(255, 117, 24, 0.14), transparent 70%);
-}
 
 /* -------------------------------------------------------------- snowfall */
 /* seasonal-winter: three layers of flakes at different depths and speeds. */
@@ -59,9 +54,6 @@
   background-size: 200px 200px, 260px 260px, 160px 160px;
   animation: pt-snow 18s linear infinite;
   opacity: 0.9;
-}
-[data-flourish='snowfall']::after {
-  background: linear-gradient(to bottom, rgba(195, 213, 226, 0.35), transparent 45%);
 }
 @keyframes pt-snow {
   from { background-position: 0 -200px, 0 -260px, 0 -160px; }
@@ -77,11 +69,6 @@
     transparent 3deg 12deg
   );
   animation: pt-rays 90s linear infinite;
-}
-[data-flourish='sun-rays']::after {
-  background:
-    radial-gradient(30% 25% at 88% 6%, rgba(255, 196, 90, 0.45), transparent 70%),
-    linear-gradient(to bottom, transparent 70%, rgba(10, 162, 192, 0.10) 100%);
 }
 @keyframes pt-rays {
   to { transform: rotate(360deg); }
@@ -113,9 +100,6 @@
   animation: pt-embers 22s linear infinite;
   mask-image: linear-gradient(to top, #000 0%, transparent 75%);
   -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 75%);
-}
-[data-flourish='embers']::after {
-  background: radial-gradient(60% 35% at 50% 105%, rgba(226, 98, 27, 0.22), transparent 70%);
 }
 @keyframes pt-embers {
   from { background-position: 0 200px, 0 240px, 0 180px; }

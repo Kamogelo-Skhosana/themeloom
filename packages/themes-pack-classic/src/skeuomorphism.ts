@@ -4,8 +4,8 @@ export const skeuomorphism = defineTheme({
   id: 'skeuomorphism',
   category: 'tactile',
   name: 'Skeuomorphism',
-  description: 'Linen, paper and stitched leather, with gel buttons you want to press.',
-  swatch: 'linear-gradient(180deg, #7db5f0 0%, #2a6cbf 50%, #cfc6b4 51%, #a8997b 100%)',
+  description: 'Linen, paper and stitched cards, with buttons you want to press.',
+  swatch: '#2560a8',
   mode: 'light',
 
   color: {
@@ -37,8 +37,6 @@ export const skeuomorphism = defineTheme({
     space: '1rem',
   },
   surface: {
-    cardOverlay: 'linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 28%)',
-    button: 'linear-gradient(180deg, #7db5f0 0%, #3b82d6 48%, #2a6cbf 52%, #3274c6 100%)',
     inset: 'inset 0 2px 3px rgba(40, 28, 10, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.6)',
     pressed: 'inset 0 2px 5px rgba(0, 0, 0, 0.45)',
   },

@@ -5,7 +5,7 @@ export const terminal = defineTheme({
   category: 'expressive',
   name: 'Terminal / Hacker',
   description: 'Green phosphor on black, monospace everything and a blinking cursor.',
-  swatch: 'linear-gradient(135deg, #050805 0%, #0b120b 60%, #39ff14 100%)',
+  swatch: '#39ff14',
   mode: 'dark',
 
   color: {

@@ -5,7 +5,7 @@ export const seasonalAutumn = defineTheme({
   category: 'seasonal',
   name: 'Autumn Ember',
   description: 'Woodsmoke and low sun, burnt orange against damp bark.',
-  swatch: 'linear-gradient(135deg, #e2621b 0%, #c9a227 45%, #1a1210 100%)',
+  swatch: '#e2621b',
   mode: 'dark',
 
   color: {

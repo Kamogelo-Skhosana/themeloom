@@ -5,7 +5,7 @@ export const minimalism = defineTheme({
   category: 'clean',
   name: 'Minimalism',
   description: 'Black on white, generous space, nothing that does not need to be there.',
-  swatch: 'linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #111111 50%, #111111 100%)',
+  swatch: '#111111',
   mode: 'light',
 
   color: {

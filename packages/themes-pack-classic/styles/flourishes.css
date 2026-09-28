@@ -52,26 +52,7 @@
  */
 
 /* ------------------------------------------------------------------ liquid */
-/* liquid-glass: saturated colour fields slowly morphing under clear glass. */
-[data-flourish='liquid']::before {
-  background:
-    radial-gradient(38% 42% at 18% 22%, rgba(0, 132, 255, 0.55), transparent 70%),
-    radial-gradient(34% 38% at 82% 18%, rgba(255, 94, 168, 0.5), transparent 70%),
-    radial-gradient(40% 36% at 70% 82%, rgba(255, 166, 0, 0.42), transparent 70%),
-    radial-gradient(36% 40% at 22% 86%, rgba(52, 199, 150, 0.42), transparent 70%);
-  filter: blur(30px) saturate(1.2);
-  animation: pt-liquid 26s ease-in-out infinite alternate;
-}
-[data-flourish='liquid']::after {
-  /* A faint caustic grid, the refraction you catch at the glass edge. */
-  background: repeating-radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.07) 0 2px, transparent 2px 38px);
-  mix-blend-mode: soft-light;
-}
-@keyframes pt-liquid {
-  0% { transform: translate3d(-3%, -2%, 0) scale(1.05) rotate(0deg); }
-  50% { transform: translate3d(2%, 3%, 0) scale(1.12) rotate(4deg); }
-  100% { transform: translate3d(3%, -1%, 0) scale(1.06) rotate(-3deg); }
-}
+/* liquid-glass: clear, blurred controls. No colour fields: the glass sits on a flat page. */
 [data-flourish='liquid'] input,
 [data-flourish='liquid'] select,
 [data-flourish='liquid'] textarea {
@@ -88,22 +69,7 @@
 }
 
 /* -------------------------------------------------------------------- orbs */
-/* glassmorphism: glowing orbs for the frost to catch. */
-[data-flourish='orbs']::before {
-  background:
-    radial-gradient(28% 34% at 15% 25%, rgba(157, 123, 255, 0.75), transparent 70%),
-    radial-gradient(24% 30% at 85% 20%, rgba(79, 209, 232, 0.6), transparent 70%),
-    radial-gradient(30% 32% at 60% 88%, rgba(255, 107, 139, 0.5), transparent 70%);
-  filter: blur(40px);
-  animation: pt-drift 24s ease-in-out infinite alternate;
-}
-[data-flourish='orbs']::after {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), transparent 40%);
-}
-@keyframes pt-drift {
-  from { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-  to { transform: translate3d(2%, 2%, 0) scale(1.08); }
-}
+/* glassmorphism: frosted inputs on a flat indigo page. */
 [data-flourish='orbs'] input,
 [data-flourish='orbs'] select,
 [data-flourish='orbs'] textarea {
@@ -111,28 +77,7 @@
 }
 
 /* -------------------------------------------------------------------- aero */
-/* frutiger-aero: open sky, light rays, drifting bubbles and a green hill. */
-[data-flourish='aero']::before {
-  background:
-    radial-gradient(circle at 12% 30%, rgba(255, 255, 255, 0.9) 0 10px, rgba(255, 255, 255, 0.25) 11px 13px, transparent 14px),
-    radial-gradient(circle at 86% 22%, rgba(255, 255, 255, 0.9) 0 16px, rgba(255, 255, 255, 0.2) 17px 20px, transparent 21px),
-    radial-gradient(circle at 74% 60%, rgba(255, 255, 255, 0.85) 0 7px, rgba(255, 255, 255, 0.2) 8px 10px, transparent 11px),
-    radial-gradient(circle at 28% 70%, rgba(255, 255, 255, 0.8) 0 12px, rgba(255, 255, 255, 0.2) 13px 15px, transparent 16px),
-    conic-gradient(from 200deg at 50% -10%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0.45) 12deg, rgba(255, 255, 255, 0) 24deg, rgba(255, 255, 255, 0.35) 40deg, rgba(255, 255, 255, 0) 52deg),
-    linear-gradient(180deg, #7fcdfb 0%, #c4ebff 45%, #e3f4ff 70%);
-  animation: pt-bubbles 30s linear infinite;
-}
-[data-flourish='aero']::after {
-  /* The hill, with a highlight along its crest. */
-  background:
-    radial-gradient(120% 60% at 30% 118%, #6ccf45 0 55%, #9be37a 56%, transparent 57%),
-    radial-gradient(90% 50% at 90% 120%, #48b52c 0 55%, transparent 56%);
-  opacity: 0.7;
-}
-@keyframes pt-bubbles {
-  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
-  to { background-position: 0 -120vh, 0 -80vh, 0 -140vh, 0 -100vh, 0 0, 0 0; }
-}
+/* frutiger-aero: a soft white letterpress on headings. */
 [data-flourish='aero'] h1,
 [data-flourish='aero'] h2 {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -165,19 +110,7 @@
 }
 
 /* -------------------------------------------------------------------- clay */
-/* claymorphism: puffy pastel blobs, and cards in a rotating set of pastels. */
-[data-flourish='clay']::before {
-  background:
-    radial-gradient(circle at 38% 34%, #ffe0ea 0 6%, #ffadc6 16%, transparent 17%) 97% 4% / 300px 300px no-repeat,
-    radial-gradient(circle at 38% 34%, #e7fbf5 0 6%, #9fe8d6 16%, transparent 17%) 82% 42% / 320px 320px no-repeat,
-    radial-gradient(circle at 38% 34%, #efe8ff 0 6%, #cdb8ff 16%, transparent 17%) 0% 98% / 300px 300px no-repeat;
-  filter: drop-shadow(0 18px 24px rgba(98, 62, 170, 0.25));
-  animation: pt-float 9s ease-in-out infinite alternate;
-}
-@keyframes pt-float {
-  from { transform: translateY(-6px); }
-  to { transform: translateY(8px); }
-}
+/* claymorphism: cards in a rotating set of flat pastels. */
 [data-flourish='clay'] .pt-card { border-color: transparent; }
 [data-flourish='clay'] .pt-btn--ghost,
 [data-flourish='clay'] .pt-btn--ghost:hover {
@@ -202,9 +135,6 @@
   opacity: 0.55;
   mix-blend-mode: multiply;
 }
-[data-flourish='linen']::after {
-  background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.35), transparent 60%);
-}
 [data-flourish='linen'] .pt-card {
   outline: 2px dashed rgba(120, 100, 70, 0.35);
   outline-offset: -9px;
@@ -220,24 +150,18 @@
   border-color: #1d5aa3;
 }
 [data-flourish='linen'] .pt-btn--ghost {
-  background: linear-gradient(180deg, #fbf8f1 0%, #e6dfcf 100%);
+  background: #f8f4ea;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(40, 28, 10, 0.3);
 }
 
 /* ------------------------------------------------------------------- depth */
-/* spatial-3d: a lit room with a floor that recedes, and cards that float in it. */
+/* spatial-3d: a floor that recedes, and cards that float above it. */
 /*
  * No \`perspective\` on the body itself: it would make <body> the containing
  * block for these fixed layers and pin the floor to the bottom of the whole
  * document instead of the viewport. The hover tilt carries its own
  * perspective() instead.
  */
-[data-flourish='depth']::before {
-  background:
-    radial-gradient(60% 45% at 50% 0%, rgba(199, 166, 255, 0.28), transparent 70%),
-    radial-gradient(45% 40% at 85% 60%, rgba(142, 203, 255, 0.2), transparent 70%),
-    radial-gradient(50% 45% at 10% 75%, rgba(255, 196, 107, 0.12), transparent 70%);
-}
 [data-flourish='depth']::after {
   /* The floor: a grid laid flat and receding to a horizon two thirds down. */
   inset: 58% -60% -10% -60%;
@@ -313,12 +237,7 @@
 }
 
 /* --------------------------------------------------------------- spotlight */
-/* dark-premium: one warm light from above, a little film grain. */
-[data-flourish='spotlight']::before {
-  background:
-    radial-gradient(55% 40% at 50% -5%, rgba(214, 179, 106, 0.16), transparent 70%),
-    radial-gradient(ellipse 80% 70% at 50% 45%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
-}
+/* dark-premium: a little film grain. */
 [data-flourish='spotlight']::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");
   opacity: 0.05;
@@ -361,41 +280,20 @@
 }
 
 /* --------------------------------------------------------------------- y2k */
-/* retro-y2k: an iridescent mesh, chrome sheen and four-point sparkles. */
+/* retro-y2k: four-point sparkles and an embossed headline. */
 [data-flourish='y2k']::before {
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='460'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M60 50 L64 66 L80 70 L64 74 L60 90 L56 74 L40 70 L56 66Z'/%3E%3Cpath d='M400 300 L402.5 311 L414 314 L402.5 317 L400 328 L397.5 317 L386 314 L397.5 311Z'/%3E%3Cpath d='M300 80 L301.5 86 L308 88 L301.5 90 L300 96 L298.5 90 L292 88 L298.5 86Z'/%3E%3Cpath d='M150 360 L152 368 L160 370 L152 372 L150 380 L148 372 L140 370 L148 368Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 520px 460px,
-    radial-gradient(40% 40% at 15% 20%, rgba(255, 124, 192, 0.45), transparent 70%),
-    radial-gradient(40% 45% at 85% 25%, rgba(25, 211, 255, 0.4), transparent 70%),
-    radial-gradient(45% 40% at 50% 90%, rgba(190, 150, 255, 0.45), transparent 70%);
-}
-[data-flourish='y2k']::after {
-  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.55) 45%, rgba(186, 210, 255, 0.35) 52%, rgba(255, 255, 255, 0) 68%);
-  background-size: 300% 300%;
-  animation: pt-sheen 14s linear infinite;
-  opacity: 0.45;
-}
-@keyframes pt-sheen {
-  from { background-position: 0% 50%; }
-  to { background-position: 200% 50%; }
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='460'%3E%3Cg fill='%23c4b3f5'%3E%3Cpath d='M60 50 L64 66 L80 70 L64 74 L60 90 L56 74 L40 70 L56 66Z'/%3E%3Cpath d='M400 300 L402.5 311 L414 314 L402.5 317 L400 328 L397.5 317 L386 314 L397.5 311Z'/%3E%3Cpath d='M300 80 L301.5 86 L308 88 L301.5 90 L300 96 L298.5 90 L292 88 L298.5 86Z'/%3E%3Cpath d='M150 360 L152 368 L160 370 L152 372 L150 380 L148 372 L140 370 L148 368Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 520px 460px;
+  opacity: 0.9;
 }
 [data-flourish='y2k'] h1 {
-  background: linear-gradient(180deg, #2a1b5c 0%, #6a4fd8 48%, #1a1033 52%, #8f7ae8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  text-shadow: 0 2px 0 #ffffff, 0 3px 0 var(--pt-color-border);
 }
 
 /* --------------------------------------------------------------------- crt */
-/* terminal: scanlines, phosphor bloom, a prompt and a blinking cursor. */
+/* terminal: scanlines, a prompt and a blinking cursor. */
 [data-flourish='crt']::before {
   background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 3px);
   opacity: 0.6;
-}
-[data-flourish='crt']::after {
-  background:
-    radial-gradient(ellipse at center, rgba(57, 255, 20, 0.07), transparent 65%),
-    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.65) 100%);
 }
 [data-flourish='crt'] h1,
 [data-flourish='crt'] h2,
@@ -430,19 +328,16 @@
 }
 
 /* -------------------------------------------------------------------- neon */
-/* cyberpunk: a neon horizon, scanlines, cut corners and a glitch on hover. */
+/* cyberpunk: a floor grid, scanlines, cut corners and a glitch on hover. */
 [data-flourish='neon']::before {
   background:
-    linear-gradient(to bottom, transparent 0%, transparent 62%, rgba(255, 0, 60, 0.35) 62.3%, transparent 63%),
     repeating-linear-gradient(to right, rgba(0, 240, 255, 0.12) 0 1px, transparent 1px 70px),
     repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.12) 0 1px, transparent 1px 70px);
   mask-image: linear-gradient(to bottom, transparent 45%, #000 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 45%, #000 100%);
 }
 [data-flourish='neon']::after {
-  background:
-    repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 0 1px, transparent 1px 3px),
-    radial-gradient(ellipse 70% 40% at 50% 62%, rgba(255, 0, 60, 0.2), transparent 70%);
+  background: repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 0 1px, transparent 1px 3px);
 }
 [data-flourish='neon'] .pt-card {
   border-left: 3px solid var(--pt-color-accent-alt);

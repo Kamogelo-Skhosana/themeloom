@@ -4,8 +4,8 @@ export const frutigerAero = defineTheme({
   id: 'frutiger-aero',
   category: 'glass',
   name: 'Frutiger Aero',
-  description: 'Glossy gel buttons, sky-blue glass, bubbles and fresh green optimism.',
-  swatch: 'linear-gradient(180deg, #8fd6ff 0%, #dff4ff 55%, #7fd35c 100%)',
+  description: 'Sky blue, rounded type and bright, optimistic controls.',
+  swatch: '#0b7fcf',
   mode: 'light',
 
   color: {
@@ -38,8 +38,6 @@ export const frutigerAero = defineTheme({
   },
   surface: {
     backdrop: 'blur(10px) saturate(1.3)',
-    cardOverlay: 'linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.3) 46%, rgba(255, 255, 255, 0) 50%, rgba(190, 230, 255, 0.28) 100%)',
-    button: 'linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.2) 48%, rgba(255, 255, 255, 0) 50%), linear-gradient(180deg, #2fa8ee 0%, #0b7fcf 55%, #0a6db3 100%)',
     inset: 'inset 0 1px 3px rgba(10, 70, 130, 0.22)',
     pressed: 'inset 0 2px 5px rgba(0, 40, 80, 0.35)',
     shadowHover: '0 10px 24px rgba(10, 70, 130, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.95)',

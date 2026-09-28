@@ -5,7 +5,7 @@ export const seasonalHalloween = defineTheme({
   category: 'seasonal',
   name: 'Halloween Night',
   description: 'Pumpkin orange under a bruised purple sky, with cobwebs in the corners.',
-  swatch: 'linear-gradient(135deg, #ff7518 0%, #6b2d8f 60%, #120b16 100%)',
+  swatch: '#ff7518',
   mode: 'dark',
 
   color: {

@@ -27,8 +27,8 @@ A themeloom theme declares the whole design language:
 | `type` | display and body stacks, hero weight, tracking, line height, heading transform |
 | `shape` | radius (plus a separate large-surface radius), shadow, border width, base spacing |
 | `motion` | duration and easing that every transition on the page reads from |
-| `surface` | optional material — frosted backdrop, gloss overlay, gel buttons, inset and pressed shadows, hover depth |
-| `flourish` | an optional decorative hook — colour fields behind glass, linen, scanlines, a neon horizon |
+| `surface` | optional material — frosted backdrop, inset and pressed shadows, hover depth |
+| `flourish` | an optional decorative hook — linen, a floor grid, scanlines, sparkles |
 
 That is why `neo-brutalism` has `radius: 10px`, a hard `5px 5px 0` shadow, a
 3px border and a 110ms curve, while `dark-premium` has Cormorant display type, a

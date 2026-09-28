@@ -5,7 +5,7 @@ export const seasonalNewYear = defineTheme({
   category: 'seasonal',
   name: 'Midnight Countdown',
   description: 'Black tie, champagne gold and fireworks going off behind the type.',
-  swatch: 'linear-gradient(135deg, #f5c518 0%, #7b5cff 50%, #06060d 100%)',
+  swatch: '#f5c518',
   mode: 'dark',
 
   color: {

@@ -5,7 +5,7 @@ export const seasonalSummer = defineTheme({
   category: 'seasonal',
   name: 'High Summer',
   description: 'Bleached sand, a hot orange sun and one stripe of pool blue.',
-  swatch: 'linear-gradient(135deg, #fff6e5 0%, #e8590c 55%, #0aa2c0 100%)',
+  swatch: '#e8590c',
   mode: 'light',
 
   color: {

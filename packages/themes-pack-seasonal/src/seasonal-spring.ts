@@ -5,7 +5,7 @@ export const seasonalSpring = defineTheme({
   category: 'seasonal',
   name: 'Spring Bloom',
   description: 'Blossom pink and new-leaf green, soft and rounded throughout.',
-  swatch: 'linear-gradient(135deg, #fdf6fa 0%, #c2185b 60%, #4c9a2a 100%)',
+  swatch: '#c2185b',
   mode: 'light',
 
   color: {
