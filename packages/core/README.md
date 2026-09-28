@@ -19,10 +19,10 @@ const engine = new ThemeEngine({
   themes,                    // ThemeTokens[]
   persist: 'localStorage',   // | 'sessionStorage' | false
   storageKey: 'site-theme',
-  default: 'basic-corporate',
+  default: 'minimalism',
 });
 
-engine.set('arcade-8bit');
+engine.set('terminal');
 engine.next();
 engine.random();
 engine.on('change', ({ theme, previous, reason }) => {});
@@ -78,7 +78,7 @@ declare `shape.radiusLarge` to override the clamp.
 import { inlineBootScript, renderThemeStylesheet } from '@themeloom/core';
 
 // In <head>, synchronously, before anything paints:
-inlineBootScript({ storageKey: 'site-theme', default: 'basic-corporate' });
+inlineBootScript({ storageKey: 'site-theme', default: 'minimalism' });
 
 // Or emit every theme's rules to a static stylesheet at build time:
 renderThemeStylesheet(themes);   // then pass injectVars: false

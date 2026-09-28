@@ -22,7 +22,7 @@ export default defineConfig({
   /*
    * On CI a missing baseline is a setup failure, not something to paper over.
    * The default ('missing') writes the actual screenshot and then fails, which
-   * reads as thirteen mysterious diffs; 'none' says plainly that the snapshot
+   * reads as fifteen mysterious diffs; 'none' says plainly that the snapshot
    * isn't there.
    *
    * Baselines are per-platform — Chromium rasterises text differently on Linux

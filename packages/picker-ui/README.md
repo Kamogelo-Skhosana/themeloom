@@ -36,7 +36,7 @@ document.querySelector('themeloom-picker').themes = classicThemes;
 ```jsx
 import { ThemeProvider, ThemePicker, useTheme } from '@themeloom/picker/react';
 
-<ThemeProvider themes={themes} storageKey="site-theme" default="basic-corporate">
+<ThemeProvider themes={themes} storageKey="site-theme" default="minimalism">
   <App />
   <ThemePicker position="top-right" onSelect={(theme) => console.log(theme.id)} />
 </ThemeProvider>;

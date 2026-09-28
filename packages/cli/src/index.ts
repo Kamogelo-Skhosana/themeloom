@@ -13,7 +13,7 @@ const c = {
 };
 
 const PACKS = [
-  { id: 'classic', label: 'classic', detail: '13 themes — retro, basic, futuristic, arcade, nature, elegant' },
+  { id: 'classic', label: 'classic', detail: '15 themes — glass, tactile, clean, expressive' },
 ];
 
 function parseArgs(args: string[]) {

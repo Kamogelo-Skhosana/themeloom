@@ -27,11 +27,12 @@ A themeloom theme declares the whole design language:
 | `type` | display and body stacks, hero weight, tracking, line height, heading transform |
 | `shape` | radius (plus a separate large-surface radius), shadow, border width, base spacing |
 | `motion` | duration and easing that every transition on the page reads from |
-| `flourish` | an optional decorative hook — scanlines, a grid horizon, paper grain |
+| `surface` | optional material — frosted backdrop, gloss overlay, gel buttons, inset and pressed shadows, hover depth |
+| `flourish` | an optional decorative hook — colour fields behind glass, linen, scanlines, a neon horizon |
 
-That is why `arcade-8bit` has `radius: 0`, `shadow: 4px 4px 0`, a `steps(4, end)`
-easing curve and a pixel font, while `elegant-noir` has serif type at 1.15×
-scale, a 50px shadow and a 320ms ease. Same markup. Different product.
+That is why `neo-brutalism` has `radius: 10px`, a hard `5px 5px 0` shadow, a
+3px border and a 110ms curve, while `dark-premium` has Cormorant display type, a
+60px soft shadow and a 420ms ease. Same markup. Different product.
 
 **The wedge against daisyUI:** no Tailwind, no CSS framework, no build step
 required. The core is dependency-free and works from a `<script>` tag.
@@ -58,10 +59,10 @@ const engine = new ThemeEngine({
   categories: classicCategories,
   persist: 'localStorage',
   storageKey: 'site-theme',
-  default: 'basic-corporate',
+  default: 'minimalism',
 });
 
-engine.set('arcade-8bit');
+engine.set('terminal');
 engine.on('change', ({ theme }) => console.log(theme.id));
 ```
 
@@ -113,9 +114,10 @@ export const houseTheme = defineTheme({
   type:  { display, body, heroWeight, letterSpacing },
   shape: { radius, shadow },
   motion: { duration, ease },                       // optional, defaults applied
+  surface: { backdrop, cardOverlay, button, inset }, // optional material: glass, gloss, soft UI
 
   fonts: [{ family: 'Inter', url: 'https://…' }],   // loaded on first use only
-  flourish: 'grid-horizon',                          // optional decorative hook
+  flourish: 'liquid',                                // optional decorative hook
 });
 ```
 
@@ -127,7 +129,7 @@ the contract where you write it, not where you use it.
 | Package | What it is |
 | --- | --- |
 | `@themeloom/core` | The engine. Zero dependencies, 5.3 kB gzipped, ESM + CJS + IIFE. |
-| `@themeloom/themes-classic` | 13 themes across retro, basic, futuristic, arcade, nature, elegant. |
+| `@themeloom/themes-classic` | 15 themes: Liquid Glass, Glassmorphism, Neumorphism, Retro / Y2K, Frutiger Aero, Neo-Brutalism, Skeuomorphism, Minimalism, Bento UI, Claymorphism, Terminal, Cyberpunk, 3D / Spatial, Swiss / Editorial, Dark Premium. |
 | `@themeloom/themes-seasonal` | 6 themes for times of year — spring, summer, autumn, Halloween, winter, New Year. |
 | `@themeloom/picker` | `<themeloom-picker>` plus React, Vue and Svelte wrappers. |
 | `themeloom` (CLI) | `npx themeloom init` — scaffolds a theme config and prints the snippet. |
@@ -189,7 +191,7 @@ actually look like — a broken theme is a visual bug, not a logic bug.
 
 Chromium rasterises text differently per platform, so a baseline is only valid
 on the OS that produced it — the platform is in the filename
-(`theme-retro-80s-chromium-linux.png`). Two sets are committed: **Linux**,
+(`theme-cyberpunk-chromium-linux.png`). Two sets are committed: **Linux**,
 because that is what CI gates on, and **Windows**, so `npm run test:visual`
 gives a real answer on a maintainer's own machine.
 

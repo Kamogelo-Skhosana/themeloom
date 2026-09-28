@@ -20,7 +20,7 @@ const PACKS = [
     themes: classicThemes,
     categories: classicCategories,
     flourishCss: read('../packages/themes-pack-classic/styles/flourishes.css'),
-    expectedCategories: ['arcade', 'basic', 'elegant', 'futuristic', 'nature', 'retro'],
+    expectedCategories: ['clean', 'expressive', 'glass', 'tactile'],
   },
   {
     name: '@themeloom/themes-seasonal',

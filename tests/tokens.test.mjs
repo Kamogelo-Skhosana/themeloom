@@ -58,6 +58,28 @@ describe('tokensToCssVars', () => {
     assert.equal(noMotion['--pt-motion-duration'], '180ms');
   });
 
+  test('surface tokens default to no effect when a theme omits them', () => {
+    assert.equal(vars['--pt-surface-backdrop'], 'none');
+    assert.equal(vars['--pt-surface-card-overlay'], 'none');
+    assert.equal(vars['--pt-surface-inset'], 'none');
+    assert.equal(vars['--pt-surface-hover-transform'], 'none');
+    // Buttons fall back to the accent, and pressed/hover to the resting shadow.
+    assert.equal(vars['--pt-surface-button'], '#2563eb');
+    assert.equal(vars['--pt-surface-pressed'], '0 1px 2px rgba(0,0,0,.1)');
+    assert.equal(vars['--pt-surface-shadow-hover'], '0 1px 2px rgba(0,0,0,.1)');
+  });
+
+  test('declared surface tokens are written through', () => {
+    const glass = tokensToCssVars({
+      ...theme,
+      surface: { backdrop: 'blur(20px)', cardOverlay: 'linear-gradient(red, blue)', hoverTransform: 'translateY(-2px)' },
+    });
+    assert.equal(glass['--pt-surface-backdrop'], 'blur(20px)');
+    assert.equal(glass['--pt-surface-card-overlay'], 'linear-gradient(red, blue)');
+    assert.equal(glass['--pt-surface-hover-transform'], 'translateY(-2px)');
+    assert.equal(glass['--pt-surface-inset'], 'none');
+  });
+
   test('a custom prefix is respected everywhere', () => {
     const custom = tokensToCssVars(theme, { prefix: 'x' });
     assert.equal(custom['--x-color-bg'], '#ffffff');

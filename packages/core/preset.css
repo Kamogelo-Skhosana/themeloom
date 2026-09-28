@@ -96,13 +96,22 @@ hr {
 
 .pt-card,
 :where(article, aside, .card)[data-pt-card] {
-  background: var(--pt-color-card-bg);
+  /* The overlay is a CSS image (gloss, specular edge, grain) layered over the fill. */
+  background: var(--pt-surface-card-overlay, none), var(--pt-color-card-bg);
   border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
   border-radius: var(--pt-shape-radius-large, 0);
   box-shadow: var(--pt-shape-shadow, none);
+  -webkit-backdrop-filter: var(--pt-surface-backdrop, none);
+  backdrop-filter: var(--pt-surface-backdrop, none);
   padding: calc(var(--pt-space) * 1.25);
   transition: background-color var(--pt-transition), border-color var(--pt-transition),
     box-shadow var(--pt-transition), transform var(--pt-transition);
+}
+
+.pt-card:hover,
+:where(article, aside, .card)[data-pt-card]:hover {
+  box-shadow: var(--pt-surface-shadow-hover, var(--pt-shape-shadow, none));
+  transform: var(--pt-surface-hover-transform, none);
 }
 
 .pt-btn,
@@ -112,7 +121,7 @@ button:where(:not([data-pt-unstyled])) {
   font-weight: 600;
   letter-spacing: var(--pt-type-letter-spacing, normal);
   text-transform: var(--pt-type-heading-transform, none);
-  background: var(--pt-color-accent);
+  background: var(--pt-surface-button, var(--pt-color-accent));
   color: var(--pt-color-accent-text);
   border: var(--pt-shape-border-width, 1px) solid var(--pt-color-accent);
   border-radius: var(--pt-shape-radius, 0);
@@ -127,15 +136,19 @@ button:where(:not([data-pt-unstyled])) {
 button:where(:not([data-pt-unstyled])):hover {
   filter: brightness(1.08);
   transform: translateY(-1px);
+  box-shadow: var(--pt-surface-shadow-hover, var(--pt-shape-shadow, none));
 }
 
 .pt-btn:active,
 button:where(:not([data-pt-unstyled])):active {
   transform: translateY(0);
   filter: brightness(0.95);
+  box-shadow: var(--pt-surface-pressed, var(--pt-shape-shadow, none));
 }
 
-.pt-btn--ghost {
+.pt-btn--ghost,
+.pt-btn--ghost:hover,
+.pt-btn--ghost:active {
   background: transparent;
   color: var(--pt-color-accent);
   border-color: var(--pt-color-border);
@@ -148,6 +161,7 @@ input, select, textarea {
   background: var(--pt-color-bg-alt);
   border: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
   border-radius: var(--pt-shape-radius, 0);
+  box-shadow: var(--pt-surface-inset, none);
   padding: 0.55em 0.75em;
   width: 100%;
 }

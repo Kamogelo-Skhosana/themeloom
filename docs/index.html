@@ -232,10 +232,10 @@ const engine = new ThemeEngine({
   categories: classicCategories,
   persist: 'localStorage',
   storageKey: 'site-theme',
-  default: 'basic-corporate',
+  default: 'minimalism',
 });
 
-engine.set('arcade-8bit');
+engine.set('terminal');
 engine.on('change', (event) => console.log(event.theme.id));</code></pre>
     </section>
 
@@ -263,7 +263,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
       themes: allThemes,
       categories: allCategories,
       storageKey: 'themeloom-docs',
-      default: 'basic-corporate',
+      default: 'minimalism',
     });
 
     document.body.appendChild(document.createElement('themeloom-picker'));

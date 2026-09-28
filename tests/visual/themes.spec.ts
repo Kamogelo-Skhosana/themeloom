@@ -64,7 +64,7 @@ test.describe('theme rendering', () => {
   /*
    * One test per theme, not one loop over all of them.
    *
-   * The loop shared a single 30s budget across thirteen screenshots. That
+   * The loop shared a single 30s budget across every screenshot. That
    * passed locally and timed out on CI — but the real damage was to baseline
    * generation: a timeout partway through meant every theme after it never got
    * a baseline written, so `--update-snapshots` produced a partial set and the
@@ -85,11 +85,11 @@ test.describe('theme rendering', () => {
 
   test('the attribute and the tokens agree', async ({ page }) => {
     await openDemo(page);
-    await applyTheme(page, 'arcade-8bit');
+    await applyTheme(page, 'terminal');
 
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'arcade-8bit');
-    await expect(page.locator('html')).toHaveAttribute('data-theme-category', 'arcade');
-    await expect(page.locator('body')).toHaveAttribute('data-flourish', 'pixel-grid');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'terminal');
+    await expect(page.locator('html')).toHaveAttribute('data-theme-category', 'expressive');
+    await expect(page.locator('body')).toHaveAttribute('data-flourish', 'crt');
 
     const radius = await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue('--pt-shape-radius').trim(),
@@ -101,9 +101,9 @@ test.describe('theme rendering', () => {
     await openDemo(page);
 
     const initial = await page.locator('link[data-themeloom="font"]').count();
-    await applyTheme(page, 'arcade-8bit');
+    await applyTheme(page, 'terminal');
     const afterOne = await page.locator('link[data-themeloom="font"]').count();
-    await applyTheme(page, 'arcade-8bit');
+    await applyTheme(page, 'terminal');
     const afterRepeat = await page.locator('link[data-themeloom="font"]').count();
 
     expect(afterOne).toBeGreaterThan(initial);
@@ -112,9 +112,9 @@ test.describe('theme rendering', () => {
 
   test('the choice survives a reload', async ({ page }) => {
     await openDemo(page);
-    await applyTheme(page, 'elegant-noir');
+    await applyTheme(page, 'dark-premium');
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'elegant-noir');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark-premium');
   });
 });
 
@@ -128,12 +128,12 @@ test.describe('picker', () => {
     await expect(picker(page).locator('.panel')).toBeVisible();
 
     const categories = picker(page).locator('.cat-toggle');
-    await expect(categories).toHaveCount(6);
+    await expect(categories).toHaveCount(4);
 
-    await picker(page).locator('.cat-toggle', { hasText: 'Arcade' }).click();
-    await picker(page).locator('.theme', { hasText: '8-Bit Arcade' }).click();
+    await picker(page).locator('.cat-toggle', { hasText: 'Expressive' }).click();
+    await picker(page).locator('.theme', { hasText: 'Terminal / Hacker' }).click();
 
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'arcade-8bit');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'terminal');
     await expect(picker(page).locator('.panel')).toBeHidden();
   });
 
@@ -142,8 +142,8 @@ test.describe('picker', () => {
 
     // A theme with a flourish is the case that broke this: the pack's
     // decorative CSS must not be able to restyle the host element.
-    await applyTheme(page, 'future-cyberpunk');
-    await expect(page.locator('body')).toHaveAttribute('data-flourish', 'scanlines');
+    await applyTheme(page, 'cyberpunk');
+    await expect(page.locator('body')).toHaveAttribute('data-flourish', 'neon');
 
     const position = await picker(page).evaluate((node) => getComputedStyle(node).position);
     expect(position).toBe('fixed');
@@ -157,9 +157,9 @@ test.describe('picker', () => {
   test('search narrows the list across categories', async ({ page }) => {
     await openDemo(page);
     await picker(page).locator('.trigger').click();
-    await picker(page).locator('.search').fill('arcade');
+    await picker(page).locator('.search').fill('morphism');
 
-    await expect(picker(page).locator('.theme')).toHaveCount(2);
+    await expect(picker(page).locator('.theme')).toHaveCount(4);
   });
 
   test('Escape closes and returns focus to the trigger', async ({ page }) => {
@@ -172,12 +172,12 @@ test.describe('picker', () => {
   });
 
   /*
-   * A spread across the extremes the picker has to survive: a light default, a
-   * pixel font with zero radius, a bevelled grey system theme, and a dark
-   * serif one. Split per theme for the same reason as the theme screenshots
+   * A spread across the extremes the picker has to survive: a plain light
+   * default, a monospace theme with zero radius, a translucent glass theme, and
+   * a dark serif one. Split per theme for the same reason as the theme screenshots
    * above.
    */
-  for (const id of ['basic-corporate', 'arcade-8bit', 'retro-90s', 'elegant-noir']) {
+  for (const id of ['minimalism', 'terminal', 'liquid-glass', 'dark-premium']) {
     test(`stays legible on ${id}`, async ({ page }) => {
       await openDemo(page);
       await applyThemeAndLoadFonts(page, id);

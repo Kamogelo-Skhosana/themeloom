@@ -12,6 +12,7 @@ export type {
   TypeTokens,
   ShapeTokens,
   MotionTokens,
+  SurfaceTokens,
 } from './tokens.js';
 
 export {

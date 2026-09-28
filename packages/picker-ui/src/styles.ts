@@ -3,7 +3,7 @@
  *
  * These live inside the shadow root, so nothing here leaks out and — more
  * importantly for this component — nothing from the host page leaks in. The
- * picker sits on top of thirteen wildly different themes and has to stay
+ * picker sits on top of fifteen wildly different themes and has to stay
  * legible on all of them, which it can't do if a theme's `button {}` rule
  * reaches it.
  *

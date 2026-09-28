@@ -2,7 +2,7 @@ name: Update visual baselines
 
 # Chromium rasterises text differently per platform, so a baseline is only valid
 # on the OS that produced it. Baselines carry the platform in the filename
-# (`theme-retro-80s-chromium-linux.png`), and the repo commits two sets: Linux
+# (`theme-cyberpunk-chromium-linux.png`), and the repo commits two sets: Linux
 # because that is what CI gates on, Windows so maintainers can run
 # `npm run test:visual` locally and get a real answer.
 #

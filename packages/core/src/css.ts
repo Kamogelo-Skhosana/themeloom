@@ -39,6 +39,7 @@ export function tokensToCssVars(theme: ThemeTokens, options: CssOptions = {}): R
   walk(theme.type, ['type']);
   walk(theme.shape, ['shape']);
   walk({ ...DEFAULT_MOTION, ...theme.motion }, ['motion']);
+  walk(theme.surface, ['surface']);
 
   // Sensible fallbacks so consumers can rely on these existing everywhere.
   out[`--${prefix}-shape-radius-large`] ??= `min(var(--${prefix}-shape-radius), 1.5rem)`;
@@ -52,6 +53,13 @@ export function tokensToCssVars(theme: ThemeTokens, options: CssOptions = {}): R
   out[`--${prefix}-color-success`] ??= theme.color.accent;
   out[`--${prefix}-color-warning`] ??= theme.color.accent;
   out[`--${prefix}-type-mono`] ??= 'ui-monospace, SFMono-Regular, Menlo, monospace';
+  out[`--${prefix}-surface-backdrop`] ??= 'none';
+  out[`--${prefix}-surface-card-overlay`] ??= 'none';
+  out[`--${prefix}-surface-button`] ??= theme.color.accent;
+  out[`--${prefix}-surface-inset`] ??= 'none';
+  out[`--${prefix}-surface-pressed`] ??= theme.shape.shadow;
+  out[`--${prefix}-surface-shadow-hover`] ??= theme.shape.shadow;
+  out[`--${prefix}-surface-hover-transform`] ??= 'none';
 
   // Identity vars — useful for `content:` debugging and for the picker.
   out[`--${prefix}-id`] = theme.id;

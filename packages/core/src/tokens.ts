@@ -89,6 +89,35 @@ export interface MotionTokens {
   durationSlow?: string;
 }
 
+/**
+ * How surfaces are built, beyond a flat fill and one shadow.
+ *
+ * Glass, neumorphism, clay and skeuomorphic themes are defined less by their
+ * colours than by the material of their surfaces: a frosted backdrop, a gel
+ * highlight, a shadow that sinks into the page instead of lifting off it. Every
+ * field is optional and defaults to "no effect", so a flat theme can ignore the
+ * whole group.
+ */
+export interface SurfaceTokens {
+  /** `backdrop-filter` for cards and panels, e.g. `blur(20px) saturate(1.8)`. Defaults to `none`. */
+  backdrop?: string;
+  /**
+   * A CSS image painted over `color.cardBg` — a specular highlight, a gloss,
+   * paper grain. Defaults to `none`.
+   */
+  cardOverlay?: string;
+  /** Background for primary buttons. A gradient here gives gel or chrome buttons. Defaults to `color.accent`. */
+  button?: string;
+  /** Shadow for recessed elements such as inputs. Defaults to `none`. */
+  inset?: string;
+  /** Shadow for a button while it is pressed. Defaults to `shape.shadow`. */
+  pressed?: string;
+  /** Shadow for hovered cards and buttons. Defaults to `shape.shadow`. */
+  shadowHover?: string;
+  /** Transform for hovered cards, e.g. a lift or a tilt toward the viewer. Defaults to `none`. */
+  hoverTransform?: string;
+}
+
 export interface ThemeTokens {
   /** Stable, unique, kebab-case. Becomes the `data-theme` value. */
   id: string;
@@ -104,6 +133,8 @@ export interface ThemeTokens {
   color: ColorTokens;
   type: TypeTokens;
   shape: ShapeTokens;
+  /** Optional surface material — frost, gloss, inset and hover depth. */
+  surface?: SurfaceTokens;
   /** Optional — defaults are applied when omitted. */
   motion?: MotionTokens;
 

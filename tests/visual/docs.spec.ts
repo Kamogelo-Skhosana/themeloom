@@ -26,9 +26,9 @@ test.describe('docs site', () => {
   });
 
   test('clicking a card themes the whole page', async ({ page }) => {
-    await page.locator('.preview[data-theme-id="future-cyberpunk"]').click();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'future-cyberpunk');
-    await expect(page.locator('.preview[data-theme-id="future-cyberpunk"]')).toHaveAttribute(
+    await page.locator('.preview[data-theme-id="cyberpunk"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'cyberpunk');
+    await expect(page.locator('.preview[data-theme-id="cyberpunk"]')).toHaveAttribute(
       'aria-current',
       'true',
     );

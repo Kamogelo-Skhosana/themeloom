@@ -1,7 +1,7 @@
 {
   "name": "@themeloom/themes-classic",
   "version": "0.1.0",
-  "description": "Thirteen first-party themeloom themes across retro, basic, futuristic, arcade, nature and elegant.",
+  "description": "Fifteen first-party themeloom themes: glass, neumorphism, clay, brutalism, bento, Y2K, terminal, cyberpunk and more.",
   "type": "module",
   "sideEffects": ["./styles/*.css"],
   "main": "./dist/index.cjs",
@@ -24,7 +24,7 @@
   "peerDependencies": {
     "@themeloom/core": "^0.1.0"
   },
-  "keywords": ["themeloom", "themes", "design-tokens", "retro", "cyberpunk"],
+  "keywords": ["themeloom", "themes", "design-tokens", "glassmorphism", "neumorphism", "neo-brutalism", "cyberpunk"],
   "license": "MIT",
   "publishConfig": { "access": "public" }
 }

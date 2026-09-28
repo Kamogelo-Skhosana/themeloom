@@ -7,7 +7,7 @@ provideThemeloom({
   categories: classicCategories,
   persist: 'localStorage',
   storageKey: 'vite-vue-theme',
-  default: 'basic-corporate',
+  default: 'minimalism',
 });
 
 // Reactive: `theme` updates on every change, wherever it was triggered from.
@@ -22,7 +22,7 @@ const { theme, randomTheme, setTheme } = useTheme();
 
     <div class="actions">
       <button @click="randomTheme">Surprise me</button>
-      <button class="pt-btn--ghost" @click="setTheme('basic-corporate')">Reset</button>
+      <button class="pt-btn--ghost" @click="setTheme('minimalism')">Reset</button>
     </div>
 
     <div class="grid">
