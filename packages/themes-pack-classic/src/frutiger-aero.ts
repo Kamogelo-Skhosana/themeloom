@@ -4,7 +4,7 @@ export const frutigerAero = defineTheme({
   id: 'frutiger-aero',
   category: 'glass',
   name: 'Frutiger Aero',
-  description: 'Sky blue, rounded type and bright, optimistic controls.',
+  description: 'Sky, bubbles, a green hill, and glossy two-tone controls in framed windows.',
   swatch: '#0b7fcf',
   mode: 'light',
 
@@ -16,8 +16,8 @@ export const frutigerAero = defineTheme({
     accent: '#0b7fcf',
     accentAlt: '#5cc93b',
     accentText: '#ffffff',
-    border: '#a9d4ef',
-    cardBg: 'rgba(255, 255, 255, 0.62)',
+    border: '#7fb7e6',
+    cardBg: 'rgba(255, 255, 255, 0.8)',
     danger: '#e0443e',
     success: '#3fae2a',
     warning: '#f2a516',
@@ -32,15 +32,14 @@ export const frutigerAero = defineTheme({
   shape: {
     radius: '12px',
     radiusLarge: '18px',
-    shadow: '0 6px 18px rgba(10, 70, 130, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.95)',
+    shadow: 'inset 0 0 0 1px #ffffff, 0 6px 18px rgba(10, 70, 130, 0.18)',
     borderWidth: '1px',
     space: '1rem',
   },
   surface: {
-    backdrop: 'blur(10px) saturate(1.3)',
     inset: 'inset 0 1px 3px rgba(10, 70, 130, 0.22)',
     pressed: 'inset 0 2px 5px rgba(0, 40, 80, 0.35)',
-    shadowHover: '0 10px 24px rgba(10, 70, 130, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.95)',
+    shadowHover: 'inset 0 0 0 1px #ffffff, 0 10px 24px rgba(10, 70, 130, 0.24)',
     hoverTransform: 'translateY(-1px)',
   },
   motion: {

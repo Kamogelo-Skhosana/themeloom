@@ -4,7 +4,7 @@ export const spatial3d = defineTheme({
   id: 'spatial-3d',
   category: 'tactile',
   name: '3D / Spatial',
-  description: 'Floating glass windows with real depth, tilting toward you on hover.',
+  description: 'Tilted glass windows with grab bars, floating over a floor that recedes.',
   swatch: '#8ecbff',
   mode: 'dark',
 
@@ -37,7 +37,7 @@ export const spatial3d = defineTheme({
     space: '1.1rem',
   },
   surface: {
-    backdrop: 'blur(28px) saturate(1.4)',
+    backdrop: 'blur(10px) saturate(1.3)',
     inset: 'inset 0 2px 6px rgba(0, 0, 0, 0.45)',
     pressed: 'inset 0 2px 8px rgba(0, 20, 50, 0.45)',
     shadowHover: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 40px 70px -20px rgba(0, 0, 0, 0.75), 0 14px 24px -10px rgba(0, 0, 0, 0.55)',

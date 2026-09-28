@@ -4,7 +4,7 @@ export const skeuomorphism = defineTheme({
   id: 'skeuomorphism',
   category: 'tactile',
   name: 'Skeuomorphism',
-  description: 'Linen, paper and stitched cards, with buttons you want to press.',
+  description: 'A leather bar, stitched paper with dog-eared corners, and gel buttons you want to press.',
   swatch: '#2560a8',
   mode: 'light',
 

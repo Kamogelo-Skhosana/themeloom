@@ -4,7 +4,7 @@ export const bento = defineTheme({
   id: 'bento',
   category: 'clean',
   name: 'Bento UI',
-  description: 'Rounded tiles in a tight grid, mixing light, dark and colour like a product keynote.',
+  description: 'Tiles of different sizes in a tight grid, alternating white, black and colour.',
   swatch: '#e8480c',
   mode: 'light',
 

@@ -4,6 +4,8 @@
  * Companion stylesheet for this pack's decorative hooks. The engine writes
  * `data-flourish="<name>"` on <body>; everything below hangs off that.
  *
+ * Every texture is a flat SVG tile; there is no gradient() in this file.
+ *
  * Optional — the themes work without it. Same painting rules as the classic
  * pack: `isolation` keeps the decoration inside this element's stacking
  * context at `z-index: -1`, so it sits above the background and below the
@@ -34,102 +36,94 @@
 }
 
 /* --------------------------------------------------------------- cobwebs */
-/* seasonal-halloween: webs in the top corners, fog pooling at the bottom. */
+/* seasonal-halloween: webs in the top corners. */
 [data-flourish='cobwebs']::before {
-  background-image:
-    repeating-conic-gradient(from 0deg at 0% 0%, rgba(247, 236, 217, 0.10) 0deg 1deg, transparent 1deg 15deg),
-    repeating-conic-gradient(from 180deg at 100% 0%, rgba(247, 236, 217, 0.10) 0deg 1deg, transparent 1deg 15deg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cpath d='M40 0 A40 40 0 0 1 0 40' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M80 0 A80 80 0 0 1 0 80' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M120 0 A120 120 0 0 1 0 120' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M160 0 A160 160 0 0 1 0 160' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M200 0 A200 200 0 0 1 0 200' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M240 0 A240 240 0 0 1 0 240' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='251' y2='67' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='225' y2='130' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='184' y2='184' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='130' y2='225' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='67' y2='251' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg transform='translate(260 0) scale(-1 1)'%3E%3Cpath d='M40 0 A40 40 0 0 1 0 40' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M80 0 A80 80 0 0 1 0 80' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M120 0 A120 120 0 0 1 0 120' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M160 0 A160 160 0 0 1 0 160' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M200 0 A200 200 0 0 1 0 200' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cpath d='M240 0 A240 240 0 0 1 0 240' fill='none' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='251' y2='67' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='225' y2='130' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='184' y2='184' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='130' y2='225' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='67' y2='251' stroke='%23f7ecd9' stroke-opacity='0.16' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 260px 260px, 260px 260px;
   background-position: top left, top right;
   background-repeat: no-repeat;
 }
 
 /* -------------------------------------------------------------- snowfall */
-/* seasonal-winter: three layers of flakes at different depths and speeds. */
+/* seasonal-winter: flakes at two depths and speeds. */
 [data-flourish='snowfall']::before {
-  background-image:
-    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.9) 50%, transparent 51%),
-    radial-gradient(2px 2px at 120px 80px, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
-    radial-gradient(1px 1px at 70px 140px, rgba(255, 255, 255, 0.8) 50%, transparent 51%);
-  background-size: 200px 200px, 260px 260px, 160px 160px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='%237fa3c4'%3E%3Ccircle cx='20' cy='30' r='2' fill-opacity='0.9'/%3E%3Ccircle cx='120' cy='80' r='2' fill-opacity='0.7'/%3E%3Ccircle cx='70' cy='140' r='1.2' fill-opacity='0.8'/%3E%3Ccircle cx='170' cy='170' r='1.5' fill-opacity='0.6'/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='%237fa3c4'%3E%3Ccircle cx='20' cy='30' r='2' fill-opacity='0.9'/%3E%3Ccircle cx='120' cy='80' r='2' fill-opacity='0.7'/%3E%3Ccircle cx='70' cy='140' r='1.2' fill-opacity='0.8'/%3E%3Ccircle cx='170' cy='170' r='1.5' fill-opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 200px, 320px 320px;
   animation: pt-snow 18s linear infinite;
   opacity: 0.9;
 }
 @keyframes pt-snow {
-  from { background-position: 0 -200px, 0 -260px, 0 -160px; }
-  to   { background-position: 40px 200px, -30px 260px, 20px 160px; }
+  from { background-position: 0 -200px, 0 -320px; }
+  to   { background-position: 40px 200px, -30px 320px; }
 }
 
 /* -------------------------------------------------------------- sun-rays */
-/* seasonal-summer: a hot corner and slow rotating rays. */
+/* seasonal-summer: a fan of flat rays turning slowly around the top-right corner. */
 [data-flourish='sun-rays']::before {
-  background: repeating-conic-gradient(
-    from 0deg at 88% 6%,
-    rgba(232, 89, 12, 0.10) 0deg 3deg,
-    transparent 3deg 12deg
-  );
+  inset: auto;
+  top: 6%;
+  left: 88%;
+  width: 1600px;
+  height: 1600px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1600' viewBox='0 0 1600 1600'%3E%3Cpolygon points='800,800 1600,800 1598,856' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1573,1007 1556,1060' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1493,1200 1463,1247' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1366,1366 1325,1404' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1200,1493 1151,1519' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1007,1573 953,1585' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 800,1600 744,1598' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 593,1573 540,1556' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 400,1493 353,1463' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 234,1366 196,1325' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 107,1200 81,1151' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 27,1007 15,953' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 0,800 2,744' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 27,593 44,540' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 107,400 137,353' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 234,234 275,196' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 400,107 449,81' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 593,27 647,15' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 800,0 856,2' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1007,27 1060,44' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1200,107 1247,137' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1366,234 1404,275' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1493,400 1519,449' fill='%23e8590c' fill-opacity='0.12'/%3E%3Cpolygon points='800,800 1573,593 1585,647' fill='%23e8590c' fill-opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  transform: translate(-50%, -50%);
   animation: pt-rays 90s linear infinite;
 }
 @keyframes pt-rays {
-  to { transform: rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ---------------------------------------------------------------- petals */
 /* seasonal-spring: blossom drifting down and sideways. */
 [data-flourish='petals']::before {
-  background-image:
-    radial-gradient(4px 3px at 30px 40px, rgba(194, 24, 91, 0.22) 50%, transparent 51%),
-    radial-gradient(3px 2px at 150px 110px, rgba(194, 24, 91, 0.16) 50%, transparent 51%),
-    radial-gradient(3px 3px at 90px 180px, rgba(76, 154, 42, 0.16) 50%, transparent 51%);
-  background-size: 220px 240px, 300px 320px, 260px 280px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cellipse cx='30' cy='40' rx='4' ry='3' fill='%23c2185b' fill-opacity='0.35' transform='rotate(-20 30 40)'/%3E%3Cellipse cx='150' cy='110' rx='3' ry='2' fill='%23c2185b' fill-opacity='0.3' transform='rotate(30 150 110)'/%3E%3Cellipse cx='90' cy='180' rx='3' ry='3' fill='%234c9a2a' fill-opacity='0.25'/%3E%3Cellipse cx='200' cy='210' rx='4' ry='2.5' fill='%23e88ab0' fill-opacity='0.4' transform='rotate(10 200 210)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cellipse cx='30' cy='40' rx='4' ry='3' fill='%23c2185b' fill-opacity='0.35' transform='rotate(-20 30 40)'/%3E%3Cellipse cx='150' cy='110' rx='3' ry='2' fill='%23c2185b' fill-opacity='0.3' transform='rotate(30 150 110)'/%3E%3Cellipse cx='90' cy='180' rx='3' ry='3' fill='%234c9a2a' fill-opacity='0.25'/%3E%3Cellipse cx='200' cy='210' rx='4' ry='2.5' fill='%23e88ab0' fill-opacity='0.4' transform='rotate(10 200 210)'/%3E%3C/svg%3E");
+  background-size: 240px 240px, 360px 360px;
   animation: pt-petals 26s linear infinite;
 }
 @keyframes pt-petals {
-  from { background-position: 0 -240px, 0 -320px, 0 -280px; }
-  to   { background-position: 90px 240px, -70px 320px, 50px 280px; }
+  from { background-position: 0 -240px, 0 -360px; }
+  to   { background-position: 90px 240px, -70px 360px; }
 }
 
 /* ---------------------------------------------------------------- embers */
 /* seasonal-autumn: sparks rising from the bottom edge. */
 [data-flourish='embers']::before {
-  background-image:
-    radial-gradient(2px 2px at 40px 20px, rgba(226, 98, 27, 0.55) 50%, transparent 51%),
-    radial-gradient(1px 1px at 140px 60px, rgba(201, 162, 39, 0.45) 50%, transparent 51%),
-    radial-gradient(2px 2px at 90px 120px, rgba(226, 98, 27, 0.35) 50%, transparent 51%);
-  background-size: 200px 200px, 240px 240px, 180px 180px;
+  inset: auto 0 0 0;
+  height: 30vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='40' cy='20' r='2' fill='%23e2621b' fill-opacity='0.6'/%3E%3Ccircle cx='140' cy='60' r='1' fill='%23c9a227' fill-opacity='0.5'/%3E%3Ccircle cx='90' cy='120' r='2' fill='%23e2621b' fill-opacity='0.4'/%3E%3Ccircle cx='180' cy='150' r='1.5' fill='%23f0a04b' fill-opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
   animation: pt-embers 22s linear infinite;
-  mask-image: linear-gradient(to top, #000 0%, transparent 75%);
-  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 75%);
 }
 @keyframes pt-embers {
-  from { background-position: 0 200px, 0 240px, 0 180px; }
-  to   { background-position: 30px -200px, -40px -240px, 20px -180px; }
+  from { background-position: 0 200px; }
+  to   { background-position: 30px -200px; }
 }
 
 /* ------------------------------------------------------------- fireworks */
 /* seasonal-newyear: two bursts on a long, offset cycle. */
+[data-flourish='fireworks']::before,
+[data-flourish='fireworks']::after {
+  inset: auto;
+  width: 400px;
+  height: 400px;
+  background-size: 100% 100%;
+  transform-origin: 50% 50%;
+}
 [data-flourish='fireworks']::before {
-  background: repeating-conic-gradient(
-    from 0deg at 24% 26%,
-    rgba(245, 197, 24, 0.30) 0deg 2deg,
-    transparent 2deg 10deg
-  );
-  mask-image: radial-gradient(22% 22% at 24% 26%, #000 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(22% 22% at 24% 26%, #000 0%, transparent 70%);
+  top: 26%;
+  left: 24%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cline x1='200' y1='200' x2='380' y2='200' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='380' cy='200' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='369' y2='262' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='369' cy='262' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='338' y2='316' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='338' cy='316' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='290' y2='356' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='290' cy='356' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='231' y2='377' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='231' cy='377' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='169' y2='377' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='169' cy='377' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='110' y2='356' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='110' cy='356' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='62' y2='316' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='62' cy='316' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='31' y2='262' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='31' cy='262' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='20' y2='200' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='20' cy='200' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='31' y2='138' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='31' cy='138' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='62' y2='84' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='62' cy='84' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='110' y2='44' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='110' cy='44' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='169' y2='23' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='169' cy='23' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='231' y2='23' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='231' cy='23' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='290' y2='44' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='290' cy='44' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='338' y2='84' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='338' cy='84' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='369' y2='138' stroke='%23f5c518' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='369' cy='138' r='4' fill='%23f5c518' fill-opacity='0.8'/%3E%3C/svg%3E");
   animation: pt-burst 7s ease-out infinite;
 }
 [data-flourish='fireworks']::after {
-  background: repeating-conic-gradient(
-    from 12deg at 76% 18%,
-    rgba(123, 92, 255, 0.30) 0deg 2deg,
-    transparent 2deg 10deg
-  );
-  mask-image: radial-gradient(18% 18% at 76% 18%, #000 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(18% 18% at 76% 18%, #000 0%, transparent 70%);
+  top: 18%;
+  left: 76%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cline x1='200' y1='200' x2='380' y2='200' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='380' cy='200' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='369' y2='262' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='369' cy='262' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='338' y2='316' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='338' cy='316' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='290' y2='356' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='290' cy='356' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='231' y2='377' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='231' cy='377' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='169' y2='377' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='169' cy='377' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='110' y2='356' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='110' cy='356' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='62' y2='316' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='62' cy='316' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='31' y2='262' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='31' cy='262' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='20' y2='200' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='20' cy='200' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='31' y2='138' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='31' cy='138' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='62' y2='84' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='62' cy='84' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='110' y2='44' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='110' cy='44' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='169' y2='23' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='169' cy='23' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='231' y2='23' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='231' cy='23' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='290' y2='44' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='290' cy='44' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='338' y2='84' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='338' cy='84' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3Cline x1='200' y1='200' x2='369' y2='138' stroke='%237b5cff' stroke-opacity='0.55' stroke-width='2'/%3E%3Ccircle cx='369' cy='138' r='4' fill='%237b5cff' fill-opacity='0.8'/%3E%3C/svg%3E");
   animation: pt-burst 7s ease-out 3.5s infinite;
 }
 @keyframes pt-burst {
-  0%        { opacity: 0; transform: scale(0.35); }
+  0%        { opacity: 0; transform: translate(-50%, -50%) scale(0.35); }
   12%       { opacity: 1; }
-  55%, 100% { opacity: 0; transform: scale(1.25); }
+  55%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
 }

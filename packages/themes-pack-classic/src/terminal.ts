@@ -4,7 +4,7 @@ export const terminal = defineTheme({
   id: 'terminal',
   category: 'expressive',
   name: 'Terminal / Hacker',
-  description: 'Green phosphor on black, monospace everything and a blinking cursor.',
+  description: 'Framed boxes, bracketed buttons, a prompt and a blinking cursor. Everything monospace.',
   swatch: '#39ff14',
   mode: 'dark',
 
@@ -32,15 +32,15 @@ export const terminal = defineTheme({
     scale: 0.95,
   },
   shape: {
-    radius: '0',
-    radiusLarge: '0',
-    shadow: '0 0 0 1px rgba(57, 255, 20, 0.08), 0 0 24px -6px rgba(57, 255, 20, 0.25)',
+    radius: '0px',
+    radiusLarge: '0px',
+    shadow: 'none',
     borderWidth: '1px',
     space: '1rem',
   },
   surface: {
     button: '#39ff14',
-    shadowHover: '0 0 0 1px rgba(57, 255, 20, 0.35), 0 0 32px -4px rgba(57, 255, 20, 0.45)',
+    shadowHover: '0 0 0 1px #39ff14',
     pressed: '0 0 0 1px #39ff14',
   },
   motion: {

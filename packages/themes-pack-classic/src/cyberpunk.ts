@@ -4,7 +4,7 @@ export const cyberpunk = defineTheme({
   id: 'cyberpunk',
   category: 'expressive',
   name: 'Cyberpunk',
-  description: 'Hazard yellow and cyan neon, cut corners and a city that never sleeps.',
+  description: 'Cut corners, hazard stripes, numbered panels and a skyline. Hazard yellow on near-black.',
   swatch: '#fcee0a',
   mode: 'dark',
 
@@ -32,16 +32,16 @@ export const cyberpunk = defineTheme({
     headingTransform: 'uppercase',
   },
   shape: {
-    radius: '0',
-    radiusLarge: '0',
-    shadow: '0 0 0 1px rgba(0, 240, 255, 0.35), 0 0 22px -4px rgba(0, 240, 255, 0.35)',
+    radius: '0px',
+    radiusLarge: '0px',
+    shadow: '0 0 0 1px rgba(0, 240, 255, 0.35)',
     borderWidth: '1px',
     space: '1rem',
   },
   surface: {
     button: '#fcee0a',
-    shadowHover: '0 0 0 1px rgba(252, 238, 10, 0.6), 0 0 30px -2px rgba(252, 238, 10, 0.45)',
-    pressed: '0 0 0 1px #ff003c, 0 0 18px -2px rgba(255, 0, 60, 0.6)',
+    shadowHover: '0 0 0 1px #fcee0a',
+    pressed: '0 0 0 1px #ff003c',
     hoverTransform: 'translate(2px, -2px)',
   },
   motion: {

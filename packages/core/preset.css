@@ -94,6 +94,28 @@ hr {
 
 /* -------------------------------------------------------------- components */
 
+.pt-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
+  border-bottom: var(--pt-shape-border-width, 1px) solid var(--pt-color-border);
+  font-family: var(--pt-type-display, inherit);
+  font-size: 0.95rem;
+}
+.pt-nav a {
+  color: var(--pt-color-text);
+  text-decoration: none;
+}
+.pt-nav a:hover { color: var(--pt-color-accent); opacity: 1; }
+.pt-nav .pt-brand {
+  font-weight: 700;
+  letter-spacing: var(--pt-type-letter-spacing, normal);
+  margin-right: auto;
+}
+.pt-nav button { font-size: 0.85rem; padding: 0.45em 1em; }
+
 .pt-card,
 :where(article, aside, .card)[data-pt-card] {
   /* The overlay is a CSS image (gloss, specular edge, grain) layered over the fill. */

@@ -97,7 +97,10 @@ Call `mount()` once you're in the browser.
 - `contrastRatio` / `relativeLuminance` / `inferMode` — returns `null` rather
   than guessing when a colour can't be parsed
 - `preset.css` — an optional token → element stylesheet, so plain HTML is themed
-  without you writing any CSS
+  without you writing any CSS. It styles headings, links, buttons, inputs and
+  tables, plus `.pt-card`, `.pt-btn`, `.pt-btn--ghost`, `.pt-badge` and `.pt-nav`
+  (a brand, links and a button in a row). A pack's flourish stylesheet can then
+  reshape every one of those per theme.
 
 ## Licence
 

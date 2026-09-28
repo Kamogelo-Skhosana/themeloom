@@ -4,7 +4,7 @@ export const darkPremium = defineTheme({
   id: 'dark-premium',
   category: 'clean',
   name: 'Dark Premium',
-  description: 'Near-black, warm gold and a serif that takes its time.',
+  description: 'Near-black, gold hairlines and ornaments, outlined buttons and a serif that takes its time.',
   swatch: '#d6b36a',
   mode: 'dark',
 
@@ -16,7 +16,7 @@ export const darkPremium = defineTheme({
     accent: '#d6b36a',
     accentAlt: '#8c7a52',
     accentText: '#1a1407',
-    border: '#2a2721',
+    border: '#3a3320',
     cardBg: '#141416',
     danger: '#e0685a',
     success: '#8fbf7f',
@@ -31,15 +31,15 @@ export const darkPremium = defineTheme({
     scale: 1.04,
   },
   shape: {
-    radius: '4px',
-    radiusLarge: '14px',
-    shadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 60px -24px rgba(0, 0, 0, 0.9)',
+    radius: '0px',
+    radiusLarge: '0px',
+    shadow: 'none',
     borderWidth: '1px',
     space: '1.25rem',
   },
   surface: {
     inset: 'inset 0 1px 2px rgba(0, 0, 0, 0.6)',
-    shadowHover: 'inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 30px 70px -24px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(214, 179, 106, 0.28)',
+    shadowHover: '0 0 0 1px #d6b36a',
     hoverTransform: 'translateY(-2px)',
   },
   motion: {

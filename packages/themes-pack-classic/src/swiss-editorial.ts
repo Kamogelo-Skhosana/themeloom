@@ -4,7 +4,7 @@ export const swissEditorial = defineTheme({
   id: 'swiss-editorial',
   category: 'clean',
   name: 'Swiss / Editorial',
-  description: 'A strict grid, heavy grotesk headlines, serif reading text and one red.',
+  description: 'A 12-column grid, heavy rules, numbered sections and one red.',
   swatch: '#e30613',
   mode: 'light',
 
@@ -31,8 +31,8 @@ export const swissEditorial = defineTheme({
     scale: 1.05,
   },
   shape: {
-    radius: '0',
-    radiusLarge: '0',
+    radius: '0px',
+    radiusLarge: '0px',
     shadow: 'none',
     borderWidth: '1px',
     space: '1.25rem',

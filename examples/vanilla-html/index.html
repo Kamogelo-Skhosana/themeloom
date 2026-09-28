@@ -7,7 +7,7 @@
 
 <!-- 1. Token → element styles. Optional: bring your own CSS instead. -->
 <link rel="stylesheet" href="/packages/core/preset.css" />
-<!-- 2. Decorative hooks for themes that declare a `flourish`. Also optional. -->
+<!-- 2. Each theme's construction: how its cards, buttons and headings are built. Also optional. -->
 <link rel="stylesheet" href="/packages/themes-pack-classic/styles/flourishes.css" />
 
 <!-- 3. Apply the stored theme before first paint, so the page never flashes. -->
@@ -23,9 +23,9 @@
 <style>
   /* Everything below reads from the tokens the engine writes. Nothing here
      mentions a colour, a font or a radius by name. */
-  .wrap { max-width: 64rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 4rem) 1.25rem 6rem; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 1.25rem 1.25rem 6rem; }
 
-  header { padding-block: clamp(2rem, 8vh, 5rem) 2rem; }
+  header { padding-block: clamp(2rem, 6vh, 4rem) 2rem; }
   .eyebrow {
     display: inline-block;
     font-family: var(--pt-type-mono);
@@ -42,14 +42,14 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
     gap: var(--pt-shape-space);
-    margin-top: 3rem;
+    margin-top: 2.5rem;
   }
 
   .swatches { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
   .chip {
-    width: 2.5rem; height: 2.5rem;
+    width: 2.25rem; height: 2.25rem;
     border-radius: var(--pt-shape-radius);
     border: var(--pt-shape-border-width) solid var(--pt-color-border);
   }
@@ -66,6 +66,10 @@
   .specimen dt { color: var(--pt-color-text-dim); }
   .specimen dd { margin: 0; overflow-wrap: anywhere; }
 
+  .form-row { display: flex; gap: 0.75rem; align-items: center; max-width: 34rem; margin: 1rem 0 1.5rem; }
+  .form-row input { flex: 1; }
+  .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
   footer {
     margin-top: 4rem;
     padding-top: 1.5rem;
@@ -75,17 +79,26 @@
   }
 
   .motion-demo {
-    width: 2.5rem; height: 2.5rem;
+    width: 2.25rem; height: 2.25rem;
     background: var(--pt-color-accent);
     border-radius: var(--pt-shape-radius);
+    margin-top: 1rem;
     animation: slide calc(var(--pt-motion-duration) * 8) var(--pt-motion-ease) infinite alternate;
   }
-  @keyframes slide { to { transform: translateX(min(14rem, 40vw)); } }
+  @keyframes slide { to { transform: translateX(min(9rem, 30vw)); } }
 </style>
 </head>
 
 <body>
   <div class="wrap">
+    <nav class="pt-nav" aria-label="Demo">
+      <span class="pt-brand">themeloom</span>
+      <a href="#">Gallery</a>
+      <a href="#">Docs</a>
+      <a href="#">Packs</a>
+      <button class="pt-btn--ghost" type="button">Sign in</button>
+    </nav>
+
     <header>
       <span class="eyebrow" id="category">clean</span>
       <h1 id="theme-name">Minimalism</h1>
@@ -107,8 +120,8 @@
 
       <article class="pt-card">
         <h3>Type</h3>
-        <p>Display and body stacks, hero weight, tracking. Fonts load on first use of a theme — never up front.</p>
-        <p><span class="pt-badge" id="font-count">0 fonts</span></p>
+        <p>Display and body stacks, hero weight, tracking. Fonts load on first use of a theme.</p>
+        <div class="badges"><span class="pt-badge" id="font-count">0 fonts</span><span class="pt-badge">AA</span></div>
       </article>
 
       <article class="pt-card">
@@ -116,24 +129,33 @@
         <p>Radius, shadow and border width, plus the duration and easing every transition reads from.</p>
         <div class="motion-demo" aria-hidden="true"></div>
       </article>
-    </div>
 
-    <section class="specimen">
-      <h2>The active contract</h2>
-      <dl id="tokens"></dl>
-    </section>
+      <article class="pt-card">
+        <h3>Surface</h3>
+        <p>Frost, inset wells, pressed states and hover depth — the material a card is made of.</p>
+        <p style="margin: 1rem 0 0;"><input type="text" placeholder="Type here" /></p>
+      </article>
+    </div>
 
     <section class="specimen">
       <h2>Components</h2>
       <p>
-        A <a href="#">link</a>, some <code>inline code</code>, and a table — all
+        A <a href="#">link</a>, some <code>inline code</code>, a form and a table — all
         picking up the same tokens.
       </p>
+      <form class="form-row" onsubmit="return false">
+        <input type="email" placeholder="you@example.com" />
+        <button type="submit">Subscribe</button>
+      </form>
       <table>
         <thead><tr><th>Theme</th><th>Category</th><th>Flourish</th></tr></thead>
         <tbody id="theme-table"></tbody>
       </table>
-      <p style="margin-top: 1.5rem;"><input type="text" placeholder="An input, themed too" /></p>
+    </section>
+
+    <section class="specimen">
+      <h2>The active contract</h2>
+      <dl id="tokens"></dl>
     </section>
 
     <footer>

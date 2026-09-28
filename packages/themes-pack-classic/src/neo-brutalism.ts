@@ -4,7 +4,7 @@ export const neoBrutalism = defineTheme({
   id: 'neo-brutalism',
   category: 'expressive',
   name: 'Neo-Brutalism',
-  description: 'Thick black outlines, hard offset shadows and loud flat colour.',
+  description: 'Boxed headline, 3px outlines, hard offset shadows and sticker badges in loud flat colour.',
   swatch: '#ffd23f',
   mode: 'light',
 
@@ -32,14 +32,14 @@ export const neoBrutalism = defineTheme({
   shape: {
     radius: '10px',
     radiusLarge: '14px',
-    shadow: '5px 5px 0 #0a0a0a',
+    shadow: '6px 6px 0 #0a0a0a',
     borderWidth: '3px',
     space: '1rem',
   },
   surface: {
     button: '#ffd23f',
     pressed: '0 0 0 #0a0a0a',
-    shadowHover: '8px 8px 0 #0a0a0a',
+    shadowHover: '9px 9px 0 #0a0a0a',
     hoverTransform: 'translate(-3px, -3px)',
   },
   motion: {

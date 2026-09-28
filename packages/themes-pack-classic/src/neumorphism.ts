@@ -4,7 +4,7 @@ export const neumorphism = defineTheme({
   id: 'neumorphism',
   category: 'tactile',
   name: 'Neumorphism',
-  description: 'Soft UI extruded from a single material, lit from the top left.',
+  description: 'One material for everything: raised, pressed or grooved, never outlined. Colour lives only in the type.',
   swatch: '#4f5dff',
   mode: 'light',
 

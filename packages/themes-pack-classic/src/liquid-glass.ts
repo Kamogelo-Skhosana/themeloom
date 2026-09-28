@@ -4,7 +4,7 @@ export const liquidGlass = defineTheme({
   id: 'liquid-glass',
   category: 'glass',
   name: 'Liquid Glass',
-  description: 'Clear, refractive panels with specular edges and soft depth.',
+  description: 'Every control is a pill of clear glass, with thick highlight rings, floating over flat colour discs.',
   swatch: '#0071e3',
   mode: 'light',
 
@@ -17,7 +17,7 @@ export const liquidGlass = defineTheme({
     accentAlt: '#ff5ea8',
     accentText: '#ffffff',
     border: 'rgba(255, 255, 255, 0.7)',
-    cardBg: 'rgba(255, 255, 255, 0.34)',
+    cardBg: 'rgba(255, 255, 255, 0.55)',
     danger: '#ff3b30',
     success: '#34c759',
     warning: '#ff9f0a',
@@ -32,15 +32,15 @@ export const liquidGlass = defineTheme({
   shape: {
     radius: '999px',
     radiusLarge: '30px',
-    shadow: '0 10px 30px -6px rgba(15, 35, 80, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 1px rgba(255, 255, 255, 0.35)',
+    shadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.95), inset 0 0 0 4px rgba(255, 255, 255, 0.35), 0 12px 32px -12px rgba(15, 35, 80, 0.3)',
     borderWidth: '1px',
     space: '1rem',
   },
   surface: {
-    backdrop: 'blur(24px) saturate(1.9) brightness(1.05)',
+    backdrop: 'blur(6px) saturate(1.4)',
     inset: 'inset 0 1px 3px rgba(15, 35, 80, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.55)',
     pressed: 'inset 0 2px 6px rgba(0, 0, 0, 0.2)',
-    shadowHover: '0 18px 44px -8px rgba(15, 35, 80, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(255, 255, 255, 0.4)',
+    shadowHover: 'inset 0 0 0 1px rgba(255, 255, 255, 0.95), inset 0 0 0 4px rgba(255, 255, 255, 0.45), 0 20px 44px -14px rgba(15, 35, 80, 0.35)',
     hoverTransform: 'translateY(-2px) scale(1.01)',
   },
   motion: {

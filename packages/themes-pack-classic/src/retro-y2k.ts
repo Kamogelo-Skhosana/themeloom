@@ -4,7 +4,7 @@ export const retroY2k = defineTheme({
   id: 'retro-y2k',
   category: 'expressive',
   name: 'Retro / Y2K',
-  description: 'Bubblegum pink, lavender, pill shapes and sparkles from the new millennium.',
+  description: 'Outlined bubble type, double chrome rings, sparkles and pill shapes from the new millennium.',
   swatch: '#e0187f',
   mode: 'light',
 
@@ -17,7 +17,7 @@ export const retroY2k = defineTheme({
     accentAlt: '#19d3ff',
     accentText: '#ffffff',
     border: '#c4b3f5',
-    cardBg: 'rgba(255, 255, 255, 0.72)',
+    cardBg: '#ffffff',
     danger: '#ff3864',
     success: '#00c2a8',
     warning: '#ffb000',
@@ -32,15 +32,14 @@ export const retroY2k = defineTheme({
   shape: {
     radius: '999px',
     radiusLarge: '26px',
-    shadow: '0 10px 24px -8px rgba(90, 40, 170, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 6px rgba(150, 120, 255, 0.18)',
-    borderWidth: '1px',
+    shadow: '0 8px 0 #e6dcff, inset 0 0 0 3px #ffffff, inset 0 0 0 4px #e0d5ff',
+    borderWidth: '2px',
     space: '1rem',
   },
   surface: {
-    backdrop: 'blur(8px) saturate(1.2)',
-    inset: 'inset 0 2px 4px rgba(90, 40, 170, 0.18)',
-    pressed: 'inset 0 3px 8px rgba(100, 0, 50, 0.4)',
-    shadowHover: '0 16px 30px -10px rgba(90, 40, 170, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 6px rgba(150, 120, 255, 0.22)',
+    inset: 'inset 0 0 0 2px #ffffff, inset 0 0 0 3px #e0d5ff',
+    pressed: '0 0 0 2px #e0187f, 0 0 0 #a80f5f',
+    shadowHover: '0 12px 0 #e6dcff, inset 0 0 0 3px #ffffff, inset 0 0 0 4px #e0d5ff',
     hoverTransform: 'translateY(-2px)',
   },
   motion: {
