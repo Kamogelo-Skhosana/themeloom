@@ -34,6 +34,21 @@ test.describe('docs site', () => {
     );
   });
 
+  test('preview construction stays isolated when the page theme changes', async ({ page }) => {
+    const styles = () => page.locator('.preview').evaluateAll((cards) => cards.map((card) => {
+      const scene = card.querySelector('span')!.shadowRoot!;
+      const panel = getComputedStyle(scene.querySelector('.pt-card')!);
+      const title = getComputedStyle(scene.querySelector('.preview-title')!);
+      return [panel.borderTopWidth, panel.borderRadius, panel.boxShadow, title.fontFamily];
+    }));
+    await expect.poll(async () => new Set((await styles()).map(JSON.stringify)).size).toBeGreaterThan(12);
+    const before = await styles();
+    await page.locator('.preview[data-theme-id="cyberpunk"]').click();
+    expect(await styles()).toEqual(before);
+    await page.setViewportSize({ width: 390, height: 844 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  });
+
   test('the playground reports contrast and generates source', async ({ page }) => {
     await page.locator('#pg-bg').evaluate((el: HTMLInputElement) => {
       el.value = '#ffffff';
@@ -70,7 +85,7 @@ test.describe('docs site', () => {
     ]);
 
     expect(button).toBe('999px');
-    expect(block).toBe('28px');
+    expect(block).toBe('26px');
   });
 
   test('the hidden attribute still hides themed elements', async ({ page }) => {

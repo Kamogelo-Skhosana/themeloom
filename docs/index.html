@@ -103,6 +103,21 @@
     color: var(--c-dim);
   }
 
+  /* Keep preview controls independent of the selected page construction. */
+  .gallery { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
+  button.preview[data-pt-unstyled] {
+    font: inherit; padding: 0; min-width: 0; border-radius: 12px;
+    background: var(--c-bg); color: var(--c-text); box-shadow: none;
+    border: 1px solid var(--c-border); text-transform: none; letter-spacing: normal;
+  }
+  button.preview[data-pt-unstyled]:hover { transform: translateY(-3px); filter: none; box-shadow: none; }
+  .preview:focus-visible { outline: 3px solid var(--pt-color-accent); outline-offset: 4px; }
+  .preview-meta { background: var(--c-bg); color: var(--c-text); padding: .9rem 1rem; }
+  @media (prefers-reduced-motion: reduce) {
+    button.preview[data-pt-unstyled]:hover { transform: none; }
+  }
+  input { accent-color: var(--pt-color-accent); }
+
   /* ------------------------------------------------------- the playground */
   .playground { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 2rem; }
   @media (min-width: 60rem) { .playground { grid-template-columns: 20rem minmax(0, 1fr); } }
@@ -148,7 +163,7 @@
     <section id="gallery">
       <h2>Gallery</h2>
       <p class="section-note">
-        Every card is drawn with its own theme's tokens. Click one to apply it to
+        Every preview uses its theme's typography, surfaces and construction styles. Click one to apply it to
         this whole page.
       </p>
       <div class="gallery" id="gallery-grid"></div>
@@ -245,6 +260,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
     </footer>
   </div>
 
+  <script src="/docs/gallery-preview.js"></script>
   <script src="/packages/core/dist/themeloom.global.js"></script>
   <script src="/packages/themes-pack-classic/dist/themes-classic.global.js"></script>
   <script src="/packages/themes-pack-seasonal/dist/themes-seasonal.global.js"></script>
@@ -276,6 +292,13 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
     // ------------------------------------------------------------- gallery
 
     const cards = new Map();
+    const fontObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        Themeloom.ensureFonts(engine.get(entry.target.dataset.themeId).fonts);
+        fontObserver.unobserve(entry.target);
+      }
+    }, { rootMargin: '200px' });
 
     for (const category of engine.categories()) {
       for (const theme of category.themes) {
@@ -283,6 +306,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
         card.type = 'button';
         card.className = 'preview';
         card.dataset.themeId = theme.id;
+        card.setAttribute('data-pt-unstyled', '');
         card.setAttribute('aria-label', `Apply ${theme.name}`);
 
         // Scope the theme's own tokens to this card only.
@@ -306,18 +330,9 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
           '--c-duration': motion.duration || '180ms',
         }).forEach(([key, value]) => card.style.setProperty(key, value));
 
-        const canvas = document.createElement('div');
-        canvas.className = 'preview-canvas';
-        const title = document.createElement('p');
-        title.className = 'preview-title';
-        title.textContent = theme.name;
-        const body = document.createElement('p');
-        body.className = 'preview-body';
-        body.textContent = theme.description;
-        const chip = document.createElement('span');
-        chip.className = 'preview-chip';
-        chip.textContent = 'Button';
-        canvas.append(title, body, chip);
+        const canvas = document.createElement('span');
+        canvas.setAttribute('aria-hidden', 'true');
+        renderThemePreview(canvas, theme);
 
         const meta = document.createElement('div');
         meta.className = 'preview-meta';
@@ -331,6 +346,7 @@ engine.on('change', (event) => console.log(event.theme.id));</code></pre>
         card.addEventListener('click', () => engine.set(theme.id));
         cards.set(theme.id, card);
         $('gallery-grid').appendChild(card);
+        fontObserver.observe(card);
       }
     }
 
